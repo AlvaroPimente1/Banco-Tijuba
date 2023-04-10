@@ -1,11 +1,11 @@
 # BanCotijuba
 <h2>Integrantes<h2>
  <ul>
-  <h4><li>Alvaro Pimentel</li></h4>
-  <h4><li>Bernardo Brandão</li></h4>
-  <h4><li>Enzo Eluan</li></h4>
-  <h4><li>Marcos França</li></h4>
-  <h4><li>Vitor Flores</li></h4>
+  <li>Alvaro Pimentel</li>
+  <li>Bernardo Brandão</li>
+  <li>Enzo Eluan</li>
+  <li>Marcos França</li>
+  <li>Vitor Flores</li>
  </ul>
 <h1>Introdução</h1>
 Este é um app para o Projeto Integrado III do ano 2023.
