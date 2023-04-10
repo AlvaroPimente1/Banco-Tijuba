@@ -1,12 +1,17 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, Text } from "react-native";
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 
-export default function Login(){
+export default function Login({ navigation }){
     
     return(
         <SafeAreaView style={styles.container}>
             <Text>Tela Login a fazer</Text>
+            <TouchableOpacity
+                onPress={() => navigation.navigate('Home')}
+            >
+                <Text>Entrar</Text>
+            </TouchableOpacity>
         </SafeAreaView>
     );
 }
