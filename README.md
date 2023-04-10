@@ -1,5 +1,5 @@
 # BanCotijuba
-<h2>Integrantes<h2>
+<h2>Integrantes</h2>
  <ul>
   <li>Alvaro Pimentel</li>
   <li>Bernardo Brandão</li>
