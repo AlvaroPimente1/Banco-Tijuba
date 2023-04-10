@@ -1,7 +1,7 @@
 import React from "react";
 import { View ,SafeAreaView, Text, TouchableOpacity, StyleSheet , StatusBar} from "react-native";
 
-export default function Home({}){
+export default function Home(){
 
 return(
     <SafeAreaView style={styles.container}>
