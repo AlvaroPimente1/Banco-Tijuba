@@ -6,7 +6,7 @@ export default function Login(){
     
     return(
         <SafeAreaView style={styles.container}>
-            <Text>hello</Text>
+            <Text>Tela Login a fazer</Text>
         </SafeAreaView>
     );
 }
