@@ -1,40 +1,45 @@
 import React from "react";
-import { View ,SafeAreaView, Text, TouchableOpacity, StyleSheet , StatusBar} from "react-native";
+import { View ,SafeAreaView, Text, TouchableOpacity, StyleSheet , StatusBar, Image} from "react-native";
 
-export default function Home(){
+export default function Home({ navigation }){
 
 return(
     <SafeAreaView style={styles.container}>
-    <StatusBar
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent
-    />
+        <StatusBar
+            barStyle="light-content"
+            backgroundColor="transparent"
+            translucent
+        />
+        
+        <Image
+            style={styles.logo}
+            source={require('../assets/images/BanCotijuba_3.png')}
+        />
 
-    <View style={styles.bordaTexto}>
-        <Text style={styles.texto}>Banco-{'\n'}Tijuba</Text>
-    </View>
-
-    <View style={{marginTop: 40}}>
-        <TouchableOpacity style={styles.botao}>
-            <Text style={styles.textoBotao}>Lista de projetos</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.botao}>
-            <Text style={styles.textoBotao}>Novo projeto</Text>
-        </TouchableOpacity>
-    </View>
+            <View style={{marginTop: 40}}>
+                <TouchableOpacity 
+                    style={styles.botao}
+                    onPress={()=> navigation.navigate('List')}
+                >
+                    <Text style={styles.textoBotao}>Lista de projetos</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={styles.botao}
+                    onPress={()=> navigation.navigate('New')}
+                >
+                    <Text style={styles.textoBotao}>Novo projeto</Text>
+                </TouchableOpacity>
+            </View>
     </SafeAreaView>
 );
 }
 
 const styles = StyleSheet.create({
     container: {
-    paddingBottom: 100,
-    flex: 1,
-    backgroundColor: '#D8BFD8',
-    alignItems: 'center',
-    justifyContent: 'center',
-},
+        flex: 1,
+        backgroundColor: '#1C1C1C',
+        alignItems: 'center',
+    },
     bordaTexto:{
         borderWidth: 3,
         borderColor: '#000',
@@ -42,6 +47,7 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 10,
         borderTopLeftRadius: 10,
+
 },
     texto: {
         fontSize: 32,
@@ -55,7 +61,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#663399',
         paddingVertical: 16,
         paddingHorizontal: 32,
-        borderRadius: 8,
+        borderRadius: 12,
         marginVertical: 16,
 },
     textoBotao: {
@@ -64,4 +70,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
 },
+    conteudo: {
+        paddingVertical: 150
+},
+    logo: {
+        marginTop: 100,
+        width: 200,
+        height: 200,
+    }
 });
