@@ -1,10 +1,11 @@
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from "../pages/Home";
 import Login from "../pages/login";
+import Home from "../pages/Home";
 import NewProject from "../pages/New";
 import ListProject from "../pages/List";
+import Cadastro from "../pages/Cadastrar";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +19,9 @@ return(
                 headerTitleStyle: { fontWeight: 'bold'},
                 }}
             >
-            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Login" component={Login} options={{ presentation: 'modal' , headerTitle: 'Entrar'}}/>
+            {/* <Stack.Screen name="Cadastro" component={Cadastro} options={{ presentation: 'modal' , headerTitle: 'Cadastro'}}/> */}
+            {/* <Stack.Screen name="Home" component={Home} options={{ headerShown: false }}/> */}
             <Stack.Screen name="New" component={NewProject} />    
             <Stack.Screen name="List" component={ListProject} />    
         </Stack.Navigator>

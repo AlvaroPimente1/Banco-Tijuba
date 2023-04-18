@@ -5,30 +5,32 @@ export default function Home({ navigation }){
 
 return(
     <SafeAreaView style={styles.container}>
-        <StatusBar
-            barStyle="light-content"
-            backgroundColor="transparent"
-            translucent
-        />
-        
-        <Image
-            style={styles.logo}
-            source={require('../assets/images/BanCotijuba_3.png')}
-        />
+            <StatusBar
+                barStyle="light-content"
+                backgroundColor="transparent"
+                translucent
+            />
+            
+            <View style={styles.conteudo}>
+                <Image
+                    style={styles.logo}
+                    source={require('../assets/images/BanCotijuba_3.png')}
+                />
 
-            <View style={{marginTop: 40}}>
-                <TouchableOpacity 
-                    style={styles.botao}
-                    onPress={()=> navigation.navigate('List')}
-                >
-                    <Text style={styles.textoBotao}>Lista de projetos</Text>
-                </TouchableOpacity>
-                <TouchableOpacity 
-                    style={styles.botao}
-                    onPress={()=> navigation.navigate('New')}
-                >
-                    <Text style={styles.textoBotao}>Novo projeto</Text>
-                </TouchableOpacity>
+                <View style={{marginTop: 40}}>
+                    <TouchableOpacity 
+                        style={styles.botao}
+                        onPress={()=> navigation.navigate('List')}
+                    >
+                        <Text style={styles.textoBotao}>Lista de projetos</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                        style={styles.botao}
+                        onPress={()=> navigation.navigate('New')}
+                    >
+                        <Text style={styles.textoBotao}>Novo projeto</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
     </SafeAreaView>
 );
@@ -71,10 +73,9 @@ const styles = StyleSheet.create({
         textAlign: 'center',
 },
     conteudo: {
-        paddingVertical: 150
+        paddingVertical: 180
 },
     logo: {
-        marginTop: 100,
         width: 200,
         height: 200,
     }

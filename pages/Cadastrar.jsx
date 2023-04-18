@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image, TextInpu
 import { KeyboardAvoidingView } from "react-native";
 import { StatusBar } from "react-native";
 
-export default function Login({ navigation }){
+export default function Cadastro({ navigation }){
     
     return(
         <SafeAreaView style={styles.container}>
@@ -36,13 +36,12 @@ export default function Login({ navigation }){
 
                     <TouchableOpacity
                         style={styles.botao}
-                        onPress={()=> navigation.navigate('List')}
+                        onPress={()=> navigation.navigate('Home')}
                     >
                         <Text style={styles.textoBotao}>Log-In</Text>
                     </TouchableOpacity>
                     
                     <TouchableOpacity
-                        // onPress={() => navigation.navigate('Cadastro')}
                     >
                         <Text style={styles.textoMenor}>Não tem uma conta? Crie sua conta</Text>
                     </TouchableOpacity>
@@ -54,7 +53,6 @@ export default function Login({ navigation }){
 
 
 const styles = StyleSheet.create({
-
     container: {
         flex: 1,
         backgroundColor: '#1C1C1C',
@@ -62,7 +60,7 @@ const styles = StyleSheet.create({
         
 },
 
-texto: {
+    texto: {
         color: '#fff',
 },
 

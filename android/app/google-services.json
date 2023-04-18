@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "902495629453",
+    "firebase_url": "https://bancotijuba-83426-default-rtdb.firebaseio.com",
+    "project_id": "bancotijuba-83426",
+    "storage_bucket": "bancotijuba-83426.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902495629453:android:2a2e28a8656e54b06132c4",
+        "android_client_info": {
+          "package_name": "com.bancotijuba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902495629453-og8kr1t7lvhb4bl0ede863b3031bevc2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9FxrNdOK-GZXa-zSmuixBuoMCWujEHlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902495629453-og8kr1t7lvhb4bl0ede863b3031bevc2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
