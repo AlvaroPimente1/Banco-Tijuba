@@ -1,54 +1,90 @@
+import { ReactNativeFirebase } from "@react-native-firebase/app";
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput } from "react-native";
-import { KeyboardAvoidingView } from "react-native";
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput, Alert } from "react-native";
+import { KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { StatusBar } from "react-native";
+import firebase from 'firebase/app';
+import auth from '@react-native-firebase/auth';
+
+
 
 export default function Login({ navigation }){
-    
+
+    const [email, setEmail] = React.useState('');
+    const [senha, setSenha] = React.useState('');
+
+    function usuarioLogin(){
+        auth()
+        .signInWithEmailAndPassword(email, senha)
+        .then(() => {
+            Alert.alert('Login realizado com sucesso!');
+            navigation.navigate('List')
+        })
+        .catch(error => {
+            if (error.code === 'auth/user-not-found') {
+                Alert.alert('Usuário não encontrado!');
+            }
+
+            if (error.code === 'auth/wrong-password') {
+                Alert.alert('Senha incorreta!');
+            }
+
+            console.error(error);
+        });
+        }
+
     return(
-        <SafeAreaView style={styles.container}>
-            <StatusBar
+        <KeyboardAvoidingView
+                behavior='padding'
+                style={styles.container}
+            >
+                <StatusBar
                 barStyle="light-content"
                 backgroundColor="transparent"
                 translucent
-            />
+                />
+                <TouchableWithoutFeedback>
+                    <View style={styles.conteudo}>
+                        <Image
+                            style={styles.logo}
+                            source={require('../assets/images/BanCotijuba_3.png')}
+                        />
+                        
+                        
+                        <TextInput
+                            style={styles.input}
+                            placeholder={'Insira seu e-mail'}
+                            placeholderTextColor={"grey"}
+                            KeyboardAvoidingView="enable"
+                            value={email}
+                            onChangeText={setEmail}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder={'Insira sua senha'}
+                            placeholderTextColor={"grey"}
+                            KeyboardAvoidingView="enable"
+                            secureTextEntry={true}
+                            value={senha}
+                            onChangeText={setSenha}
+                        />
 
-            <KeyboardAvoidingView
-                behavior='padding'
-            >
-                <View style={styles.conteudo}>
-                    <Image
-                        style={styles.logo}
-                        source={require('../assets/images/BanCotijuba_3.png')}
-                    />
-                    
-                    
-                    <TextInput
-                        style={styles.input}
-                        placeholder={'Insira seu e-mail'}
-                        placeholderTextColor={"grey"}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder={'Insira sua senha'}
-                        placeholderTextColor={"grey"}
-                    />
-
-                    <TouchableOpacity
-                        style={styles.botao}
-                        onPress={()=> navigation.navigate('List')}
-                    >
-                        <Text style={styles.textoBotao}>Log-In</Text>
-                    </TouchableOpacity>
-                    
-                    <TouchableOpacity
-                        // onPress={() => navigation.navigate('Cadastro')}
-                    >
-                        <Text style={styles.textoMenor}>Não tem uma conta? Crie sua conta</Text>
-                    </TouchableOpacity>
-                </View>
-            </KeyboardAvoidingView>
-            </SafeAreaView>
+                        <TouchableOpacity
+                            style={styles.botao}
+                            onPress={usuarioLogin}
+                        >
+                            <Text style={styles.textoBotao}>Entrar</Text>
+                        </TouchableOpacity>
+                        
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('Cadastro')}
+                        >
+                            <Text style={styles.textoMenor}>Não tem uma conta? Crie sua conta</Text>
+                        </TouchableOpacity>
+                    </View>
+                </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+            
     );
 }
 
@@ -59,7 +95,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#1C1C1C',
         alignItems: 'center',
-        
+        justifyContent: 'center',
+        paddingBottom: 100
 },
 
 texto: {

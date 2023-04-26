@@ -19,8 +19,8 @@ return(
                 headerTitleStyle: { fontWeight: 'bold'},
                 }}
             >
-            <Stack.Screen name="Login" component={Login} options={{ presentation: 'modal' , headerTitle: 'Entrar'}}/>
-            {/* <Stack.Screen name="Cadastro" component={Cadastro} options={{ presentation: 'modal' , headerTitle: 'Cadastro'}}/> */}
+            <Stack.Screen name="Login" component={Login} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>
+            <Stack.Screen name="Cadastro" component={Cadastro} options={{ presentation: 'modal' , headerTitle: 'Cadastro', headerShown: false}}/>
             {/* <Stack.Screen name="Home" component={Home} options={{ headerShown: false }}/> */}
             <Stack.Screen name="New" component={NewProject} />    
             <Stack.Screen name="List" component={ListProject} />    

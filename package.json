@@ -10,9 +10,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "@react-native-firebase/app": "^12.9.3",
+    "@react-native-firebase/app": "^17.4.3",
+    "@react-native-firebase/auth": "^17.4.3",
     "@react-navigation/native-stack": "^6.9.12",
-    "firebase": "^9.19.1",
+    "firebase": "^9.20.0",
     "react": "18.2.0",
     "react-native": "0.71.4",
     "react-native-google-fonts": "^0.0.0",
