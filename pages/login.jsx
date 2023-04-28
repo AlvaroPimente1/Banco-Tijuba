@@ -1,11 +1,8 @@
-import { ReactNativeFirebase } from "@react-native-firebase/app";
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput, Alert } from "react-native";
 import { KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { StatusBar } from "react-native";
-import firebase from 'firebase/app';
 import auth from '@react-native-firebase/auth';
-
 
 
 export default function Login({ navigation }){
@@ -18,7 +15,7 @@ export default function Login({ navigation }){
         .signInWithEmailAndPassword(email, senha)
         .then(() => {
             Alert.alert('Login realizado com sucesso!');
-            navigation.navigate('List')
+            navigation.navigate('Tab')
         })
         .catch(error => {
             if (error.code === 'auth/user-not-found') {
@@ -28,6 +25,8 @@ export default function Login({ navigation }){
             if (error.code === 'auth/wrong-password') {
                 Alert.alert('Senha incorreta!');
             }
+
+            if(error.code === 'auth/')
 
             console.error(error);
         });
