@@ -107,7 +107,8 @@ const styles = StyleSheet.create({
     fotoDemo: {
         width: 40,
         height: 40,
-        backgroundColor: '#000'
+        backgroundColor: '#000',
+        borderRadius: 5
     },
 
     descricao: {
