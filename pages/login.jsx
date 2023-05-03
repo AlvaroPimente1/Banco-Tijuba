@@ -32,6 +32,14 @@ export default function Login({ navigation }){
         });
         }
 
+    function esqueciSenha(){
+        auth().
+        sendPasswordResetEmail(email).
+        then(() => Alert.alert('Redefinir Senha', 'Enviamos um e-mail para você')).
+        catch(error => console.log(error))
+
+    }
+
     return(
         <KeyboardAvoidingView
                 behavior='padding'
@@ -79,6 +87,12 @@ export default function Login({ navigation }){
                             onPress={() => navigation.navigate('Cadastro')}
                         >
                             <Text style={styles.textoMenor}>Não tem uma conta? Crie sua conta</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            onPress={esqueciSenha}
+                        >
+                            <Text style={styles.textoMenor}>Esqueci a minha senha</Text>
                         </TouchableOpacity>
                     </View>
                 </TouchableWithoutFeedback>
@@ -136,7 +150,7 @@ textoBotao: {
 },
 
 textoMenor: {
-    fontSize: 7,
+    fontSize: 9,
     color: '#D8BFD8',
     alignSelf: 'center',
     marginTop: 10

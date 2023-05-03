@@ -136,7 +136,7 @@ textoBotao: {
 },
 
 textoMenor: {
-    fontSize: 7,
+    fontSize: 9,
     color: '#D8BFD8',
     alignSelf: 'center',
     marginTop: 10

@@ -2,6 +2,7 @@ import React from "react";
 import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList } from 'react-native';
 import { useState } from "react";
 import { useEffect } from "react";
+import firebase from "../firebase";
 
 export default function ListProject(){
     const [text, setText] = useState('')
@@ -16,7 +17,18 @@ export default function ListProject(){
         {key: 5, nome: 'Projeto5'},
         {key: 6, nome: 'Projeto6'},
         {key: 7, nome: 'Projeto7'}
-    ]
+    ] 
+
+/*     const [data, setData] = useState('');
+
+    useEffect(() => {
+        const fetchData = async () => {
+        const snapshot = await firebase.database().ref('Projetos/Projeto1').once('value');
+        const dataFromSnapshot = snapshot.val();
+        setData(dataFromSnapshot);
+    };
+        fetchData();
+    }, []);  */
 
     function FiltroBusca(text) {
         const filterList = items.filter((item) => {  
@@ -56,10 +68,10 @@ export default function ListProject(){
             placeholderTextColor={'#F5F5F5'}
             onChangeText={(t)=>FiltroBusca(t)} value={text}
         />
-            <FlatList
-                data={list}
-                renderItem={renderItem}
-            />
+        <FlatList
+            data={list}
+            renderItem={renderItem}
+        />
         </SafeAreaView>
     );
 }
@@ -80,11 +92,12 @@ const styles = StyleSheet.create({
         borderColor: '#663399',
         marginVertical: 10,
         borderRadius: 15,
-        backgroundColor: '#333333',
+        backgroundColor: '#444444',
         color: '#F5F5F5',
         borderRightWidth: 0,
         borderLeftWidth: 0,
-        borderTopWidth: 0
+        borderTopWidth: 0,
+        borderBottomWidth: 0
     },
 
     textoLista: {
@@ -94,13 +107,13 @@ const styles = StyleSheet.create({
     },
 
     conteinerLista: {
-        backgroundColor: '#444444',
+        backgroundColor: '#333333',
         paddingVertical: 8,
         paddingHorizontal: 5,
         marginBottom: 15,
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: '#333333',
+        borderColor: '#663399',
         marginHorizontal: 30
     },
 

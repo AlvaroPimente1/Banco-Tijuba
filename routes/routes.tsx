@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from "../pages/login";
@@ -7,10 +7,11 @@ import ListProject from "../pages/List";
 import Cadastro from "../pages/Cadastrar";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Image } from "react-native";
-
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 const Tab = createBottomTabNavigator();
 
 function TabNavigator(){
+
     return(
         <Tab.Navigator
         screenOptions={{
@@ -32,7 +33,8 @@ function TabNavigator(){
                             color: '#1C1C1C',
                             marginBottom: 2
                         },
-                        tabBarLabel: 'Meus Projetos'
+                        tabBarLabel: 'Meus Projetos',
+                        headerTitle: 'Meus Projetos',
                     }}
                 />    
                 <Tab.Screen name="New" component={NewProject} 
@@ -57,6 +59,14 @@ function TabNavigator(){
 const Stack = createNativeStackNavigator();
 
 export default function Routes(){
+/* 
+    const[user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+
+    useEffect(() =>{
+        const subscriber = auth().onAuthStateChanged(setUser);
+
+        return subscriber
+    }, []) */
 return(
     <NavigationContainer>
         <Stack.Navigator
@@ -68,7 +78,7 @@ return(
             >
             <Stack.Screen name="Login" component={Login} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>
             <Stack.Screen name="Cadastro" component={Cadastro} options={{ presentation: 'modal' , headerTitle: 'Cadastro', headerShown: false}}/>
-            <Stack.Screen name="Tab" component={TabNavigator} options={{headerShown: false}}/>    
+            <Stack.Screen name="Tab" component={TabNavigator} options={{headerShown: false}}/>
         </Stack.Navigator>
     </NavigationContainer>
 );
