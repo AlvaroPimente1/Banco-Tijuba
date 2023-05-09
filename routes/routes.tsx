@@ -5,6 +5,7 @@ import Login from "../pages/login";
 import NewProject from "../pages/New";
 import ListProject from "../pages/List";
 import Cadastro from "../pages/Cadastrar";
+import Details from "../pages/Detail";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Image } from "react-native";
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
@@ -79,6 +80,7 @@ return(
             <Stack.Screen name="Login" component={Login} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>
             <Stack.Screen name="Cadastro" component={Cadastro} options={{ presentation: 'modal' , headerTitle: 'Cadastro', headerShown: false}}/>
             <Stack.Screen name="Tab" component={TabNavigator} options={{headerShown: false}}/>
+            <Stack.Screen name="Details" component={Details}/>
         </Stack.Navigator>
     </NavigationContainer>
 );

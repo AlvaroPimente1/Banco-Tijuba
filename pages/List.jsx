@@ -1,10 +1,11 @@
 import React from "react";
-import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import { useState } from "react";
 import { useEffect } from "react";
 import firebase from "../firebase";
+import '@react-native-firebase/database'
 
-export default function ListProject(){
+export default function ListProject({ navigation }){
     const [text, setText] = useState('')
     const [list, setList] = useState('')
     const [items, setItems] = useState('') 
@@ -28,7 +29,7 @@ export default function ListProject(){
         setData(dataFromSnapshot);
     };
         fetchData();
-    }, []);  */
+    }, []);   */
 
     function FiltroBusca(text) {
         const filterList = items.filter((item) => {  
@@ -49,13 +50,15 @@ export default function ListProject(){
     function renderItem({ item }){
         return(
             <View>
-                <View style={styles.conteinerLista}>
+                <TouchableOpacity style={styles.conteinerLista}
+                    onPress={()=> navigation.navigate('Details', { projetos: item })}
+                >
                     <View style={{flexDirection: 'row'}}>
                         <View style={styles.fotoDemo}/>
                         <Text style={styles.textoLista}>{item.nome}</Text>
                     </View>
                     <Text style={styles.descricao}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id dui est. Quisque blandit porttitor arcu, eu hendrerit velit pellentesque ut. Integer sed mauris vel risus imperdiet euismod. Sed pharetra elit sit amet nunc sollicitudin bibendum. Nulla a ipsum nunc. Nam tempor quam eu lectus fringilla vehicula</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -66,7 +69,8 @@ export default function ListProject(){
             style={styles.inputText}
             placeholder={'Pesquise o projeto que quiser'}
             placeholderTextColor={'#F5F5F5'}
-            onChangeText={(t)=>FiltroBusca(t)} value={text}
+            onChangeText={(t)=>FiltroBusca(t)} 
+            value={text}
         />
         <FlatList
             data={list}
