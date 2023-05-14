@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useState } from "react";
 import { useEffect } from "react";
 import '@react-native-firebase/database'
@@ -43,7 +43,7 @@ export default function ListProject({ navigation }){
                     onPress={()=> navigation.navigate('Details', { projetos: item })}
                 >
                     <View style={{flexDirection: 'row'}}>
-                        <View style={styles.fotoDemo}/>
+                        <Image style={styles.fotoDemo} source={require('../assets/images/imagemTeste.png')}/>
                         <Text style={styles.textoLista}>{item.nome}</Text>
                     </View>
                     <Text style={styles.descricao}>{item.intuito}</Text>
@@ -114,8 +114,8 @@ const styles = StyleSheet.create({
     fotoDemo: {
         width: 40,
         height: 40,
-        backgroundColor: '#000',
-        borderRadius: 5
+        borderRadius: 5,
+        marginLeft: 2
     },
 
     descricao: {

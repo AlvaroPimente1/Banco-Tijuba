@@ -1,9 +1,10 @@
 import React from "react";
-import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useState } from "react";
 import { useEffect } from "react";
 import '@react-native-firebase/database'
 import firebase from "../firebase";
+import Modal from "../components/Modal";
 
 export default function NewProject({ navigation }){
     const [text, setText] = useState('')
@@ -40,9 +41,10 @@ export default function NewProject({ navigation }){
         return(
             <View>
                 <TouchableOpacity style={styles.conteinerLista}
+                    onPress={()=> navigation.navigate('DetailsNew', { projetos: item })}
                 >
                     <View style={{flexDirection: 'row'}}>
-                        <View style={styles.fotoDemo}/>
+                        <Image style={styles.fotoDemo} source={require('../assets/images/imagemTeste.png')}/>
                         <Text style={styles.textoLista}>{item.nome}</Text>
                     </View>
                     <Text style={styles.descricao}>{item.intuito}</Text>
@@ -53,18 +55,18 @@ export default function NewProject({ navigation }){
 
     return(
         <SafeAreaView style={styles.conteiner}>
-        <TextInput
-            style={styles.inputText}
-            placeholder={'Pesquise o projeto que quiser'}
-            placeholderTextColor={'#F5F5F5'}
-            onChangeText={(t)=>FiltroBusca(t)} 
-            value={text}
-        />
-        <FlatList
-            data={projetosDesativados}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.key.toString()}
-        />
+                <TextInput
+                    style={styles.inputText}
+                    placeholder={'Pesquise o projeto que quiser'}
+                    placeholderTextColor={'#F5F5F5'}
+                    onChangeText={(t)=>FiltroBusca(t)} 
+                    value={text}
+                />
+            <FlatList
+                data={projetosDesativados}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.key.toString()}
+            />
         </SafeAreaView>
     );
 }
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
         borderRightWidth: 0,
         borderLeftWidth: 0,
         borderTopWidth: 0,
-        borderBottomWidth: 0
+        borderBottomWidth: 0,
     },
 
     textoLista: {
@@ -113,13 +115,15 @@ const styles = StyleSheet.create({
     fotoDemo: {
         width: 40,
         height: 40,
-        backgroundColor: '#000',
-        borderRadius: 5
+        borderRadius: 5,
+        marginLeft: 2
     },
+
 
     descricao: {
         color: '#F5F5F5',
         paddingVertical: 4,
         paddingHorizontal: 10
-    }
+    },
+    
 })

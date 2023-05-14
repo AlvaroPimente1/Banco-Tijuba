@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Login from "../pages/login";
 import NewProject from "../pages/New";
 import ListProject from "../pages/List";
 import Cadastro from "../pages/Cadastrar";
-import Details from "../pages/Detail";
-import Home from "../pages/Home";
+import Detail from "../pages/Detail";
+import DetailNew from "../pages/DetailNew";
+import ChatBot from "../pages/ChatBot";
 import { Image } from "react-native";
 
 
@@ -41,6 +43,22 @@ function TabNavigator(){
                         headerTitle: 'Meus Projetos',
                     }}
                 />    
+
+                <Tab.Screen name="Bot" component={ChatBot}
+                    options={{
+                        tabBarIcon: () => {
+                            return <Image source={require('../assets/images/roboGrande.png')} style={{width: 30, height: 30}}/>
+                        },
+                    tabBarLabelStyle: {
+                        fontSize: 12,
+                        fontWeight: 'bold',
+                        color: '#1C1C1C',
+                        marginBottom: 2
+                    },
+                        tabBarLabel: 'ChatBot',
+                        headerTitle: 'Bot'
+                    }}
+                />
                 <Tab.Screen name="New" component={NewProject} 
                         options={{
                             tabBarIcon: () => {
@@ -81,10 +99,11 @@ return(
                 headerTitleStyle: { fontWeight: 'bold'},
                 }}
             >
-           {/*  <Stack.Screen name="Login" component={Login} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>
-            <Stack.Screen name="Cadastro" component={Cadastro} options={{ presentation: 'modal' , headerTitle: 'Cadastro', headerShown: false}}/> */}
+            <Stack.Screen name="Login" component={Login} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>
+            <Stack.Screen name="Cadastro" component={Cadastro} options={{ presentation: 'modal' , headerTitle: 'Cadastro', headerShown: false}}/>
             <Stack.Screen name="Tab" component={TabNavigator} options={{headerShown: false}}/>
-            <Stack.Screen name="Details" component={Details}/>
+            <Stack.Screen name="Details" component={Detail}/>
+            <Stack.Screen name="DetailsNew" component={DetailNew}/>
         </Stack.Navigator>
     </NavigationContainer>
 );

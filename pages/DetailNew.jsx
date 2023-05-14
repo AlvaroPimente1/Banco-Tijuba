@@ -1,9 +1,15 @@
 import React from "react";
-import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image } from "react-native";
+import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from "react-native";
+import database from '@react-native-firebase/database';
 
-export default function Detail({ route }){
+export default function DetailNew({ route }){
     const projetos = route.params.projetos;
 
+    function atualizarProjeto(key) {
+        const ref = database().ref(`TodosProjetos/1`);
+        ref.update({ ativado: true });
+    }
+    
     return(
         <SafeAreaView style={styles.conteiner}>
             <View style={styles.imagemConteiner}>
@@ -13,6 +19,15 @@ export default function Detail({ route }){
                     <Text style={styles.name}>{projetos.nome}</Text>
                 <View style={styles.descriptionConteiner}>
                     <Text style={styles.description}>{projetos.intuito}</Text>
+                </View>
+
+                <View style={styles.buttonConteiner}>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={atualizarProjeto}
+                    >
+                        <Text style={styles.buttonText}>Quero investir nesse projeto!</Text>  
+                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -72,5 +87,26 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         marginHorizontal: 5,
         borderRadius: 5,
+    },
+
+    button: {
+        backgroundColor: '#663399',
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        borderRadius: 10,
+        borderWidth: 1
+    },
+
+    buttonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+
+    buttonConteiner: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 20
     }
 })
