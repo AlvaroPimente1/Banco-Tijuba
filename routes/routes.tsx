@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
 import Login from "../pages/login";
 import NewProject from "../pages/New";
 import ListProject from "../pages/List";
 import Cadastro from "../pages/Cadastrar";
 import Details from "../pages/Detail";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Home from "../pages/Home";
 import { Image } from "react-native";
-import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
+
+
 const Tab = createBottomTabNavigator();
 
 function TabNavigator(){
@@ -49,7 +52,8 @@ function TabNavigator(){
                             color: '#1C1C1C',
                             marginBottom: 2
                         },
-                        tabBarLabel: 'Novo Projeto'
+                        tabBarLabel: 'Novo Projeto',
+                        headerTitle: 'Projetos disponíveis'
                         
                     }}
                 />    
@@ -77,8 +81,8 @@ return(
                 headerTitleStyle: { fontWeight: 'bold'},
                 }}
             >
-            <Stack.Screen name="Login" component={Login} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>
-            <Stack.Screen name="Cadastro" component={Cadastro} options={{ presentation: 'modal' , headerTitle: 'Cadastro', headerShown: false}}/>
+           {/*  <Stack.Screen name="Login" component={Login} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>
+            <Stack.Screen name="Cadastro" component={Cadastro} options={{ presentation: 'modal' , headerTitle: 'Cadastro', headerShown: false}}/> */}
             <Stack.Screen name="Tab" component={TabNavigator} options={{headerShown: false}}/>
             <Stack.Screen name="Details" component={Details}/>
         </Stack.Navigator>

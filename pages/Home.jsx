@@ -1,82 +1,29 @@
-import React from "react";
-import { View ,SafeAreaView, Text, TouchableOpacity, StyleSheet , StatusBar, Image} from "react-native";
+import React, { useState } from 'react';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { BancoDados } from '../data';
 
-export default function Home({ navigation }){
 
-return(
-    <SafeAreaView style={styles.container}>
-            <StatusBar
-                barStyle="light-content"
-                backgroundColor="transparent"
-                translucent
-            />
-            
-            <View style={styles.conteudo}>
-                <Image
-                    style={styles.logo}
-                    source={require('../assets/images/BanCotijuba_3.png')}
-                />
+  const [meusProjetos, setMeusProjetos] = useState([]);
 
-                <View style={{marginTop: 40}}>
-                    <TouchableOpacity 
-                        style={styles.botao}
-                        onPress={()=> navigation.navigate('List')}
-                    >
-                        <Text style={styles.textoBotao}>Lista de projetos</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                        style={styles.botao}
-                        onPress={()=> navigation.navigate('New')}
-                    >
-                        <Text style={styles.textoBotao}>Novo projeto</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-    </SafeAreaView>
-);
+  export default function adicionarProjeto(projeto) {
+    setMeusProjetos([...meusProjetos, projeto]);
+  }
+/* 
+
+  return (
+    <View>
+      <Text>Meus Projetos</Text>
+      <FlatList
+        data={BancoDados.TodosProjetos}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.key.toString()}
+      />
+      <Text>Projetos Adicionados</Text>
+      <FlatList
+        data={meusProjetos}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.key.toString()}
+      />
+    </View>
+  ); */
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#1C1C1C',
-        alignItems: 'center',
-    },
-    bordaTexto:{
-        borderWidth: 3,
-        borderColor: '#000',
-        borderTopRightRadius: 30,
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 10,
-        borderTopLeftRadius: 10,
-
-},
-    texto: {
-        fontSize: 32,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginVertical: 32,
-        paddingHorizontal: 20,
-        color: '#000',
-},
-    botao: {
-        backgroundColor: '#663399',
-        paddingVertical: 16,
-        paddingHorizontal: 32,
-        borderRadius: 12,
-        marginVertical: 16,
-},
-    textoBotao: {
-        color: '#D8BFD8',
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
-},
-    conteudo: {
-        paddingVertical: 180
-},
-    logo: {
-        width: 200,
-        height: 200,
-    }
-});
