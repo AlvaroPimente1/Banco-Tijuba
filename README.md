@@ -14,10 +14,10 @@ O intuito desse app é armazenar informações referentes as atividades e projet
 <h2>Imagens do Projeto</h2>
 
 <p align="center">
-<img src="https://github.com/bernrdo/BanCotijuba/assets/119829559/95f7f309-7924-4238-a482-ec1c16ffff3c" width="200px" />
-<img src="https://github.com/bernrdo/BanCotijuba/assets/119829559/08df88c9-0469-468c-ae41-593308d1a569" width="200px" />
-<img src="https://github.com/bernrdo/BanCotijuba/assets/119829559/8cb66fac-d852-4f84-9a99-a5ac16c52d18" width="200px" />
-<img src="https://github.com/bernrdo/BanCotijuba/assets/119829559/faef2528-a3e6-4f59-aba0-b31b19a9579d" width="200px" />
+<img src="https://github.com/AlvaroPimente1/Banco-Tijuba/assets/119829559/bd8f9abf-7724-4bf1-b0d6-4d90da4f4fd7" width="200px" />
+<img src="https://github.com/AlvaroPimente1/Banco-Tijuba/assets/119829559/828ec6ee-b603-4649-a4f3-58484f11196f" width="200px" />
+<img src="https://github.com/AlvaroPimente1/Banco-Tijuba/assets/119829559/244a736b-2eb5-473c-ae28-f988f47f4f9f" width="200px" />
+<img src="https://github.com/AlvaroPimente1/Banco-Tijuba/assets/119829559/16df0c65-1c58-4fd2-9f13-b04c0fdd4836" width="200px" />
 </p>
 
 <!--Comentar este formato, para talvez utilizar futuramente-->
