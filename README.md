@@ -7,8 +7,8 @@ O intuito desse app é armazenar informações referentes as atividades e projet
 <h2>Principais Funcionalidades</h2>
 <ul>
 <li>Chatbot</li>
-<li>Sistema especialista</li>
-<li>Banco de dados</li>
+<li>Banco de dados em nuvem para armazenar projetos</li>
+ <li>Investidor selecionar projetos para participar</li>
 </ul>
 
 <h2>Imagens do Projeto</h2>
