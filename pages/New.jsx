@@ -8,18 +8,20 @@ import Modal from "../components/Modal";
 
 export default function NewProject({ navigation }){
     const [text, setText] = useState('')
-    const [list, setList] = useState('')
-    const [items, setItems] = useState('') 
+    const [list, setList] = useState([])
+    const [items, setItems] = useState([])
 
     const [projetosDesativados, setProjetosDesativados] = useState([]);
 
     useEffect(() => {
         const projetosRef = database.ref('TodosProjetos');
         projetosRef.once('value', (snapshot) => {
-        const projetos = snapshot.val();
-        const projetosFiltrados = Object.values(projetos).filter((projeto) => !projeto.ativado);
-        setProjetosDesativados(projetosFiltrados);
-    });
+            const projetos = snapshot.val();
+            const projetosDesativados = Object.values(projetos).filter((projeto) => !projeto.ativado);
+            setProjetosDesativados(projetosDesativados);
+            setItems(projetosDesativados);
+            setList(projetosDesativados);
+        });
     }, []);
 
     function FiltroBusca(text) {
@@ -28,14 +30,9 @@ export default function NewProject({ navigation }){
             const newText = text.toUpperCase();
             return itemFilter.indexOf(newText) > -1;
         });
-            setList(filterList)
-            setText(text)
-        }   
-
-        useEffect(()=>{
-            setList(projetosDesativados)
-            setItems(projetosDesativados)    
-        },[])  
+        setList(filterList)
+        setText(text)
+    } 
 
     function renderItem({ item }){
         return(
@@ -53,22 +50,24 @@ export default function NewProject({ navigation }){
         )
     }
 
-    return(
-        <SafeAreaView style={styles.conteiner}>
-                <TextInput
+    return (
+        <View style={styles.conteiner}>
+            <View style={styles.searchBar}>
+                <TextInput 
                     style={styles.inputText}
                     placeholder={'Pesquise o projeto que quiser'}
                     placeholderTextColor={'#F5F5F5'}
                     onChangeText={(t)=>FiltroBusca(t)} 
                     value={text}
                 />
+            </View>
             <FlatList
-                data={projetosDesativados}
+                data={list}
                 renderItem={renderItem}
-                keyExtractor={(item) => item.key.toString()}
+                keyExtractor={(item) => item.key}
             />
-        </SafeAreaView>
-    );
+        </View>
+    )
 }
 
 

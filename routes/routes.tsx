@@ -59,6 +59,7 @@ function TabNavigator(){
                         headerTitle: 'Bot'
                     }}
                 />
+
                 <Tab.Screen name="New" component={NewProject} 
                         options={{
                             tabBarIcon: () => {
