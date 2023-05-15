@@ -47,7 +47,7 @@ O intuito desse app é armazenar informações referentes as atividades e projet
   <li>Bernardo Brandão <br> Contato: bernardogbrandao@gmail.com</li>
   <li>Enzo Eluan <br> Contato: enzoeluan@gmail.com</li>
   <li>Marcos França <br> Contato: marcosfranca1233@gmail.com</li>
-  <li>Vitor Flores <br> Contato: vitordf25@gmail.</li>
+  <li>Vitor Flores <br> Contato: vitordf25@gmail.com</li>
  </ul>
 
 
