@@ -12,6 +12,8 @@ import Detail from "../pages/Detail";
 import DetailNew from "../pages/DetailNew";
 import ChatBot from "../pages/ChatBot";
 import { Image } from "react-native";
+import ChatScreen from "../pages/TesteChat";
+import { child } from "firebase/database";
 
 
 const Tab = createBottomTabNavigator();
@@ -56,7 +58,8 @@ function TabNavigator(){
                         marginBottom: 2
                     },
                         tabBarLabel: 'ChatBot',
-                        headerTitle: 'Bot'
+                        headerTitle: 'Bot',
+                        
                     }}
                 />
 

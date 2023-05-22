@@ -6,7 +6,7 @@ export default function DetailNew({ route }){
     const projetos = route.params.projetos;
 
     function atualizarProjeto(key) {
-        const ref = database().ref(`TodosProjetos/1`);
+        const ref = database().ref(`TodosProjetos/3`);
         ref.update({ ativado: true });
     }
     
