@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, View, TextInput, Button, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 import Message from '../components/Message';
-import { Alert } from 'react-native';
+import { Alert, Linking } from 'react-native';
 
 export default function ChatBot() {
     const [messages, setMessages] = useState([]);
@@ -80,6 +80,12 @@ export default function ChatBot() {
             }
         };
 
+        const openZap = () => {
+            const phoneNumber = '+5591982549141';
+            const url = `whatsapp://send?text=Olá&phone=${phoneNumber}`;
+            Linking.openURL(url);
+        };
+
     return (
         <View style={styles.conteiner}>
             <FlatList
@@ -88,6 +94,12 @@ export default function ChatBot() {
                 keyExtractor={(item, index) => index.toString()}
                 style={{ flex: 1 }}
             />
+            <TouchableOpacity
+                style={styles.zapButton}
+                onPress={openZap}
+            >
+                <Image source={require('../assets/images/whatsapp.png')} style={{width: 35, height: 35}}/>
+            </TouchableOpacity>
             <View style={styles.barraInteracao}>
                 <TextInput
                     value={text}
@@ -143,5 +155,11 @@ const styles = StyleSheet.create({
         borderColor: '#663399'
     }, 
 
+    zapButton: {
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        marginRight: 5,
+        marginBottom: 5
+    }
 
 })
