@@ -12,7 +12,6 @@ import Detail from "../pages/Detail";
 import DetailNew from "../pages/DetailNew";
 import ChatBot from "../pages/ChatBot";
 import { Image } from "react-native";
-import ChatBotScreen from "../pages/TesteChat";
 
 
 const Tab = createBottomTabNavigator();

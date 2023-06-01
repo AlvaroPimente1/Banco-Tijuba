@@ -81,8 +81,7 @@ export default function ChatBot() {
         };
 
         const openZap = () => {
-            const phoneNumber = '+5591982549141';
-            const url = `whatsapp://send?text=Olá&phone=${phoneNumber}`;
+            const url = `https://t.me/BanCotijubaBot`;
             Linking.openURL(url);
         };
 
@@ -98,7 +97,7 @@ export default function ChatBot() {
                 style={styles.zapButton}
                 onPress={openZap}
             >
-                <Image source={require('../assets/images/whatsapp.png')} style={{width: 35, height: 35}}/>
+                <Image source={require('../assets/images/telegram.png')} style={{width: 40, height: 40}}/>
             </TouchableOpacity>
             <View style={styles.barraInteracao}>
                 <TextInput
