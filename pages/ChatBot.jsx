@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, View, TextInput, Button, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 import Message from '../components/Message';
-import { Alert } from 'react-native';
+import { Alert, Linking } from 'react-native';
 
 export default function ChatBot() {
     const [messages, setMessages] = useState([]);
     const [text, setText] = useState('');
     const [step, setStep] = useState(0);
-    const [isConversationOver, setIsConversationOver] = useState(false);
-    const [projetosAtivados, setProjetosAtivados] = useState([])
 
     useEffect(() => {
         setMessages([{ text: 'Olá sou o BanChat! Estou aqui para lhe auxiliar a encontrar projetos que você possa se interessar. Primeiramente qual tipo de causa você quer apoiar?\n(Responda com o número correspondente)\n\n1- Animal\n2- Ambiental\n3- Educação\n4- Humana', isUser: false }]);
@@ -80,6 +78,11 @@ export default function ChatBot() {
             }
         };
 
+        const openZap = () => {
+            const url = `https://t.me/BanCotijubaBot`;
+            Linking.openURL(url);
+        };
+
     return (
         <View style={styles.conteiner}>
             <FlatList
@@ -88,6 +91,12 @@ export default function ChatBot() {
                 keyExtractor={(item, index) => index.toString()}
                 style={{ flex: 1 }}
             />
+            <TouchableOpacity
+                style={styles.zapButton}
+                onPress={openZap}
+            >
+                <Image source={require('../assets/images/telegram.png')} style={{width: 40, height: 40}}/>
+            </TouchableOpacity>
             <View style={styles.barraInteracao}>
                 <TextInput
                     value={text}
@@ -143,5 +152,11 @@ const styles = StyleSheet.create({
         borderColor: '#663399'
     }, 
 
+    zapButton: {
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        marginRight: 5,
+        marginBottom: 5
+    }
 
 })

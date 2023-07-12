@@ -37,7 +37,6 @@ export default function Login({ navigation }){
         sendPasswordResetEmail(email).
         then(() => Alert.alert('Redefinir Senha', 'Enviamos um e-mail para você')).
         catch(error => console.log(error))
-
     }
 
     return(
