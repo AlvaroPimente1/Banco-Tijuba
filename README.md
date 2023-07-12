@@ -1,4 +1,4 @@
-<h1>BanCotijuba (🚧Em desenvolvimento🚧)</h1>
+<h1>BanCotijuba versão Projeto Integrado</h1>
 
 <h2>Objetivo</h2>
 Este é um app para o Projeto Integrado III do ano 2023.
