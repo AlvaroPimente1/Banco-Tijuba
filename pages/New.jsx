@@ -11,14 +11,14 @@ export default function NewProject({ navigation }){
 
     const [projetosDesativados, setProjetosDesativados] = useState([]);
 
-    const [equipamentos, setEquipamentos] = useState([]);
+    const [projetos, setProjetos] = useState([]);
         useEffect(() => {
         const fetchEquipamentos = async () => {
             const querySnapshot = await firestore().collection('projetos').get();
-            const equipamentosData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-            setEquipamentos(equipamentosData);
-            setItems(equipamentosData);
-            setList(equipamentosData);
+            const projetosData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            setProjetos(projetosData);
+            setItems(projetosData);
+            setList(projetosData);
         };
     
         fetchEquipamentos();

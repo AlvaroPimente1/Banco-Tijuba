@@ -1,13 +1,14 @@
 import React from "react";
 import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from "react-native";
-import database from '@react-native-firebase/database';
+import firestore from '@react-native-firebase/firestore';
 
 export default function DetailNew({ route }){
     const projetos = route.params.projetos;
+    const projectId = projetos.id; 
 
-    function atualizarProjeto(key) {
-        const ref = database().ref(`TodosProjetos/3`);
-        ref.update({ ativado: true });
+    function atualizarProjeto() {
+        const ref = firestore().collection('projetos').doc(projectId);
+        ref.update({ nome_projeto: 'teste' });
     }
     
     return(
