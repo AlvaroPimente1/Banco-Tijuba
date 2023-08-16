@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image, TextInpu
 import { KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { StatusBar } from "react-native";
 import auth from '@react-native-firebase/auth';
-
+import firestore from '@react-native-firebase/firestore';
 
 export default function Login({ navigation }){
 
@@ -15,28 +15,40 @@ export default function Login({ navigation }){
         .signInWithEmailAndPassword(email, senha)
         .then(() => {
             Alert.alert('Login realizado com sucesso!');
-            navigation.navigate('Tab')
+            navigation.navigate('Tab');
+
+            firestore()
+            .collection('usuarios')
+            .doc(auth().currentUser.uid)
+            .set({
+                email: email,
+            })
+            .then(() => {
+                console.log('Sessao de usuário criada');
+            });
         })
         .catch(error => {
             if (error.code === 'auth/user-not-found') {
                 Alert.alert('Usuário não encontrado!');
             }
-
+    
             if (error.code === 'auth/wrong-password') {
                 Alert.alert('Senha incorreta!');
             }
-
-            if(error.code === 'auth/')
-
             console.error(error);
         });
-        }
+    }
 
     function esqueciSenha(){
         auth().
         sendPasswordResetEmail(email).
         then(() => Alert.alert('Redefinir Senha', 'Enviamos um e-mail para você')).
-        catch(error => console.log(error))
+        catch(error => {
+            if (error.code === 'auth/user-not-found') {
+                Alert.alert('Usuário não encontrado!');
+            }            
+            console.log(error)
+        })
     }
 
     return(

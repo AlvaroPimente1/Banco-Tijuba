@@ -12,14 +12,6 @@ import DetailNew from "../pages/DetailNew";
 const Stack = createNativeStackNavigator();
 
 export default function Routes(){
-    const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
-
-    useEffect(()=> {
-        const subscriber = auth().onAuthStateChanged(setUser)
-
-        return subscriber
-    }, [])
-
 return(
     <NavigationContainer>
         <Stack.Navigator

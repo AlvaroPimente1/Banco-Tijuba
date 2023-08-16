@@ -6,8 +6,6 @@ import { StatusBar } from "react-native";
 import firebase from 'firebase/app';
 import auth from '@react-native-firebase/auth';
 
-
-
 export default function Login({ navigation }){
     const [email, setEmail] = React.useState('');
     const [senha, setSenha] = React.useState('');
@@ -18,6 +16,7 @@ export default function Login({ navigation }){
         .createUserWithEmailAndPassword(email, senha)
         .then(() => {
             Alert.alert('Usuário criado com sucesso!');
+            navigation.navigate('Login')
         })
         .catch(error => {
             if (error.code === 'auth/email-already-in-use') {

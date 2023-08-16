@@ -2,9 +2,7 @@ import React from "react";
 import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useState } from "react";
 import { useEffect } from "react";
-import '@react-native-firebase/database'
-import firebase from "../firebase";
-import Modal from "../components/Modal";
+import firestore from '@react-native-firebase/firestore';
 
 export default function NewProject({ navigation }){
     const [text, setText] = useState('')
@@ -13,26 +11,28 @@ export default function NewProject({ navigation }){
 
     const [projetosDesativados, setProjetosDesativados] = useState([]);
 
-    useEffect(() => {
-        const projetosRef = database.ref('TodosProjetos');
-        projetosRef.once('value', (snapshot) => {
-            const projetos = snapshot.val();
-            const projetosDesativados = Object.values(projetos).filter((projeto) => !projeto.ativado);
-            setProjetosDesativados(projetosDesativados);
-            setItems(projetosDesativados);
-            setList(projetosDesativados);
-        });
-    }, []);
-
+    const [equipamentos, setEquipamentos] = useState([]);
+        useEffect(() => {
+        const fetchEquipamentos = async () => {
+            const querySnapshot = await firestore().collection('projetos').get();
+            const equipamentosData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            setEquipamentos(equipamentosData);
+            setItems(equipamentosData);
+            setList(equipamentosData);
+        };
+    
+        fetchEquipamentos();
+        }, []);
+    
     function FiltroBusca(text) {
-        const filterList = items.filter((item) => {  
+        const filterList = items.filter((item) => {
             const itemFilter = item.nome ? item.nome.toUpperCase() : ''.toUpperCase();
             const newText = text.toUpperCase();
             return itemFilter.indexOf(newText) > -1;
         });
-        setList(filterList)
-        setText(text)
-    } 
+        setList(filterList);
+        setText(text);
+    }
 
     function renderItem({ item }){
         return(
@@ -42,9 +42,9 @@ export default function NewProject({ navigation }){
                 >
                     <View style={{flexDirection: 'row'}}>
                         <Image style={styles.fotoDemo} source={require('../assets/images/imagemTeste.png')}/>
-                        <Text style={styles.textoLista}>{item.nome}</Text>
+                        <Text style={styles.textoLista}>{item.nome_projeto}</Text>
                     </View>
-                    <Text style={styles.descricao}>{item.intuito}</Text>
+                    <Text style={styles.descricao}>{item.descricao}</Text>
                 </TouchableOpacity>
             </View>
         )

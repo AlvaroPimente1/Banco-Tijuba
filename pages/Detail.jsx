@@ -10,9 +10,9 @@ export default function Detail({ route }){
                 <Image style={styles.image} source={require('../assets/images/imagemTeste.png')}/>
             </View>
             <ScrollView>
-                    <Text style={styles.name}>{projetos.nome}</Text>
+                    <Text style={styles.name}>{projetos.nome_projeto}</Text>
                 <View style={styles.descriptionConteiner}>
-                    <Text style={styles.description}>{projetos.intuito}</Text>
+                    <Text style={styles.description}>{projetos.descricao}</Text>
                 </View>
             </ScrollView>
         </SafeAreaView>
