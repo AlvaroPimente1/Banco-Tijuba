@@ -1,15 +1,23 @@
 import React from "react";
-import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from "react-native";
+import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Alert } from "react-native";
 import firestore from '@react-native-firebase/firestore';
+import getUserID from "../firebase/getUserID";
 
 export default function DetailNew({ route }){
     const projetos = route.params.projetos;
-    const projectId = projetos.id; 
 
-    function atualizarProjeto() {
-        const ref = firestore().collection('projetos').doc(projectId);
-        ref.update({ nome_projeto: 'teste' });
+    function adicionarProjetoAoUsuario() {
+        const userRef = firestore().collection('usuarios').doc(getUserID()).collection('projetos_usuario');
+        
+        userRef.add({
+            nome_projeto: projetos.nome_projeto,
+            descricao: projetos.descricao,
+            dt_entrada: firestore.FieldValue.serverTimestamp(),
+        })
+        .then(() => Alert.alert("Projeto adicionado com sucesso ao usuário!"))
+        .catch((error) => Alert.alert("Erro ao adicionar o projeto ao usuário!"));
     }
+    
     
     return(
         <SafeAreaView style={styles.conteiner}>
@@ -25,7 +33,7 @@ export default function DetailNew({ route }){
                 <View style={styles.buttonConteiner}>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={atualizarProjeto}
+                        onPress={adicionarProjetoAoUsuario}
                     >
                         <Text style={styles.buttonText}>Quero investir nesse projeto!</Text>  
                     </TouchableOpacity>

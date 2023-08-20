@@ -8,11 +8,9 @@ export default function NewProject({ navigation }){
     const [text, setText] = useState('')
     const [list, setList] = useState([])
     const [items, setItems] = useState([])
-
-    const [projetosDesativados, setProjetosDesativados] = useState([]);
-
     const [projetos, setProjetos] = useState([]);
-        useEffect(() => {
+
+    useEffect(() => {
         const fetchEquipamentos = async () => {
             const querySnapshot = await firestore().collection('projetos').get();
             const projetosData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));

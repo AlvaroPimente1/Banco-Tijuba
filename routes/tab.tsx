@@ -22,7 +22,7 @@ export default function TabNavigator(){
             tabBarInactiveBackgroundColor: '#8a63d2',
             }}
             >
-                {/* <Tab.Screen name="List" component={ListProject} 
+                <Tab.Screen name="List" component={ListProject} 
                     options={{
                         tabBarIcon: () => {
                             return <Image source={require('../assets/images/casa.png')} style={{width: 20, height: 20}}/>
@@ -36,7 +36,7 @@ export default function TabNavigator(){
                         tabBarLabel: 'Meus Projetos',
                         headerTitle: 'Meus Projetos',
                     }}
-                />    */}  
+                />  
 
                 <Tab.Screen name="Bot" component={ChatBot}
                     options={{

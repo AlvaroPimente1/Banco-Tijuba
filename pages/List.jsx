@@ -2,25 +2,28 @@ import React from "react";
 import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useState } from "react";
 import { useEffect } from "react";
-import '@react-native-firebase/database'
-import { novaQuery } from "./ChatBot";
+import firestore from '@react-native-firebase/firestore';
+import getUserID from "../firebase/getUserID";
 
 export default function ListProject({ navigation }){
     const [text, setText] = useState('')
     const [list, setList] = useState('')
     const [items, setItems] = useState('')
-    const [projetosAtivados, setProjetosAtivados] = useState([])
+    const [meusprojetos, setMeusProjetos] = useState([]);
+
 
     useEffect(() => {
-        const projetosRef = database.ref('TodosProjetos');
-        projetosRef.once('value', (snapshot) => {
-        const projetos = snapshot.val();
-        const projetosFiltrados = Object.values(projetos).filter((projeto) => projeto.ativado);
-        setProjetosAtivados(projetosFiltrados);
-        setItems(projetosAtivados);
-        setList(projetosAtivados);
-    });
-    }, []); 
+        const fetchEquipamentos = async () => {
+            const userRef = firestore().collection('usuarios').doc(getUserID()).collection('projetos_usuario');
+            const querySnapshot = await userRef.get();
+            const projetosData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+            setMeusProjetos(projetosData);
+            setItems(projetosData);
+            setList(projetosData);
+        };
+    
+        fetchEquipamentos();
+        }, []);
 
     function FiltroBusca(text) {
         const filterList = items.filter((item) => {  
@@ -40,9 +43,9 @@ export default function ListProject({ navigation }){
                 >
                     <View style={{flexDirection: 'row'}}>
                         <Image style={styles.fotoDemo} source={require('../assets/images/imagemTeste.png')}/>
-                        <Text style={styles.textoLista}>{item.nome}</Text>
+                        <Text style={styles.textoLista}>{item.nome_projeto}</Text>
                     </View>
-                    <Text style={styles.descricao}>{item.intuito}</Text>
+                    <Text style={styles.descricao}>{item.descricao}</Text>
                 </TouchableOpacity>
             </View>
         )
@@ -58,9 +61,9 @@ export default function ListProject({ navigation }){
             value={text}
         />
         <FlatList
-            data={projetosAtivados}
+            data={list}
             renderItem={renderItem}
-            keyExtractor={(item) => item.key.toString()}
+            keyExtractor={(item) => item.id.toString()}
         />
         </SafeAreaView>
     );
