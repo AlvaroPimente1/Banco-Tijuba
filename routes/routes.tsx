@@ -8,6 +8,7 @@ import Login from "../pages/login";
 import Cadastro from "../pages/Cadastrar";
 import Detail from "../pages/Detail";
 import DetailNew from "../pages/DetailNew";
+import PerfilUsuario from "../pages/Perfil";
 
 const Stack = createNativeStackNavigator();
 

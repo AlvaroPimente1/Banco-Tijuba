@@ -1,14 +1,17 @@
 import { ReactNativeFirebase } from "@react-native-firebase/app";
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image, TextInput, Alert } from "react-native";
 import { KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { StatusBar } from "react-native";
-import firebase from 'firebase/app';
+import firestore from '@react-native-firebase/firestore';
+import getUserID from "../firebase/getUserID";
 import auth from '@react-native-firebase/auth';
 
 export default function Login({ navigation }){
-    const [email, setEmail] = React.useState('');
-    const [senha, setSenha] = React.useState('');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [nome, setNome] = useState('');
+    const [numero, setNumero] = useState('');
 
 
     function criaConta(){
@@ -17,6 +20,18 @@ export default function Login({ navigation }){
         .then(() => {
             Alert.alert('Usuário criado com sucesso!');
             navigation.navigate('Login')
+            
+            firestore()
+            .collection('usuarios')
+            .doc(getUserID())
+            .set({
+                nome: nome,
+                email: email,
+                telefone: numero
+            })
+            .then(() => {
+                console.log('Sessao de usuário criada');
+            });
         })
         .catch(error => {
             if (error.code === 'auth/email-already-in-use') {
@@ -48,6 +63,25 @@ export default function Login({ navigation }){
                             source={require('../assets/images/BanCotijuba_3.png')}
                         />
                         
+                        <TextInput
+                            style={styles.input}
+                            placeholder={'Insira seu nome'}
+                            placeholderTextColor={"grey"}
+                            KeyboardAvoidingView="enable"
+                            value={nome}
+                            onChangeText={setNome}
+                        />
+
+                        <TextInput
+                            style={styles.input}
+                            placeholder={'Número de telefone'}
+                            placeholderTextColor={"grey"}
+                            KeyboardAvoidingView="enable"
+                            keyboardType="numeric"
+                            value={numero}
+                            onChangeText={setNumero}
+                        />
+
                         
                         <TextInput
                             style={styles.input}

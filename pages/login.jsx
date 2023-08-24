@@ -4,6 +4,7 @@ import { KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from "react-
 import { StatusBar } from "react-native";
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import getUserID from "../firebase/getUserID";
 
 export default function Login({ navigation }){
 
@@ -17,15 +18,6 @@ export default function Login({ navigation }){
             Alert.alert('Login realizado com sucesso!');
             navigation.navigate('Tab');
 
-            firestore()
-            .collection('usuarios')
-            .doc(auth().currentUser.uid)
-            .set({
-                email: email,
-            })
-            .then(() => {
-                console.log('Sessao de usuário criada');
-            });
         })
         .catch(error => {
             if (error.code === 'auth/user-not-found') {
@@ -63,29 +55,31 @@ export default function Login({ navigation }){
                 />
                 <TouchableWithoutFeedback>
                     <View style={styles.conteudo}>
-                        <Image
-                            style={styles.logo}
-                            source={require('../assets/images/BanCotijuba_3.png')}
-                        />
-                        
-                        
-                        <TextInput
-                            style={styles.input}
-                            placeholder={'Insira seu e-mail'}
-                            placeholderTextColor={"grey"}
-                            KeyboardAvoidingView="enable"
-                            value={email}
-                            onChangeText={setEmail}
-                        />
-                        <TextInput
-                            style={styles.input}
-                            placeholder={'Insira sua senha'}
-                            placeholderTextColor={"grey"}
-                            KeyboardAvoidingView="enable"
-                            secureTextEntry={true}
-                            value={senha}
-                            onChangeText={setSenha}
-                        />
+                        <View style={styles.logoContainer}>
+                            <Image
+                                style={styles.logo}
+                                source={require('../assets/images/BanCotijuba_3.png')}
+                            />
+                        </View>
+                        <View>
+                            <TextInput
+                                style={styles.input}
+                                placeholder={'Insira seu e-mail'}
+                                placeholderTextColor={"grey"}
+                                KeyboardAvoidingView="enable"
+                                value={email}
+                                onChangeText={setEmail}
+                            />
+                            <TextInput
+                                style={styles.input}
+                                placeholder={'Insira sua senha'}
+                                placeholderTextColor={"grey"}
+                                KeyboardAvoidingView="enable"
+                                secureTextEntry={true}
+                                value={senha}
+                                onChangeText={setSenha}
+                            />
+                        </View>
 
                         <TouchableOpacity
                             style={styles.botao}
@@ -128,13 +122,18 @@ texto: {
 },
 
 conteudo: {
-    paddingVertical: 150
+    paddingVertical: 150,
 },
 
-logo: {
+logoContainer: {
     width: 200,
     height: 200,
-    marginBottom: 30
+    justifyContent: 'center',
+    alignItems: 'center',
+},
+logo: {
+    width: '100%',
+    height: '100%',
 },
 
 input: {
@@ -144,7 +143,8 @@ input: {
     paddingVertical: 1,
     color: "#fff",
     borderRadius: 10,
-    marginBottom: 20
+    marginBottom: 20,
+    width: 200
 },
 
 botao: {

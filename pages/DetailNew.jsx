@@ -18,7 +18,6 @@ export default function DetailNew({ route }){
         .catch((error) => Alert.alert("Erro ao adicionar o projeto ao usuário!"));
     }
     
-    
     return(
         <SafeAreaView style={styles.conteiner}>
             <View style={styles.imagemConteiner}>
