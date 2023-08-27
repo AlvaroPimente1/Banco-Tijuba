@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { TouchableOpacity } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
@@ -22,21 +23,33 @@ export default function TabNavigator(){
             tabBarInactiveBackgroundColor: '#8a63d2',
             }}
             >
-                <Tab.Screen name="List" component={ListProject} 
-                    options={{
-                        tabBarIcon: () => {
-                            return <Image source={require('../assets/images/casa.png')} style={{width: 20, height: 20}}/>
-                        },
-                        tabBarLabelStyle: {
-                            fontSize: 12,
-                            fontWeight: 'bold',
-                            color: '#1C1C1C',
-                            marginBottom: 2
-                        },
-                        tabBarLabel: 'Meus Projetos',
-                        headerTitle: 'Meus Projetos',
-                    }}
-                />  
+            <Tab.Screen
+                name="List"
+                component={ListProject}
+                options={({ navigation }) => ({
+                    tabBarIcon: () => {
+                    return <Image source={require('../assets/images/casa.png')} style={{ width: 20, height: 20 }} />;
+                    },
+                    tabBarLabelStyle: {
+                    fontSize: 12,
+                    fontWeight: 'bold',
+                    color: '#1C1C1C',
+                    marginBottom: 2,
+                    },
+                    tabBarLabel: 'Meus Projetos',
+                    headerTitle: 'Meus Projetos',
+                    headerRight: () => (
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigation.navigate('Perfil'); 
+                        }}
+                        style={{ marginRight: 20 }}
+                    >
+                        <Image source={require('../assets/images/user.png')} style={{ width: 40, height: 40, borderRadius: 20 }} />
+                    </TouchableOpacity>
+                    ),
+                })}
+            />
 
                 <Tab.Screen name="Bot" component={ChatBot}
                     options={{
@@ -68,7 +81,6 @@ export default function TabNavigator(){
                         },
                         tabBarLabel: 'Novo Projeto',
                         headerTitle: 'Projetos disponíveis'
-                        
                     }}
                 />    
         </Tab.Navigator>
