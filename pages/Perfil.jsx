@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { SafeAreaView, Text, StyleSheet, View, Image } from "react-native";
 import firestore from '@react-native-firebase/firestore';
 import getUserID from "../firebase/getUserID";
+import ImageContainer from "../components/ImagemConteiner";
 
 export default function PerfilUsuario(){
     const [usuario, setUsuario] = useState(null);
@@ -31,6 +32,7 @@ export default function PerfilUsuario(){
 
     return(
         <SafeAreaView style={styles.conteiner}>
+            <ImageContainer source={require('../assets/images/imagemTeste.png')}/>
             <View style={styles.usuarioConteiner}>
                 {usuario && <Text style={styles.texto}>Nome: {usuario.nome}</Text>}
                 {usuario && <Text style={styles.texto}>E-mail: {usuario.email}</Text>}
@@ -46,7 +48,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         backgroundColor: '#1C1C1C',
-        justifyContent: 'center'
+        justifyContent: 'flex-start'
     },
 
     texto: {
@@ -61,6 +63,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#333333',
         paddingVertical: 8,
         marginHorizontal: 5,
+        marginVertical: 10,
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center'

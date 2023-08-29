@@ -2,6 +2,7 @@ import React from "react";
 import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Alert } from "react-native";
 import firestore from '@react-native-firebase/firestore';
 import getUserID from "../firebase/getUserID";
+import ImageConteiner from "../components/ImagemConteiner";
 
 export default function DetailNew({ route }){
     const projetos = route.params.projetos;
@@ -20,9 +21,7 @@ export default function DetailNew({ route }){
     
     return(
         <SafeAreaView style={styles.conteiner}>
-            <View style={styles.imagemConteiner}>
-                <Image style={styles.image} source={require('../assets/images/imagemTeste.png')}/>
-            </View>
+            <ImageConteiner source={require('../assets/images/imagemTeste.png')} />
             <ScrollView>
                     <Text style={styles.name}>{projetos.nome_projeto}</Text>
                 <View style={styles.descriptionConteiner}>
@@ -78,16 +77,6 @@ const styles = StyleSheet.create({
         color: "#fff",
         textAlign: 'center'
     },
-
-    imagemConteiner: {
-        paddingVertical: 20,
-        backgroundColor: "#663399",
-        paddingHorizontal: 100,
-        borderBottomRightRadius: 30,
-        borderBottomLeftRadius: 30,
-        borderBottomWidth: 1,
-        borderColor: '#333333'
-    }, 
 
     descriptionConteiner: {
         paddingHorizontal: 5,
