@@ -11,8 +11,7 @@ export default function DetailNew({ route }){
         const userRef = firestore().collection('usuarios').doc(getUserID()).collection('projetos_usuario');
         
         userRef.add({
-            nome_projeto: projetos.nome_projeto,
-            descricao: projetos.descricao,
+            projetoRef: firestore().collection('projetos').doc(projetos.id),
             dt_entrada: firestore.FieldValue.serverTimestamp(),
         })
         .then(() => Alert.alert("Projeto adicionado com sucesso ao usuário!"))

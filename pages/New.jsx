@@ -3,31 +3,46 @@ import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList, TouchableOpa
 import { useState } from "react";
 import { useEffect } from "react";
 import firestore from '@react-native-firebase/firestore';
+import getUserID from "../firebase/getUserID";
 
 export default function NewProject({ navigation }){
-    const [text, setText] = useState('')
-    const [list, setList] = useState([])
-    const [items, setItems] = useState([])
+    const [text, setText] = useState('');
+    const [list, setList] = useState([]);
+    const [items, setItems] = useState([]);
     const [projetos, setProjetos] = useState([]);
 
     useEffect(() => {
-        const fetchEquipamentos = async () => {
+        const fetchProjetosDisponiveis = async () => {
+            // Query de projetos que o usuario está
+            const usuarioProjetosSnapshot = await firestore()
+                .collection('usuarios')
+                .doc(getUserID()) 
+                .collection('projetos_usuario')
+                .get();
+            const referencedProjectIds = usuarioProjetosSnapshot.docs.map(doc => doc.data().projetoRef.id); 
+
+            // Query de todos os projetos 
             const querySnapshot = await firestore().collection('projetos').get();
-            const projetosData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-            setProjetos(projetosData);
-            setItems(projetosData);
-            setList(projetosData);
+            const allProjects = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+            // Filtrar e só mostrar os projetos que o usuário não está
+            const unreferencedProjects = allProjects.filter(project => !referencedProjectIds.includes(project.id));
+
+            setProjetos(unreferencedProjects);
+            setItems(unreferencedProjects);
+            setList(unreferencedProjects);
         };
     
-        fetchEquipamentos();
-        }, []);
-    
+        fetchProjetosDisponiveis();
+    }, []);
+
     function FiltroBusca(text) {
         const filterList = items.filter((item) => {
             const itemFilter = item.nome ? item.nome.toUpperCase() : ''.toUpperCase();
             const newText = text.toUpperCase();
             return itemFilter.indexOf(newText) > -1;
         });
+
         setList(filterList);
         setText(text);
     }

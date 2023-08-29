@@ -6,24 +6,32 @@ import firestore from '@react-native-firebase/firestore';
 import getUserID from "../firebase/getUserID";
 
 export default function ListProject({ navigation }){
-    const [text, setText] = useState('')
-    const [list, setList] = useState('')
-    const [items, setItems] = useState('')
-    const [meusprojetos, setMeusProjetos] = useState([]);
-
+    const [text, setText] = useState('');
+    const [list, setList] = useState([]);
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
         const fetchEquipamentos = async () => {
             const userRef = firestore().collection('usuarios').doc(getUserID()).collection('projetos_usuario');
             const querySnapshot = await userRef.get();
-            const projetosData = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-            setMeusProjetos(projetosData);
-            setItems(projetosData);
+            const projetosData = [];
+            
+            for (let doc of querySnapshot.docs) {
+                const projetoRef = doc.data().projetoRef;
+                if (projetoRef) {
+                    const projetoSnapshot = await projetoRef.get();
+                    projetosData.push({
+                        id: projetoSnapshot.id,
+                        ...projetoSnapshot.data()
+                    });
+                }
+            }
             setList(projetosData);
+            setItems(projetosData);
         };
-    
+
         fetchEquipamentos();
-        }, []);
+    }, []);
 
     function FiltroBusca(text) {
         const filterList = items.filter((item) => {  
@@ -31,9 +39,10 @@ export default function ListProject({ navigation }){
             const newText = text.toUpperCase();
             return itemFilter.indexOf(newText) > -1;
         });
-            setList(filterList)
-            setText(text)
-        }   
+        
+        setList(filterList);
+        setText(text);
+    }
 
     function renderItem({ item }){
         return(
