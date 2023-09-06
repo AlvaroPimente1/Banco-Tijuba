@@ -3,6 +3,7 @@ import { SafeAreaView, Text, StyleSheet, View, Image } from "react-native";
 import firestore from '@react-native-firebase/firestore';
 import getUserID from "../../firebase/getUserID";
 import ImageContainer from "../../components/ImagemConteiner";
+import getUserINFO from "../../firebase/api/getUserInfo";
 
 export default function PerfilUsuario(){
     const [usuario, setUsuario] = useState(null);
@@ -10,10 +11,9 @@ export default function PerfilUsuario(){
 
     useEffect(() => {
         const fetchUsuario = async () => {
-            const userRef = firestore().collection('usuarios').doc(getUserID());
-            const querySnapshot = await userRef.get();
-            if (querySnapshot.exists) {
-                setUsuario(querySnapshot.data());
+            const userInfoSnapshot = await getUserINFO();
+            if (userInfoSnapshot.exists) {
+                setUsuario(userInfoSnapshot.data());
             }
         };
         fetchUsuario();

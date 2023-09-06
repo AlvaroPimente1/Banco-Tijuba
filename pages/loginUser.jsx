@@ -3,31 +3,43 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image, TextInpu
 import { KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { StatusBar } from "react-native";
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 export default function LoginUser({ navigation }){
 
     const [email, setEmail] = React.useState('');
     const [senha, setSenha] = React.useState('');
 
-    function usuarioLogin(){
-        auth()
-        .signInWithEmailAndPassword(email, senha)
-        .then(() => {
-            Alert.alert('Login realizado com sucesso!');
-            navigation.navigate('UserRoute');
+    async function usuarioLogin() {
+        try {
+            await auth().signInWithEmailAndPassword(email, senha);
+            const user = auth().currentUser;
+            
+            if (user) {
+                const usuariosRef = firestore().collection('usuarios');
+                const userDoc = await usuariosRef.doc(user.uid).get();
 
-        })
-        .catch(error => {
+                if (userDoc.exists) {
+                    Alert.alert("Bem vindo!', 'Login efetuado com sucesso.");
+                    navigation.navigate('UserRoute');
+                } else {
+                    Alert.alert('Acesso Negado', 'Sua conta é de Administrador!');
+                    auth().signOut();
+                    navigation.navigate('LoginAdmin');
+                }
+            }
+        } catch (error) {
             if (error.code === 'auth/user-not-found') {
                 Alert.alert('Usuário não encontrado!');
-            }
-    
-            if (error.code === 'auth/wrong-password') {
+            } else if (error.code === 'auth/wrong-password') {
                 Alert.alert('Senha incorreta!');
+            } else {
+                Alert.alert('Erro', 'Ocorreu um erro durante o login. Tente novamente mais tarde.');
+                console.error(error);
             }
-            console.error(error);
-        });
+        }
     }
+
 
     function esqueciSenha(){
         auth().
