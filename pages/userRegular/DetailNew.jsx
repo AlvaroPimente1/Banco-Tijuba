@@ -1,8 +1,8 @@
 import React from "react";
 import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Alert } from "react-native";
 import firestore from '@react-native-firebase/firestore';
-import getUserID from "../firebase/getUserID";
-import ImageConteiner from "../components/ImagemConteiner";
+import getUserID from "../../firebase/getUserID";
+import ImageConteiner from "../../components/ImagemConteiner";
 
 export default function DetailNew({ route }){
     const projetos = route.params.projetos;
@@ -20,7 +20,7 @@ export default function DetailNew({ route }){
     
     return(
         <SafeAreaView style={styles.conteiner}>
-            <ImageConteiner source={require('../assets/images/imagemTeste.png')} />
+            <ImageConteiner source={require('../../assets/images/imagemTeste.png')} />
             <ScrollView>
                     <Text style={styles.name}>{projetos.nome_projeto}</Text>
                 <View style={styles.descriptionConteiner}>

@@ -3,10 +3,8 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image, TextInpu
 import { KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { StatusBar } from "react-native";
 import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
-import getUserID from "../firebase/getUserID";
 
-export default function Login({ navigation }){
+export default function LoginUser({ navigation }){
 
     const [email, setEmail] = React.useState('');
     const [senha, setSenha] = React.useState('');
@@ -16,7 +14,7 @@ export default function Login({ navigation }){
         .signInWithEmailAndPassword(email, senha)
         .then(() => {
             Alert.alert('Login realizado com sucesso!');
-            navigation.navigate('Tab');
+            navigation.navigate('UserRoute');
 
         })
         .catch(error => {
@@ -38,7 +36,10 @@ export default function Login({ navigation }){
         catch(error => {
             if (error.code === 'auth/user-not-found') {
                 Alert.alert('Usuário não encontrado!');
-            }            
+            }         
+            if (error.code === 'auth/user-not-found') {
+                Alert.alert('Usuário não encontrado!');
+            }    
             console.log(error)
         })
     }
@@ -95,10 +96,17 @@ export default function Login({ navigation }){
                         </TouchableOpacity>
 
                         <TouchableOpacity
+                            onPress={() => navigation.navigate('LoginAdmin')}
+                        >
+                            <Text style={styles.textoMenor}>É do MMIB? Entre por aqui</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
                             onPress={esqueciSenha}
                         >
                             <Text style={styles.textoMenor}>Esqueci a minha senha</Text>
                         </TouchableOpacity>
+
                     </View>
                 </TouchableWithoutFeedback>
         </KeyboardAvoidingView>

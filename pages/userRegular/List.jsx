@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useState } from "react";
-import getListProjects from "../firebase/api/getlistProject";
+import getListProjects from "../../firebase/api/getlistProject";
 
 export default function ListProject({ navigation }){
     const [text, setText] = useState('');
@@ -25,7 +25,7 @@ export default function ListProject({ navigation }){
                     onPress={()=> navigation.navigate('Details', { projetos: item })}
                 >
                     <View style={{flexDirection: 'row'}}>
-                        <Image style={styles.fotoDemo} source={require('../assets/images/imagemTeste.png')}/>
+                        <Image style={styles.fotoDemo} source={require('../../assets/images/imagemTeste.png')}/>
                         <Text style={styles.textoLista}>{item.nome_projeto}</Text>
                     </View>
                     <Text style={styles.descricao}>{item.descricao}</Text>

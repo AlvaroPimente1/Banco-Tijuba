@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
-import TabNavigator from "./tab";
 
-import Login from "../pages/login";
+import UserRoute from "./userRoute/usuarioApoiador";
+import AdminRoute from "./adminRoute/usuarioAdmin";
+
 import Cadastro from "../pages/Cadastrar";
-import Detail from "../pages/Detail";
-import DetailNew from "../pages/DetailNew";
-import PerfilUsuario from "../pages/Perfil";
+import LoginUser from "../pages/loginUser";
+import LoginAdmin from "../pages/userAdmin/loginAdmin";
+
 
 const Stack = createNativeStackNavigator();
 
@@ -22,12 +22,11 @@ return(
                 headerTitleStyle: { fontWeight: 'bold'},
                 }}
             >
-            <Stack.Screen name="Login" component={Login} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>
+            <Stack.Screen name="LoginUser" component={LoginUser} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>
             <Stack.Screen name="Cadastro" component={Cadastro} options={{ presentation: 'modal' , headerTitle: 'Cadastro', headerShown: false}}/>
-            <Stack.Screen name="Tab" component={TabNavigator} options={{headerShown: false}}/> 
-            <Stack.Screen name="Details" component={Detail}/>
-            <Stack.Screen name="DetailsNew" component={DetailNew}/>
-            <Stack.Screen name="Perfil" component={PerfilUsuario}/>
+            <Stack.Screen name="UserRoute" component={UserRoute} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>
+            <Stack.Screen name="LoginAdmin" component={LoginAdmin} options={{headerShown: false}}/>
+            <Stack.Screen name="AdminRoute" component={AdminRoute} options={{ presentation: 'modal', headerShown: false}}/>
         </Stack.Navigator>
     </NavigationContainer>
 );

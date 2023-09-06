@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, Text, StyleSheet, View, Image } from "react-native";
 import firestore from '@react-native-firebase/firestore';
-import getUserID from "../firebase/getUserID";
-import ImageContainer from "../components/ImagemConteiner";
+import getUserID from "../../firebase/getUserID";
+import ImageContainer from "../../components/ImagemConteiner";
 
 export default function PerfilUsuario(){
     const [usuario, setUsuario] = useState(null);
@@ -32,7 +32,7 @@ export default function PerfilUsuario(){
 
     return(
         <SafeAreaView style={styles.conteiner}>
-            <ImageContainer source={require('../assets/images/imagemTeste.png')}/>
+            <ImageContainer source={require('../../assets/images/imagemTeste.png')}/>
             <View style={styles.usuarioConteiner}>
                 {usuario && <Text style={styles.texto}>Nome: {usuario.nome}</Text>}
                 {usuario && <Text style={styles.texto}>E-mail: {usuario.email}</Text>}

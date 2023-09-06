@@ -7,7 +7,7 @@ import firestore from '@react-native-firebase/firestore';
 import getUserID from "../firebase/getUserID";
 import auth from '@react-native-firebase/auth';
 
-export default function Login({ navigation }){
+export default function Cadastrar({ navigation }){
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [nome, setNome] = useState('');
@@ -19,7 +19,7 @@ export default function Login({ navigation }){
         .createUserWithEmailAndPassword(email, senha)
         .then(() => {
             Alert.alert('Usuário criado com sucesso!');
-            navigation.navigate('Login')
+            navigation.navigate('LoginUser')
             
             firestore()
             .collection('usuarios')
@@ -109,7 +109,7 @@ export default function Login({ navigation }){
                         </TouchableOpacity>
                         
                         <TouchableOpacity
-                            onPress={() => navigation.navigate('Login')}
+                            onPress={() => navigation.navigate('LoginUser')}
                         >
                             <Text style={styles.textoMenor}>Já tem conta? Faça Login</Text>
                         </TouchableOpacity>

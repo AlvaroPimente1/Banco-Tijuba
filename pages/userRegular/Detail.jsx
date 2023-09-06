@@ -7,7 +7,7 @@ export default function Detail({ route }){
     return(
         <SafeAreaView style={styles.conteiner}>
             <View style={styles.imagemConteiner}>
-                <Image style={styles.image} source={require('../assets/images/imagemTeste.png')}/>
+                <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')}/>
             </View>
             <ScrollView>
                     <Text style={styles.name}>{projetos.nome_projeto}</Text>

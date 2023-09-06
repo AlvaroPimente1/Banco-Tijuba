@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList, View, TextInput, Button, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
-import Message from '../components/Message';
+import Message from '../../components/Message';
 import { Alert, Linking } from 'react-native';
 
 export default function ChatBot() {
@@ -95,7 +95,7 @@ export default function ChatBot() {
                 style={styles.zapButton}
                 onPress={openZap}
             >
-                <Image source={require('../assets/images/telegram.png')} style={{width: 40, height: 40}}/>
+                <Image source={require('../../assets/images/telegram.png')} style={{width: 40, height: 40}}/>
             </TouchableOpacity>
             <View style={styles.barraInteracao}>
                 <TextInput
@@ -114,7 +114,7 @@ export default function ChatBot() {
                     style={styles.resetButton}
                     onPress={handleReset}
                 >
-                    <Image source={require('../assets/images/replayBot.png')} style={{width: 35, height: 35}}/>
+                    <Image source={require('../../assets/images/replayBot.png')} style={{width: 35, height: 35}}/>
                 </TouchableOpacity>
             </View>
         </View>

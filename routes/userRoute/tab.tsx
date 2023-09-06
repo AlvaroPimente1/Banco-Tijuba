@@ -3,9 +3,9 @@ import { TouchableOpacity } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import NewProject from "../pages/New";
-import ListProject from "../pages/List";
-import ChatBot from "../pages/ChatBot";
+import NewProject from "../../pages/userRegular/New";
+import ListProject from "../../pages/userRegular/List";
+import ChatBot from "../../pages/userRegular/ChatBot";
 import { Image } from "react-native";
 
 
@@ -28,7 +28,7 @@ export default function TabNavigator(){
                 component={ListProject}
                 options={({ navigation }) => ({
                     tabBarIcon: () => {
-                    return <Image source={require('../assets/images/casa.png')} style={{ width: 20, height: 20 }} />;
+                    return <Image source={require('../../assets/images/casa.png')} style={{ width: 20, height: 20 }} />;
                     },
                     tabBarLabelStyle: {
                     fontSize: 12,
@@ -45,7 +45,7 @@ export default function TabNavigator(){
                         }}
                         style={{ marginRight: 20 }}
                     >
-                        <Image source={require('../assets/images/user.png')} style={{ width: 40, height: 40, borderRadius: 20 }} />
+                        <Image source={require('../../assets/images/user.png')} style={{ width: 40, height: 40, borderRadius: 20 }} />
                     </TouchableOpacity>
                     ),
                 })}
@@ -54,7 +54,7 @@ export default function TabNavigator(){
                 <Tab.Screen name="Bot" component={ChatBot}
                     options={{
                         tabBarIcon: () => {
-                            return <Image source={require('../assets/images/roboGrande.png')} style={{width: 30, height: 30}}/>
+                            return <Image source={require('../../assets/images/roboGrande.png')} style={{width: 30, height: 30}}/>
                         },
                     tabBarLabelStyle: {
                         fontSize: 12,
@@ -71,7 +71,7 @@ export default function TabNavigator(){
                 <Tab.Screen name="New" component={NewProject} 
                         options={{
                             tabBarIcon: () => {
-                                return <Image source={require('../assets/images/mais.png')} style={{width: 20, height: 20}}/>
+                                return <Image source={require('../../assets/images/mais.png')} style={{width: 20, height: 20}}/>
                         },
                         tabBarLabelStyle: {
                             fontSize: 12,
