@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity } from "react-native";
+import getUserINFO from "../../firebase/api/getUserInfo";
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
@@ -12,6 +14,17 @@ import { Image } from "react-native";
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator(){
+    const [ usuario, setUsuario ] = useState(null)
+    
+/*     useEffect(() => {
+        const fetchUsuario = async () => {
+            const userInfoSnapshot = await getUserINFO();
+            if (userInfoSnapshot.exists) {
+                setUsuario(userInfoSnapshot.data());
+            }
+        };
+        fetchUsuario();
+    }, []); */
 
     return(
         <Tab.Navigator

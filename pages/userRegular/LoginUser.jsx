@@ -71,7 +71,7 @@ export default function LoginUser({ navigation }){
                         <View style={styles.logoContainer}>
                             <Image
                                 style={styles.logo}
-                                source={require('../assets/images/BanCotijuba_3.png')}
+                                source={require('../../assets/images/BanCotijuba_3.png')}
                             />
                         </View>
                         <View>

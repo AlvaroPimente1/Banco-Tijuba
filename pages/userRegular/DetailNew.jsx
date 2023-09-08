@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Alert } from "react-native";
 import firestore from '@react-native-firebase/firestore';
 import getUserID from "../../firebase/getUserID";
@@ -14,7 +14,8 @@ export default function DetailNew({ route }){
         userRef.add({
             projetoRef: firestore().collection('projetos').doc(projetos.id),
             dt_entrada: firestore.FieldValue.serverTimestamp(),
-        }).then(() => {
+        })
+        .then(() => {
             const projetoRef = firestore().collection('projetos').doc(projetos.id);
         
             projetoRef.update({
@@ -47,7 +48,7 @@ export default function DetailNew({ route }){
                         style={styles.button}
                         onPress={adicionarProjetoAoUsuario}
                     >
-                        <Text style={styles.buttonText}>Quero investir nesse projeto!</Text>  
+                        <Text style={styles.buttonText}>Quero apoiar esse projeto!</Text>  
                     </TouchableOpacity>
                 </View>
             </ScrollView>
