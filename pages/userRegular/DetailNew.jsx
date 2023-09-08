@@ -6,16 +6,31 @@ import ImageConteiner from "../../components/ImagemConteiner";
 
 export default function DetailNew({ route }){
     const projetos = route.params.projetos;
-
+    
     function adicionarProjetoAoUsuario() {
-        const userRef = firestore().collection('usuarios').doc(getUserID()).collection('projetos_usuario');
+        const userID = getUserID();
+        const userRef = firestore().collection('usuarios').doc(userID).collection('projetos_usuario');
         
         userRef.add({
             projetoRef: firestore().collection('projetos').doc(projetos.id),
             dt_entrada: firestore.FieldValue.serverTimestamp(),
-        })
-        .then(() => Alert.alert("Projeto adicionado com sucesso ao usuário!"))
-        .catch((error) => Alert.alert("Erro ao adicionar o projeto ao usuário!"));
+        }).then(() => {
+            const projetoRef = firestore().collection('projetos').doc(projetos.id);
+        
+            projetoRef.update({
+                participantesProjeto: firestore.FieldValue.arrayUnion(userID)
+            })
+            
+            .then(() => {
+            Alert.alert("Projeto adicionado com sucesso ao usuário!");
+            })
+            
+            .catch((error) => {
+            Alert.alert("Erro ao adicionar o projeto ao usuário!", error.message);
+            });
+        }).catch((error) => {
+            Alert.alert("Erro ao adicionar o projeto ao usuário!", error.message);
+        });
     }
     
     return(

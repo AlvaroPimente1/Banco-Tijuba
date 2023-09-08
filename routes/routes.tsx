@@ -15,13 +15,7 @@ const Stack = createNativeStackNavigator();
 export default function Routes(){
 return(
     <NavigationContainer>
-        <Stack.Navigator
-                screenOptions={{
-                headerStyle: { backgroundColor: '#663399' },
-                headerTintColor: '#fff',
-                headerTitleStyle: { fontWeight: 'bold'},
-                }}
-            >
+        <Stack.Navigator>
             <Stack.Screen name="LoginUser" component={LoginUser} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>
             <Stack.Screen name="Cadastro" component={Cadastro} options={{ presentation: 'modal' , headerTitle: 'Cadastro', headerShown: false}}/>
             <Stack.Screen name="UserRoute" component={UserRoute} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>

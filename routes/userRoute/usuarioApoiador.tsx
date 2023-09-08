@@ -10,7 +10,13 @@ const Stack = createNativeStackNavigator();
 
 export default function UserRoute(){
     return(
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                headerStyle: { backgroundColor: '#663399' },
+                headerTintColor: '#fff',
+                headerTitleStyle: { fontWeight: 'bold'},
+                }}
+        >
             <Stack.Screen name="Tab" component={TabNavigator} options={{headerShown: false}}/> 
             <Stack.Screen name="Details" component={Detail} />
             <Stack.Screen name="DetailsNew" component={DetailNew}/>

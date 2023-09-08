@@ -14,36 +14,32 @@ export default function Cadastrar({ navigation }){
     const [numero, setNumero] = useState('');
 
 
-    function criaConta(){
-        auth()
-        .createUserWithEmailAndPassword(email, senha)
-        .then(() => {
+    async function criaConta() {
+        try {
+            await auth().createUserWithEmailAndPassword(email, senha);
             Alert.alert('Usuário criado com sucesso!');
-            navigation.navigate('LoginUser')
-            
-            firestore()
-            .collection('usuarios')
-            .doc(getUserID())
-            .set({
+            navigation.navigate('LoginUser');
+        
+            await firestore()
+                .collection('usuarios')
+                .doc(getUserID())
+                .set({
                 nome: nome,
                 email: email,
                 telefone: numero
-            })
-            .then(() => {
-                console.log('Sessao de usuário criada');
-            });
-        })
-        .catch(error => {
-            if (error.code === 'auth/email-already-in-use') {
-                Alert.alert('Esse email já está em uso!');
+                });
+        
+            console.log('Sessão de usuário criada');
+            } catch (error) {
+                if (error.code === 'auth/email-already-in-use') {
+                    Alert.alert('Esse email já está em uso!');
+                } else if (error.code === 'auth/invalid-email') {
+                    Alert.alert('Email inválido!');
+                } else {
+                    Alert.alert('Erro', 'Ocorreu um erro durante a criação de conta. Tente novamente mais tarde.');
+                    console.error(error);
+                }
             }
-
-            if (error.code === 'auth/invalid-email') {
-                Alert.alert('Email inválido!');
-            }
-
-            console.error(error);
-        });
     }
 
     return(
