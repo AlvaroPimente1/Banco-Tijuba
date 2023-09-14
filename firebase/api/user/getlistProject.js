@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import firestore from '@react-native-firebase/firestore';
-import getUserID from '../getUserID';
+import getUserID from './getUserID';
 
 export default function getListProjects() {
     const [text, setText] = useState('');

@@ -1,7 +1,7 @@
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-import getUserID from "../../firebase/getUserID";
+import getUserID from "./getUserID";
 import { Alert } from "react-native";
 
 export async function mudaImagemPerfil() {
@@ -18,8 +18,8 @@ export async function mudaImagemPerfil() {
 
         const nomeArquivo = image.path.split('/').pop();
         const userID = getUserID(); 
-        const caminhoStorage = `FotosPerfil/${userID}`;
-        const caminhoUpload = `FotosPerfil/${userID}/${nomeArquivo}`;
+        const caminhoStorage = `FotosProjeto/${userID}`;
+        const caminhoUpload = `FotosProjeto/${userID}/${nomeArquivo}`;
 
         const storageRef = storage().ref(caminhoStorage);
 
@@ -55,29 +55,3 @@ export async function mudaImagemPerfil() {
         Alert.alert('Erro', error.message);
     }
 };
-
-export async function removeImagemPerfil(){
-    try{
-        const userID = getUserID(); 
-        const caminhoStorage = `FotosPerfil/${userID}`;
-
-        const storageRef = storage().ref(caminhoStorage);
-
-        // Listar arquivos no diretório
-        const listResult = await storageRef.listAll();
-        for (let i = 0; i < listResult.items.length; i++) {
-            // Deleta a foto de perfil antiga para nao sobrecarregar storage
-            await listResult.items[i].delete();
-        }
-
-        const userRef = firestore().collection('usuarios').doc(userID);
-
-        await userRef.update({
-            fotoPerfil: firestore.FieldValue.delete()
-        })
-        Alert.alert('Foto de perfil removida')
-    }
-    catch(error){
-        Alert.alert('Não foi possível remover foto', error.message)
-    }
-}

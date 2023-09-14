@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaView, Text, StyleSheet, View, Image, Button, Alert, TouchableOpacity } from "react-native";
 import firestore from '@react-native-firebase/firestore';
-import getUserID from "../../firebase/getUserID";
+import getUserID from "../../firebase/api/user/getUserID";
 import ImageContainer from "../../components/ImagemConteiner";
-import getUserINFO from "../../firebase/api/getUserInfo";
-import { mudaImagemPerfil, removeImagemPerfil } from "../../firebase/api/profileImage";
+import getUserINFO from "../../firebase/api/user/getUserInfo";
+import { mudaImagemPerfil, removeImagemPerfil } from "../../firebase/api/user/profileImage";
 
 export default function PerfilUsuario(){
     const [usuario, setUsuario] = useState(null);
     const [qtdProjetos, setQtdProjetos] = useState(0);
-    const [imagemSelecionada, setImagemSelecionada] = useState(null);
-
 
     useEffect(() => {
         const fetchUsuario = async () => {
@@ -36,7 +34,7 @@ return(
     <SafeAreaView style={styles.conteiner}>
         {usuario && usuario.fotoPerfil 
             ? <ImageContainer source={{uri: usuario.fotoPerfil}} />
-            : <ImageContainer source={require('../../assets/images/user.png')} />
+            : <ImageContainer source={require('../../assets/images/imagemTeste.png')} />
         }
         <View style={styles.botaoFoto}>
             <TouchableOpacity onPress={mudaImagemPerfil}>

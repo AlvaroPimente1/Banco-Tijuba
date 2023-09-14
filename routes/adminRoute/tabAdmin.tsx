@@ -1,19 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { TouchableOpacity } from "react-native";
+import React from "react";
+import { Image, TouchableOpacity } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-
-import NewProject from "../../pages/userRegular/New";
-import ListProject from "../../pages/userRegular/List";
-import ChatBot from "../../pages/userRegular/ChatBot";
-import { Image } from "react-native";
-
+import ListAdmin from "../../pages/userAdmin/Projects";
+import AddProjectScreen from "../../pages/userAdmin/AddProject";
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavigator(){
-
+export default function TabAdmin(){
     return(
         <Tab.Navigator
         screenOptions={{
@@ -26,7 +20,7 @@ export default function TabNavigator(){
             >
             <Tab.Screen
                 name="List"
-                component={ListProject}
+                component={ListAdmin}
                 options={({ navigation }) => ({
                     tabBarIcon: () => {
                     return <Image source={require('../../assets/images/casa.png')} style={{ width: 20, height: 20 }} />;
@@ -37,7 +31,7 @@ export default function TabNavigator(){
                     color: '#1C1C1C',
                     marginBottom: 2,
                     },
-                    tabBarLabel: 'Meus Projetos',
+                    tabBarLabel: 'Todos os Projetos',
                     headerTitle: 'Meus Projetos',
                     headerRight: () => (
                     <TouchableOpacity
@@ -52,10 +46,10 @@ export default function TabNavigator(){
                 })}
             />
 
-                <Tab.Screen name="Bot" component={ChatBot}
+            <Tab.Screen name="New" component={AddProjectScreen} 
                     options={{
                         tabBarIcon: () => {
-                            return <Image source={require('../../assets/images/roboGrande.png')} style={{width: 30, height: 30}}/>
+                            return <Image source={require('../../assets/images/mais.png')} style={{width: 20, height: 20}}/>
                         },
                     tabBarLabelStyle: {
                         fontSize: 12,
@@ -63,27 +57,10 @@ export default function TabNavigator(){
                         color: '#1C1C1C',
                         marginBottom: 2
                     },
-                        tabBarLabel: 'ChatBot',
-                        headerTitle: 'Bot',
-                        
-                    }}
-                />
-
-                <Tab.Screen name="New" component={NewProject} 
-                        options={{
-                            tabBarIcon: () => {
-                                return <Image source={require('../../assets/images/mais.png')} style={{width: 20, height: 20}}/>
-                        },
-                        tabBarLabelStyle: {
-                            fontSize: 12,
-                            fontWeight: 'bold',
-                            color: '#1C1C1C',
-                            marginBottom: 2
-                        },
-                        tabBarLabel: 'Todos os projetos',
-                        headerTitle: 'Projetos disponíveis'
-                    }}
-                />    
+                    tabBarLabel: 'Criar Novo Projeto',
+                    headerTitle: 'Novo Projeto'
+                }}
+            />    
         </Tab.Navigator>
     )
 }

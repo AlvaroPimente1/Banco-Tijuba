@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import styles from "../../style/commonsStyles";
 import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Alert } from "react-native";
 import firestore from '@react-native-firebase/firestore';
-import getUserID from "../../firebase/getUserID";
+import getUserID from "../../firebase/api/user/getUserID";
 import ImageConteiner from "../../components/ImagemConteiner";
 
 export default function DetailNew({ route }){
@@ -55,70 +56,3 @@ export default function DetailNew({ route }){
         </SafeAreaView>
     )
 }
-
-
-const styles = StyleSheet.create({
-    conteiner: {
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor: '#1C1C1C'
-    }, 
-    image: {
-        width: 200,
-        height: 200,
-        marginBottom: 20,
-        borderRadius: 5,
-        borderWidth: 2,
-        borderColor: "#333333"
-    },
-    name: {
-        fontSize: 29,
-        fontWeight: 'bold',
-        color: "#fff",
-        paddingTop: 5,
-        textAlign: 'center',
-        paddingBottom: 7
-    },
-    description: {
-        fontSize: 15,
-        textAlign: 'justify',
-        paddingHorizontal: 10,
-        color: '#fff',
-    },
-
-    subTitulo: {
-        fontSize: 15,
-        marginBottom: 10,
-        color: "#fff",
-        textAlign: 'center'
-    },
-
-    descriptionConteiner: {
-        paddingHorizontal: 5,
-        backgroundColor: '#333333',
-        paddingVertical: 8,
-        marginHorizontal: 5,
-        borderRadius: 5,
-    },
-
-    button: {
-        backgroundColor: '#663399',
-        paddingVertical: 10,
-        paddingHorizontal: 10,
-        borderRadius: 10,
-        borderWidth: 1
-    },
-
-    buttonText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-
-    buttonConteiner: {
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 20
-    }
-})

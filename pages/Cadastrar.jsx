@@ -4,7 +4,7 @@ import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image, TextInpu
 import { KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { StatusBar } from "react-native";
 import firestore from '@react-native-firebase/firestore';
-import getUserID from "../firebase/getUserID";
+import getUserID from "../firebase/api/user/getUserID";
 import auth from '@react-native-firebase/auth';
 
 export default function Cadastrar({ navigation }){
@@ -24,9 +24,9 @@ export default function Cadastrar({ navigation }){
                 .collection('usuarios')
                 .doc(getUserID())
                 .set({
-                nome: nome,
-                email: email,
-                telefone: numero
+                    nome: nome,
+                    email: email,
+                    telefone: numero
                 });
         
             console.log('Sessão de usuário criada');

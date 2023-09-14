@@ -20,8 +20,9 @@ export default function LoginUser({ navigation }){
                 const userDoc = await usuariosRef.doc(user.uid).get();
 
                 if (userDoc.exists) {
-                    Alert.alert("Bem vindo!", "Login efetuado com sucesso.");
                     navigation.navigate('UserRoute');
+                    setEmail('');
+                    setSenha('');
                 } else {
                     Alert.alert('Acesso Negado', 'Sua conta é de Administrador!');
                     auth().signOut();

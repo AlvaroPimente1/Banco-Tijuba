@@ -21,6 +21,8 @@ export default function LoginAdmin({ navigation }) {
                 if (adminDoc.exists) {
                     Alert.alert('Bem vindo MMIB!', 'Login efetuado com sucesso.');
                     navigation.navigate('AdminRoute');
+                    setEmail('');
+                    setSenha('');
                 } else {
                     Alert.alert('Acesso Negado', 'Você não tem permissão para acessar esta área.');
                     auth().signOut();
