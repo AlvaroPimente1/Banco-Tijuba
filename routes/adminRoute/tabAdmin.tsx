@@ -3,7 +3,7 @@ import { Image, TouchableOpacity } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import ListAdmin from "../../pages/userAdmin/Projects";
-import AddProjectScreen from "../../pages/userAdmin/AddProject";
+import DrawerAdmin from "./drawerAdmin";
 
 const Tab = createBottomTabNavigator();
 
@@ -11,17 +11,17 @@ export default function TabAdmin(){
     return(
         <Tab.Navigator
         screenOptions={{
-            headerStyle: { backgroundColor: '#663399' },
-            headerTintColor: '#fff',
-            headerTitleStyle: { fontWeight: 'bold'},
-            tabBarActiveBackgroundColor: '#663399',
-            tabBarInactiveBackgroundColor: '#8a63d2',
+                headerStyle: { backgroundColor: '#663399' },
+                headerTintColor: '#fff',
+                headerTitleStyle: { fontWeight: 'bold'},
+                tabBarActiveBackgroundColor: '#663399',
+                tabBarInactiveBackgroundColor: '#8a63d2',
             }}
             >
             <Tab.Screen
                 name="List"
                 component={ListAdmin}
-                options={({ navigation }) => ({
+                options={() => ({
                     tabBarIcon: () => {
                     return <Image source={require('../../assets/images/casa.png')} style={{ width: 20, height: 20 }} />;
                     },
@@ -33,23 +33,13 @@ export default function TabAdmin(){
                     },
                     tabBarLabel: 'Todos os Projetos',
                     headerTitle: 'Meus Projetos',
-                    headerRight: () => (
-                    <TouchableOpacity
-                        onPress={() => {
-                            navigation.navigate('Perfil'); 
-                        }}
-                        style={{ marginRight: 20 }}
-                    >
-                        <Image source={require('../../assets/images/user.png')} style={{ width: 40, height: 40, borderRadius: 20 }} />
-                    </TouchableOpacity>
-                    ),
                 })}
             />
 
-            <Tab.Screen name="New" component={AddProjectScreen} 
+            <Tab.Screen name="Drawer" component={DrawerAdmin} 
                     options={{
                         tabBarIcon: () => {
-                            return <Image source={require('../../assets/images/mais.png')} style={{width: 20, height: 20}}/>
+                            return <Image source={require('../../assets/images/org.png')} style={{width: 40, height: 40}}/>
                         },
                     tabBarLabelStyle: {
                         fontSize: 12,
@@ -57,8 +47,8 @@ export default function TabAdmin(){
                         color: '#1C1C1C',
                         marginBottom: 2
                     },
-                    tabBarLabel: 'Criar Novo Projeto',
-                    headerTitle: 'Novo Projeto'
+                    tabBarLabel: 'Gestão',
+                    headerShown: false
                 }}
             />    
         </Tab.Navigator>

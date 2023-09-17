@@ -11,7 +11,8 @@ export default function createProject(){
             try{
                 await firestore().collection('projetos').add({
                     nome_projeto: nomeProjeto,
-                    descricao: descricaoProjeto
+                    descricao: descricaoProjeto,
+                    dt_criacao: firestore.FieldValue.serverTimestamp()
                 })
                 Alert.alert('Concluído', 'Projeto criado com êxito!')
                 setNomeProjeto('');
