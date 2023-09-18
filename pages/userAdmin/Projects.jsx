@@ -1,16 +1,22 @@
 import React from "react";
 import styles from "../../style/commonsStyles";
 import getAllProject from "../../firebase/api/admin/getAllProject";
+import { useContext } from "react";
+import ParamContext from "../../context/projetoContext";
 import { SafeAreaView, Text, TextInput, FlatList, View, TouchableOpacity, Image } from "react-native";
 
 export default function ListAdmin({ navigation }){
     const projetos = getAllProject();
+    const { setParams } = useContext(ParamContext);
 
     function renderItem({ item }){
         return(
             <View>
                 <TouchableOpacity style={styles.conteinerLista}
-                    onPress={()=> navigation.navigate('TopAdmin', { screen: 'DetailAdmin', params: { projeto: item } })}
+                                    onPress={() => {
+                                        setParams({ projeto: item }); 
+                                        navigation.navigate('TopAdmin', { screen: 'DetailAdmin' });
+                                    }}
 
                 >
                     <View style={{flexDirection: 'row'}}>

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styles from "../../style/commonsStyles";
 import firestore from '@react-native-firebase/firestore';
-import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Alert } from "react-native";
+import ParamContext from "../../context/projetoContext";
+import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Alert, TextInput } from "react-native";
 
 export default function DetailAdmin({ route, navigation }){
-    const projetos = route.params.projeto;
+    const { params } = useContext(ParamContext);
+    const projetos = params.projeto;
 
     function deleteProjeto(){
         const projetoRef = firestore().collection('projetos').doc(projetos.id)

@@ -3,7 +3,7 @@ import { SafeAreaView, Text, View, Image, TouchableOpacity } from "react-native"
 import styles from "../../style/perfilStyle";
 import ImageContainer from "../../components/ImagemConteiner";
 import getUserINFOAdmin from "../../firebase/api/admin/getUserInfoAdmin";
-import { mudaImagemPerfil, removeImagemPerfil } from "../../firebase/api/admin/addProjectImage";
+import { mudaImagemPerfil, removeImagemPerfil } from "../../firebase/api/admin/addImagePerfil";
 
 export default function PerfilAdminScreen(){
         const [usuario, setUsuario] = useState(null);

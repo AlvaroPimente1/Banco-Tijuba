@@ -1,11 +1,20 @@
 import React from "react";
 import styles from "../../style/commonsStyles";
-import { SafeAreaView, Text } from "react-native";
+import { useContext } from "react";
+import ParamContext from "../../context/projetoContext";
+import { SafeAreaView, Text, Image, TouchableOpacity } from "react-native";
 
-export default function TimeLineScreen(){
+export default function TimeLineScreen({ navigation }){
+    const { params } = useContext(ParamContext);
+    const projetos = params.projeto;
+    
     return(
         <SafeAreaView style={styles.conteiner}>
-            <Text style={{ color: '#fff' }}>TESTE TIME LINE</Text>
+            <TouchableOpacity
+                onPress={()=> navigation.navigate('TopAdmin', { params: { projeto: item } })}
+            >
+                <Text>{projetos.nome_projeto}</Text>
+            </TouchableOpacity>
         </SafeAreaView>
     )
 }
