@@ -10,7 +10,8 @@ export default function ListAdmin({ navigation }){
         return(
             <View>
                 <TouchableOpacity style={styles.conteinerLista}
-                    onPress={()=> navigation.navigate('DetailAdmin', { projeto: item })}
+                    onPress={()=> navigation.navigate('TopAdmin', { screen: 'DetailAdmin', params: { projeto: item } })}
+
                 >
                     <View style={{flexDirection: 'row'}}>
                         <Image style={styles.fotoDemo} source={require('../../assets/images/imagemTeste.png')}/>

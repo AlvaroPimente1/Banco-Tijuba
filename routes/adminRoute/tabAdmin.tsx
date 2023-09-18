@@ -31,8 +31,8 @@ export default function TabAdmin(){
                     color: '#1C1C1C',
                     marginBottom: 2,
                     },
-                    tabBarLabel: 'Todos os Projetos',
-                    headerTitle: 'Meus Projetos',
+                    tabBarLabel: 'Feed de projetos',
+                    headerTitle: 'Olá, Mmib',
                 })}
             />
 

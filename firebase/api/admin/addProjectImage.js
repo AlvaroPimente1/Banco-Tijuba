@@ -1,7 +1,7 @@
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-import getUserID from "./getUserID";
+import getUserID from '../user/getUserID';
 import { Alert } from "react-native";
 
 export async function mudaImagemPerfil() {
@@ -18,8 +18,8 @@ export async function mudaImagemPerfil() {
 
         const nomeArquivo = image.path.split('/').pop();
         const userID = getUserID(); 
-        const caminhoStorage = `FotosProjeto/${userID}`;
-        const caminhoUpload = `FotosProjeto/${userID}/${nomeArquivo}`;
+        const caminhoStorage = `FotoPerfilAdmin/${userID}`;
+        const caminhoUpload = `FotoPerfilAdmin/${userID}/${nomeArquivo}`;
 
         const storageRef = storage().ref(caminhoStorage);
 
@@ -42,7 +42,7 @@ export async function mudaImagemPerfil() {
             async () => {
                 // Envia URL pro firestore
                 const downloadURL = await storage().ref(caminhoUpload).getDownloadURL();
-                const userRef = firestore().collection('usuarios').doc(userID);
+                const userRef = firestore().collection('usuarios_admin').doc(userID);
                 await userRef.update({
                     fotoPerfil: downloadURL
                 });

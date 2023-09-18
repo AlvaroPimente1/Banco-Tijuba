@@ -3,26 +3,25 @@ import React, { useState } from "react";
 import { Text, TouchableOpacity, View, Image, TextInput, Alert } from "react-native";
 import { KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { StatusBar } from "react-native";
-import styles from "../style/cadastroStyles";
+import styles from "../../style/cadastroStyles";
 import firestore from '@react-native-firebase/firestore';
-import getUserID from "../firebase/api/user/getUserID";
+import getUserID from "../../firebase/api/user/getUserID";
 import auth from '@react-native-firebase/auth';
 
-export default function Cadastrar({ navigation }){
+export default function CreaterUserAdmin({ navigation }){
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [nome, setNome] = useState('');
     const [numero, setNumero] = useState('');
 
 
-    async function criaConta() {
+    async function criaContaAdmin() {
         try {
             await auth().createUserWithEmailAndPassword(email, senha);
             Alert.alert('Usuário criado com sucesso!');
-            navigation.navigate('LoginUser');
         
             await firestore()
-                .collection('usuarios')
+                .collection('usuarios_admin')
                 .doc(getUserID())
                 .set({
                     nome: nome,
@@ -55,11 +54,7 @@ export default function Cadastrar({ navigation }){
                 />
                 <TouchableWithoutFeedback>
                     <View style={styles.conteudo}>
-                        <Image
-                            style={styles.logo}
-                            source={require('../assets/images/BanCotijuba_3.png')}
-                        />
-                        
+                        <Text style={{ color: '#fff' }}>Criar usuário administrador Mmib</Text>
                         <TextInput
                             style={styles.input}
                             placeholder={'Insira seu nome'}
@@ -100,15 +95,9 @@ export default function Cadastrar({ navigation }){
 
                         <TouchableOpacity
                             style={styles.botao}
-                            onPress={criaConta}
+                            onPress={criaContaAdmin}
                         >
                             <Text style={styles.textoBotao}>Cadastrar usuario</Text>
-                        </TouchableOpacity>
-                        
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate('LoginUser')}
-                        >
-                            <Text style={styles.textoMenor}>Já tem conta? Faça Login</Text>
                         </TouchableOpacity>
                     </View>
                 </TouchableWithoutFeedback>

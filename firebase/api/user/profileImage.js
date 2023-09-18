@@ -1,7 +1,7 @@
 import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-import getUserID from "./getUserID";
+import getUserID from './getUserID';
 import { Alert } from "react-native";
 
 export async function mudaImagemPerfil() {
