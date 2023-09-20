@@ -5,6 +5,8 @@ import getUserID from '../user/getUserID';
 import { Alert } from "react-native";
 
 export async function addImagemPost() {
+    let imageUrl = null;
+
     try {
         const image = await ImagePicker.openPicker({
             width: 300,
@@ -18,40 +20,21 @@ export async function addImagemPost() {
 
         const nomeArquivo = image.path.split('/').pop();
         const userID = getUserID(); 
-        const caminhoStorage = `Imagens_Postagens/${userID}`;
         const caminhoUpload = `Imagens_Postagens/${userID}/${nomeArquivo}`;
 
-        const storageRef = storage().ref(caminhoStorage);
-
-        // Listar arquivos no diretório
-        const listResult = await storageRef.listAll();
-        for (let i = 0; i < listResult.items.length; i++) {
-            // Deleta a foto de perfil antiga para nao sobrecarregar storage
-            await listResult.items[i].delete();
-        }
-
         // Faz upload para o caminho do storage 
-        const upload = storage().ref(caminhoUpload).putFile(image.path);
+        const uploadTask = storage().ref(caminhoUpload).putFile(image.path);
 
-        upload.on('state_changed', 
-            (snapshot) => {
-            }, 
-            (error) => {
-                Alert.alert('Erro ao enviar imagem', error.message);
-            }, 
-            async () => {
-                // Envia URL pro firestore
-                const downloadURL = await storage().ref(caminhoUpload).getDownloadURL();
-                const userRef = firestore().collection('usuarios_admin').doc(userID);
-                await userRef.update({
-                    fotoPerfil: downloadURL
-                });
+        await uploadTask; // Aguarda o upload ser concluído
 
-                Alert.alert('Foto de perfil atualizada!');
-            }
-        );
+        // Obtém a URL da imagem após o upload
+        imageUrl = await storage().ref(caminhoUpload).getDownloadURL();
+
+        Alert.alert('Foto anexada');
     } catch (error) {
         console.error(error);
         Alert.alert('Erro', error.message);
     }
+
+    return imageUrl;
 };

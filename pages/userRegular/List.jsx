@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "../../style/commonsStyles";
 import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
-import { useState } from "react";
+import { useState, useContext } from "react";
+import ParamContext from "../../context/projetoContext";
 import getListProjects from "../../firebase/api/user/getlistProject";
 
 export default function ListProject({ navigation }){
     const [text, setText] = useState('');
     const { projetos, items, list } = getListProjects();
+    const { setParams } = useContext(ParamContext);
 
     function FiltroBusca(text) {
         const filterList = items.filter((item) => {  
@@ -23,7 +25,10 @@ export default function ListProject({ navigation }){
         return(
             <View>
                 <TouchableOpacity style={styles.conteinerLista}
-                    onPress={()=> navigation.navigate('Details', { projetos: item })}
+                                    onPress={() => {
+                                        setParams({ projeto: item }); 
+                                        navigation.navigate('TopUser', { screen: 'Detail' });
+                                    }}                    
                 >
                     <View style={{flexDirection: 'row'}}>
                         <Image style={styles.fotoDemo} source={require('../../assets/images/imagemTeste.png')}/>

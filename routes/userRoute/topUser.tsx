@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import DetailAdmin from "../../pages/userAdmin/DetailsAdmin";
+import Detail from "../../pages/userRegular/Detail";
 import TimeLineScreen from "../../pages/userAdmin/TimeLine";
-import NewPostScreen from "../../pages/userAdmin/NewPost";
 
 const Top = createMaterialTopTabNavigator();
 
-export default function TopAdmin(){
+export default function TopUser(){
     return(
             <Top.Navigator    
                 screenOptions={{
@@ -16,9 +15,8 @@ export default function TopAdmin(){
                     tabBarIndicatorStyle: { backgroundColor: "#1C1C1C" },
                 }}  
             >
-                <Top.Screen name="DetailAdmin" component={DetailAdmin} />
+                <Top.Screen name="Detail" component={Detail} />
                 <Top.Screen name="TimeLine" component={TimeLineScreen} />
-                <Top.Screen name="Novo Post" component={NewPostScreen} />
             </Top.Navigator>
     )
 }

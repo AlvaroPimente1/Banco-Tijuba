@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "../../style/commonsStyles";
+import ParamContext from "../../context/projetoContext";
 import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image } from "react-native";
+import { formatDate } from "../../utils/formatDate";
 
-export default function Detail({ route }){
-    const projetos = route.params.projetos;
+export default function Detail(){
+    const { params } = useContext(ParamContext);
+    const projetos = params.projeto;
 
     return(
         <SafeAreaView style={styles.conteiner}>
@@ -15,6 +18,7 @@ export default function Detail({ route }){
                 <View style={styles.descriptionConteiner}>
                     <Text style={styles.description}>{projetos.descricao}</Text>
                 </View>
+                <Text style={styles.description}>Criado em: {formatDate(projetos.dt_criacao)}</Text>
             </ScrollView>
         </SafeAreaView>
     )

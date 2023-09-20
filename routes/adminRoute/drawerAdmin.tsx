@@ -21,10 +21,10 @@ export default function DrawerAdmin() {
             }}
 
         >
+            <Drawer.Screen name="Meu Perfil" component={PerfilAdminScreen}/>
             <Drawer.Screen name="Sobre" component={OverViewScreen}/>
             <Drawer.Screen name="Novo projeto" component={AddProjectScreen} />
             <Drawer.Screen name="Agenda Mmib" component={AgendaScreen} />
-            <Drawer.Screen name="Meu Perfil" component={PerfilAdminScreen}/>
             <Drawer.Screen name="Criar Usuario " component={CreaterUserAdmin} />
         </Drawer.Navigator>
     );

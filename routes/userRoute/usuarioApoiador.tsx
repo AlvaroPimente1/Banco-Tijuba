@@ -5,6 +5,7 @@ import TabNavigator from "./tab";
 import Detail from "../../pages/userRegular/Detail";
 import DetailNew from "../../pages/userRegular/DetailNew";
 import PerfilUsuario from "../../pages/userRegular/Perfil";
+import TopUser from "./topUser";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +19,7 @@ export default function UserRoute(){
                 }}
         >
             <Stack.Screen name="Tab" component={TabNavigator} options={{headerShown: false}}/> 
-            <Stack.Screen name="Details" component={Detail} />
+            <Stack.Screen name="TopUser" component={TopUser} />
             <Stack.Screen name="DetailsNew" component={DetailNew}/>
             <Stack.Screen name="Perfil" component={PerfilUsuario}/>
         </Stack.Navigator>

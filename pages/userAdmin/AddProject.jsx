@@ -9,12 +9,12 @@ export default function AddProjectScreen() {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        { label: 'Meio Ambiente', value: 'categoria_ambiente' },
-        { label: 'Social', value: 'categoria_social' },
-        { label: 'Educação', value: 'categoria_educacao' },
-        { label: 'Agricultura Familiar', value: 'categoria_agricultura' },
-        { label: 'Turismo', value: 'categoria_turismo' },
-        { label: 'BioJoias', value: 'categoria_biojoias' }
+        { label: 'Meio Ambiente', value: 'Ambiente' },
+        { label: 'Social', value: 'Social' },
+        { label: 'Educação', value: 'Educacao' },
+        { label: 'Agricultura Familiar', value: 'Agricultura' },
+        { label: 'Turismo', value: 'Turismo' },
+        { label: 'BioJoias', value: 'Biojoias' }
     ]);
     
     const {

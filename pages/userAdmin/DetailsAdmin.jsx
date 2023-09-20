@@ -30,6 +30,7 @@ export default function DetailAdmin({ route, navigation }){
                     <Text style={styles.name}>{projetos.nome_projeto}</Text>
                 <View style={styles.descriptionConteiner}>
                     <Text style={styles.description}>{projetos.descricao}</Text>
+                    <Text style={styles.description}>{projetos.categoria}</Text>
                     <Text style={styles.description}>Cadastrado por {projetos.cadastradorPor}</Text>
                 </View>
 
