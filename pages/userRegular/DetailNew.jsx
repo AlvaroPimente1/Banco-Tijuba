@@ -14,6 +14,7 @@ export default function DetailNew({ route }){
         
         userRef.add({
             projetoRef: firestore().collection('projetos').doc(projetos.id),
+            nome_projeto: projetos.nome_projeto,
             dt_entrada: firestore.FieldValue.serverTimestamp(),
         })
         .then(() => {

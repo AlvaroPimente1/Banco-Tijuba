@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styles from "../../style/commonsStyles";
 import ParamContext from "../../context/projetoContext";
-import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image } from "react-native";
+import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, FlatList } from "react-native";
 import { formatDate } from "../../utils/formatDate";
+import ListApoiadores from "../../components/ListaParticipantes";
 
 export default function Detail(){
     const { params } = useContext(ParamContext);
@@ -20,6 +21,7 @@ export default function Detail(){
                 </View>
                 <Text style={styles.description}>Criado em: {formatDate(projetos.dt_criacao)}</Text>
             </ScrollView>
+            <ListApoiadores/>
         </SafeAreaView>
     )
 }

@@ -3,6 +3,7 @@ import styles from "../../style/commonsStyles";
 import firestore from '@react-native-firebase/firestore';
 import ParamContext from "../../context/projetoContext";
 import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Alert, TextInput } from "react-native";
+import ListApoiadores from "../../components/ListaParticipantes";
 
 export default function DetailAdmin({ route, navigation }){
     const { params } = useContext(ParamContext);
@@ -43,6 +44,7 @@ export default function DetailAdmin({ route, navigation }){
                     </TouchableOpacity>
                 </View>
             </ScrollView>
+            <ListApoiadores/>
         </SafeAreaView>
     )
 }

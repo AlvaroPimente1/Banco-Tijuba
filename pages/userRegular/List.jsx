@@ -25,10 +25,10 @@ export default function ListProject({ navigation }){
         return(
             <View>
                 <TouchableOpacity style={styles.conteinerLista}
-                                    onPress={() => {
-                                        setParams({ projeto: item }); 
-                                        navigation.navigate('TopUser', { screen: 'Detail' });
-                                    }}                    
+                    onPress={() => {
+                            setParams({ projeto: item }); 
+                            navigation.navigate('TopUser', { screen: 'Detail' });
+                    }}                    
                 >
                     <View style={{flexDirection: 'row'}}>
                         <Image style={styles.fotoDemo} source={require('../../assets/images/imagemTeste.png')}/>

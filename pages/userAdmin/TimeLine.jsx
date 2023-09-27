@@ -3,7 +3,7 @@ import getAllPosts from "../../firebase/api/admin/getAllPosts";
 import { formatDate } from "../../utils/formatDate";
 import { SafeAreaView, Text, Image, TouchableOpacity, View, FlatList, StyleSheet, ScrollView } from "react-native";
 
-export default function TimeLineScreen(){
+export default function TimeLineScreen({ navigation }){
     const posts = getAllPosts();
 
     function renderItem({ item }){
@@ -26,7 +26,13 @@ export default function TimeLineScreen(){
                     </View> 
                     <View>
                         <Text style={styles.textMessage}>{item.mensagem_post}</Text>           
-                    </View>                    
+                    </View>      
+                    <TouchableOpacity style={{flexDirection: 'row'}}
+                        //onPress={()=> navigation.navigate('Comments')}
+                    >
+                        <Image style={styles.comment} source={require('../../assets/images/comentario.png')}/>
+                        <Text style={styles.textComment}>Comentários</Text>
+                    </TouchableOpacity>
                 </View>        
             </View>
         )
@@ -65,7 +71,9 @@ const styles = StyleSheet.create({
 
     textMessage: {
         fontSize: 15,
-        color: '#fff'
+        color: '#fff',
+        marginTop: 5,
+        paddingLeft: 5
     },
 
     viewData: {
@@ -94,5 +102,18 @@ const styles = StyleSheet.create({
     viewImage: {
         alignItems: 'center',
         justifyContent: 'center',
+    },
+
+    comment: {
+        width: 20,
+        height: 20,
+        marginLeft: 5,
+        marginVertical: 5
+    },
+
+    textComment: {
+        marginLeft: 5,
+        marginVertical: 5,
+        color: '#fff'
     }
 })

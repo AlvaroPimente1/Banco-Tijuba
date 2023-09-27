@@ -11,10 +11,10 @@ export default function getAllPosts(){
     useEffect(()=>{
         const projetoRef = firestore().collection('projetos').doc(projetos.id).collection('projeto_posts');
         const unsub = projetoRef.onSnapshot((snapshot) =>{
-            const projetosArray = snapshot.docs.map(doc => {
+            const postsArray = snapshot.docs.map(doc => {
                 return{ ...doc.data(), id: doc.id };
             })
-            setPosts(projetosArray);
+            setPosts(postsArray);
         }, error => {
             Alert.alert('Erro', 'Ocorreu um erro ao consultar os projetos')
         })
