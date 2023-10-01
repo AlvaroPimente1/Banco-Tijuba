@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import ParamContext from "../context/projetoContext";
 import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, FlatList } from "react-native";
-import { buscarArrayUsuarios, buscarDetalhesUsuario } from "../firebase/api/shared/getAllSupporter";
+import { buscarArrayUsuarios, buscarDetalhesUsuario, buscarQtdParticipantes } from "../firebase/api/shared/getAllSupporter";
 
 export default function ListApoiadores(){
     const { params } = useContext(ParamContext);
@@ -43,10 +43,8 @@ export default function ListApoiadores(){
 
     return(
         <>
-            <View>
-                <Text style={styles.textNome}>Participantes:</Text>
-            </View>
             <FlatList
+                nestedScrollEnabled={true}
                 data={listaUsuarios}
                 keyExtractor={item => item.userId || item.email} 
                 renderItem={renderItem}
@@ -61,15 +59,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 10,
         borderRadius: 10,
-        alignItems: 'center',
+        marginHorizontal: 15,
         marginVertical: 4,
         justifyContent: 'flex-start'
-    },
-
-    textNome: {
-        fontSize: 18,
-        marginHorizontal: 8,
-        color: '#fff'
     },
 
     textTelefone: {
@@ -84,5 +76,10 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
 
+    textNome: {
+        fontSize: 18,
+        marginHorizontal: 8,
+        color: '#fff'
+    },
     
 })

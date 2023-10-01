@@ -1,13 +1,23 @@
 import React, { useContext, useState, useEffect } from "react";
-import styles from "../../style/commonsStyles";
+import styles from "../../style/detailStyles";
 import ParamContext from "../../context/projetoContext";
-import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, FlatList } from "react-native";
+import { View, SafeAreaView, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { formatDate } from "../../utils/formatDate";
 import ListApoiadores from "../../components/ListaParticipantes";
 
 export default function Detail(){
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
+
+    const [ showList, setShowList ] = useState(false);
+
+    function mostrarListaUsuarios(){
+        if(!showList){
+            setShowList(true)
+        }else{
+            setShowList(false)
+        }
+    }
 
     return(
         <SafeAreaView style={styles.conteiner}>
@@ -21,7 +31,23 @@ export default function Detail(){
                 </View>
                 <Text style={styles.description}>Criado em: {formatDate(projetos.dt_criacao)}</Text>
             </ScrollView>
-            <ListApoiadores/>
+            <TouchableOpacity style={styles.botaoLista}
+                onPress={mostrarListaUsuarios}
+            >
+                <Text style={styles.participantesText}>Participantes</Text>
+                
+                {
+                    showList
+                    ? <Image style={styles.iconLista} source={require('../../assets/images/setaBaixo.png')}/>
+                    : <Image style={styles.iconLista} source={require('../../assets/images/setaDireita.png')}/>
+                }
+
+            </TouchableOpacity>
+
+            {showList
+                ? <ListApoiadores/>
+                : null
+            }
         </SafeAreaView>
     )
 }

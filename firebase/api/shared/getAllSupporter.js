@@ -10,15 +10,39 @@ export async function buscarArrayUsuarios(projetoId){
         if (!doc.exists) {
             throw new Error('Projeto não encontrado.');
         }
-    
+
         const arrayUsuarios = doc.data().participantesProjeto;
         const arrayTamanho = doc.data().length
-    
+
+        if(arrayTamanho == null){
+            Alert.alert('Sem participantes ainda!')
+        }
+
         return arrayUsuarios;
     }
     catch(erro) {
         console.error(erro);
         Alert.alert('Erro', 'Não foi possível verificar os usuários participantes.');
+    }
+}
+
+export async function buscarQtdParticipantes(projetoId){
+    try {
+        const arrayRef = firestore().collection('projetos').doc(projetoId);
+    
+        const doc = await arrayRef.get();
+    
+        if (!doc.exists) {
+            throw new Error('Projeto não encontrado.');
+        }
+
+        const arrayTamanho = doc.data().length
+
+        return arrayTamanho;
+    }
+    catch(erro) {
+        console.error(erro);
+        Alert.alert('Erro', 'Não foi possível verificar a quantidade de participantes.');
     }
 }
 

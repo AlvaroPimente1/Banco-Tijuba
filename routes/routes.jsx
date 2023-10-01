@@ -8,7 +8,7 @@ import AdminRoute from "./adminRoute/usuarioAdmin";
 
 import Cadastro from "../pages/Cadastrar";
 import LoginUser from "../pages/userRegular/LoginUser";
-import LoginAdmin from "../pages/userAdmin/LoginAdmin";
+import LoginAdmin from "../pages/userAdmin/loginAdmin";
 
 
 const Stack = createNativeStackNavigator();
