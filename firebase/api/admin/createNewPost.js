@@ -10,6 +10,7 @@ export default function createNewPost(){
     const [ titulo, setTitulo ] = useState('');
     const [ mensagem, setMensagem ] = useState('');
     const [ imagemUrl, setImagemUrl ] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
@@ -25,7 +26,7 @@ export default function createNewPost(){
     }, []);
 
     const carregaImagem = async() => {
-        const url = await addImagemPost();
+        const url = await addImagemPost(setIsLoading);
         setImagemUrl(url);
     }
 
@@ -57,6 +58,8 @@ export default function createNewPost(){
         setTitulo,
         carregaImagem,
         imagemUrl,
-        setImagemUrl
+        setImagemUrl,
+        isLoading,
+        setIsLoading
     }
 }

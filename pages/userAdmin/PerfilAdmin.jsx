@@ -7,6 +7,7 @@ import { mudaImagemPerfil, removeImagemPerfil } from "../../firebase/api/admin/a
 
 export default function PerfilAdminScreen(){
         const [usuario, setUsuario] = useState(null);
+        const [isLoading, setIsLoading] = useState(false);
 
         useEffect(() => {
             const fetchUsuario = async () => {
@@ -25,7 +26,7 @@ export default function PerfilAdminScreen(){
                 : <ImageContainer source={require('../../assets/images/imagemTeste.png')} />
             }
             <View style={styles.botaoFoto}>
-                <TouchableOpacity onPress={mudaImagemPerfil}>
+                <TouchableOpacity onPress={() => mudaImagemPerfil(setIsLoading)}>
                     <Image style={styles.logoCamera} source={require('../../assets/images/camera.png')}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={removeImagemPerfil}>
