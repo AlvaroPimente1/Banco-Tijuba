@@ -23,7 +23,7 @@ export default function PerfilAdminScreen(){
         <SafeAreaView style={styles.conteiner}>
             {usuario && usuario.fotoPerfil 
                 ? <ImageContainer source={{uri: usuario.fotoPerfil}} />
-                : <ImageContainer source={require('../../assets/images/imagemTeste.png')} />
+                : <ImageContainer source={require('../../assets/images/usuario.png')} />
             }
             <View style={styles.botaoFoto}>
                 <TouchableOpacity onPress={() => mudaImagemPerfil(setIsLoading)}>

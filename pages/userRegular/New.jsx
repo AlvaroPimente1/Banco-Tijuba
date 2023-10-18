@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import ParamContext from "../../context/projetoContext";
 import styles from "../../style/commonsStyles";
 import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import getNewProject from "../../firebase/api/user/getnewProject";
 
 export default function NewProject({ navigation }){
+    const { setParams } = useContext(ParamContext);
     const {
         text, setText,
         list, setList,
@@ -24,7 +26,10 @@ export default function NewProject({ navigation }){
         return(
             <View>
                 <TouchableOpacity style={styles.conteinerLista}
-                    onPress={()=> navigation.navigate('DetailsNew', { projetos: item })}
+                        onPress={() => {
+                            setParams({ projeto: item }); 
+                            navigation.navigate('DetailsNew');
+                        }}  
                 >
                     <View style={{flexDirection: 'row'}}>
                         <Image style={styles.fotoDemo} source={require('../../assets/images/imagemTeste.png')}/>

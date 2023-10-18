@@ -20,17 +20,18 @@ export default function Detail(){
     }
 
     return(
-        <SafeAreaView style={styles.conteiner}>
-            <View style={styles.imagemConteiner}>
-                <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')}/>
-            </View>
-            <ScrollView>
-                    <Text style={styles.name}>{projetos.nome_projeto}</Text>
-                <View style={styles.descriptionConteiner}>
-                    <Text style={styles.description}>{projetos.descricao}</Text>
+<SafeAreaView style={styles.conteiner}>
+                <View style={styles.imagemConteiner}>
+                    <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')}/>
                 </View>
-                <Text style={styles.description}>Criado em: {formatDate(projetos.dt_criacao)}</Text>
-            </ScrollView>
+                        <Text style={styles.name}>{projetos.nome_projeto}</Text>
+                    <View style={styles.descriptionConteiner}>
+                        <Text style={styles.description}>{projetos.descricao}</Text>
+                        <Text style={styles.description}>Categoria: {projetos.categoria}</Text>
+                        <Text style={styles.description}>Cadastrado por {projetos.cadastradorPor}</Text>
+                    </View>
+
+
             <TouchableOpacity style={styles.botaoLista}
                 onPress={mostrarListaUsuarios}
             >

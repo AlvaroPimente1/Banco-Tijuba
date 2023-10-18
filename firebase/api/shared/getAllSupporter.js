@@ -12,10 +12,9 @@ export async function buscarArrayUsuarios(projetoId){
         }
 
         const arrayUsuarios = doc.data().participantesProjeto;
-        const arrayTamanho = doc.data().length
 
-        if(arrayTamanho == null){
-            Alert.alert('Sem participantes ainda!')
+        if (!arrayUsuarios || arrayUsuarios.length === 0) {
+            Alert.alert('Sem participantes ainda!');
         }
 
         return arrayUsuarios;
