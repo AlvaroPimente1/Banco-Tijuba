@@ -77,10 +77,9 @@ const styles =  StyleSheet.create({
     },
 
     buttonConteiner: {
-        width: '100%',
-        alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 20
+        marginVertical: 10,
+        flexDirection: 'row'
     },
 
     participantesText: {

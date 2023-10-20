@@ -47,9 +47,9 @@ export default function DetailAdmin({ route, navigation }){
                     <View style={styles.buttonConteiner}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={deleteProjeto}
+                            onPress={() => navigation.navigate('Solicitacoes')}
                         >
-                            <Text style={styles.buttonText}>DELETAR! (TESTE)</Text>  
+                            <Text style={styles.buttonText}>Visualizar solicitações</Text>  
                         </TouchableOpacity>
                     </View>
             <TouchableOpacity style={styles.botaoLista}

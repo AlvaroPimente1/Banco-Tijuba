@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import TabAdmin from "./tabAdmin";
 import TopAdmin from "./topAdmin";
+import SolicitacoesScreen from "../../pages/userAdmin/Solicitacoes";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export default function AdminRoute(){
         >
             <Stack.Screen name="Tab" component={TabAdmin} options={{headerShown: false}}/>
             <Stack.Screen name="TopAdmin" component={TopAdmin} />
+            <Stack.Screen name="Solicitacoes" component={SolicitacoesScreen}/>
         </Stack.Navigator>
     )
 }

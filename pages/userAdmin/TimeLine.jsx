@@ -40,11 +40,15 @@ export default function TimeLineScreen({ navigation }){
 
     return(
         <SafeAreaView style={styles.conteiner}>
-                <FlatList 
-                    data={posts}
-                    keyExtractor={(item) => item.id}
-                    renderItem={renderItem}
-                />
+        {posts ? (
+        <FlatList
+            data={posts}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+        />
+        ) : (
+        <Text style={{ color: '#fff' }}>Sem Posts ainda</Text>
+        )}
         </SafeAreaView>
     )
 }

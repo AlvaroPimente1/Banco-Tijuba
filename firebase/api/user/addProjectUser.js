@@ -6,7 +6,7 @@ import getUserID from './getUserID';
 
 export async function adicionarProjetoAoUsuario(projetos) {
     const userID = getUserID();
-    const userRef = firestore().collection('usuarios').doc(userID).collection('projetos_usuario');
+    const userRef = firestore().collection('usuarios').doc(userID).collection('solicitacao_usuario');
     
     try {
         await userRef.add({
@@ -17,12 +17,12 @@ export async function adicionarProjetoAoUsuario(projetos) {
 
         const projetoRef = firestore().collection('projetos').doc(projetos.id);
         await projetoRef.update({
-            participantesProjeto: firestore.FieldValue.arrayUnion(userID)
+            solicitacoesProjeto: firestore.FieldValue.arrayUnion(userID)
         });
         
-        Alert.alert("Projeto adicionado com sucesso ao usuário!");
+        Alert.alert("Solicitação feita com sucesso");
 
     } catch(error) {
-        Alert.alert("Erro ao adicionar o projeto ao usuário!", error.message);
+        Alert.alert("Erro ao criar solicitação!", error.message);
     }
 }
