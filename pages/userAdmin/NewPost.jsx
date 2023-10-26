@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { SafeAreaView, Text, StyleSheet, TextInput, TouchableOpacity, Image, ActivityIndicator } from "react-native";
-import styles from "../../style/commonsStyles";
+import { SafeAreaView, View,Text, StyleSheet, TextInput, TouchableOpacity, Image, ActivityIndicator, ActivityIndicatorBase } from "react-native";
 import createNewPost from "../../firebase/api/admin/createNewPost";
 
 export default function NewPostScreen(){
@@ -18,7 +17,10 @@ export default function NewPostScreen(){
     return(
         <SafeAreaView style={styles.conteiner}>
             {isLoading ? (
-                <ActivityIndicator size="large" color="#fff" />
+                <View style={styles.aviso}>
+                    <ActivityIndicator size="large" color="#fff" />
+                    <Text style={{ color: '#fff', marginTop: 5 }}>Carregando imagem</Text>
+                </View>
             ) : (
                 <>
                     {imagemUrl && (
@@ -28,34 +30,92 @@ export default function NewPostScreen(){
                         />
                     )}
 
-                    <TextInput
-                        placeholder="Titulo da postagem"
-                        style={styles.inputText}
-                        value={titulo}
-                        onChangeText={setTitulo}
-                    />
-
-                    <TextInput
-                        placeholder="mensagem da postagem"
-                        style={styles.inputText}
-                        value={mensagem}
-                        onChangeText={setMensagem}
-                    />
-
-                    <TouchableOpacity
-                        onPress={createPost}
-                    >
-                        <Text style={{ color: '#fff' }}>criar</Text>
-                    </TouchableOpacity>
-
                     <TouchableOpacity onPress={carregaImagem}>
                         <Text style={{ color: '#fff' }}>Adicionar Imagem</Text>
                     </TouchableOpacity>
+
+                    <View style={styles.conteinerInput}>
+                        <TextInput
+                            placeholder="Título da postagem"
+                            placeholderTextColor={'#fff'}
+                            style={styles.inputText}
+                            value={titulo}
+                            onChangeText={setTitulo}
+                        />
+
+                        <TextInput
+                            placeholder="Legenda da postagem"
+                            placeholderTextColor={'#fff'}
+                            style={styles.inputText}
+                            value={mensagem}
+                            onChangeText={setMensagem}
+                        />
+                    </View>
+
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={createPost}
+                    >
+                        <Text style={styles.buttonText}>Publicar</Text>
+                    </TouchableOpacity>
                     
-                    <Text style={{ color: '#fff' }}>TELA BETA</Text>
                 </>
             )}
         </SafeAreaView>
     );
 }
 
+const styles = StyleSheet.create({
+    conteiner: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        backgroundColor: '#1C1C1C',
+    },
+
+    aviso: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#333333',
+        paddingHorizontal: 20,
+        paddingVertical: 20,
+        borderRadius: 15,
+        borderWidth: 1,
+        borderColor: '#663399',
+    },
+
+    conteinerInput: {
+        width: '90%',
+    },
+
+    inputText: {
+        width: '90%',
+        borderBottomWidth: 1,
+        borderColor: '#663399',
+        color: '#fff',
+        marginVertical: 20
+    },
+
+    image: {
+        width: 200,
+        height: 200,
+        marginBottom: 20,
+        borderRadius: 5,
+        borderWidth: 2,
+        borderColor: "#333333",
+    },
+
+    button: {
+        backgroundColor: '#663399',
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        borderRadius: 30,
+        borderWidth: 1
+    },
+
+    buttonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+})

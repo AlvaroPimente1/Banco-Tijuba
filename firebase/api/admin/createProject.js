@@ -28,7 +28,8 @@ export default function createProject(){
                     categoria: categoria,
                     cadastradorPor: cadastradorPor,
                     dt_criacao: firestore.FieldValue.serverTimestamp(),
-                    participantesProjeto: []
+                    participantesProjeto: [],
+                    solicitacoesProjeto: []
                 })
                 Alert.alert('Concluído', 'Projeto criado com êxito!')
                 setNomeProjeto('');

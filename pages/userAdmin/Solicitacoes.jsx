@@ -53,26 +53,35 @@ export default function SolicitacoesScreen(){
     }
 
     return(
-        <SafeAreaView>
-            <FlatList
-                nestedScrollEnabled={true}
-                data={listaUsuarios}
-                keyExtractor={item => item.userId || item.email} 
-                renderItem={renderItem}
-            />
+        <SafeAreaView style={styles.conteiner}>
+            <View style={{ marginVertical: 20 }}>
+                <FlatList
+                    nestedScrollEnabled={true}
+                    data={listaUsuarios}
+                    keyExtractor={item => item.userId || item.email} 
+                    renderItem={renderItem}
+                />
+            </View>
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
+    conteiner: {
+        flex: 1,
+        backgroundColor: '#1C1C1C'
+    },
+
     viewConteiner: {
         backgroundColor: '#333333',
         paddingHorizontal: 10,
         paddingVertical: 10,
         borderRadius: 10,
         marginHorizontal: 15,
-        marginVertical: 4,
-        justifyContent: 'flex-start'
+        marginVertical: 5,
+        justifyContent: 'flex-start',
+        borderWidth: 1,
+        borderColor: '#663399'
     },
 
     textTelefone: {

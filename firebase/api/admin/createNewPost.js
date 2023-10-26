@@ -32,21 +32,26 @@ export default function createNewPost(){
 
     const createPost = async() => {
         const projRef = firestore().collection('projetos').doc(projetos.id).collection('projeto_posts');
-        try {
-            await projRef.add({
-                usuario_post: usuario,
-                titulo_post: titulo,
-                mensagem_post: mensagem,
-                imagem_post: imagemUrl,
-                dt_post: firestore.FieldValue.serverTimestamp()
-            });
-
-            Alert.alert('Concluído', 'Postagem efetuada com sucesso!');
-            setTitulo('');
-            setMensagem('');
-            setImagemUrl(null);
-        } catch (erro) {
-            Alert.alert('Erro', `Não foi possível efetuar a postagem. Detalhes: ${erro.message}`);
+        if(titulo != '' && mensagem != ''){
+            try {
+                await projRef.add({
+                    usuario_post: usuario,
+                    titulo_post: titulo,
+                    mensagem_post: mensagem,
+                    imagem_post: imagemUrl,
+                    dt_post: firestore.FieldValue.serverTimestamp()
+                });
+    
+                Alert.alert('Concluído', 'Postagem efetuada com sucesso!');
+                setTitulo('');
+                setMensagem('');
+                setImagemUrl(null);
+            } catch (erro) {
+                Alert.alert('Erro', `Não foi possível efetuar a postagem. Detalhes: ${erro.message}`);
+            }
+        }
+        else{
+            Alert.alert('Erro', 'É necessário preencher todos campos para publicar')
         }
     }
 
