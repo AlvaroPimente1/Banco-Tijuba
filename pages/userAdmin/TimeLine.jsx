@@ -1,10 +1,16 @@
 import React from "react";
 import getAllPosts from "../../firebase/api/admin/getAllPosts";
 import { formatDate } from "../../utils/formatDate";
+import deletePost from "../../firebase/api/admin/deletePost";
 import { SafeAreaView, Text, Image, TouchableOpacity, View, FlatList, StyleSheet, ScrollView } from "react-native";
 
 export default function TimeLineScreen({ navigation }){
     const posts = getAllPosts();
+
+/*     const handleDeletePost = async (postId) => {
+        await deletePost(postId);
+
+    }; */
 
     function renderItem({ item }){
         return(
@@ -27,12 +33,21 @@ export default function TimeLineScreen({ navigation }){
                     <View>
                         <Text style={styles.textMessage}>{item.mensagem_post}</Text>           
                     </View>      
-                    <TouchableOpacity style={{flexDirection: 'row'}}
-                        //onPress={()=> navigation.navigate('Comments')}
-                    >
-                        <Image style={styles.comment} source={require('../../assets/images/comentario.png')}/>
-                        <Text style={styles.textComment}>Comentários</Text>
-                    </TouchableOpacity>
+
+                    <View  style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <TouchableOpacity
+                            style={{ flexDirection: 'row' }}
+                            //onPress={()=> navigation.navigate('Comments')}
+                        >
+                            <Image style={styles.comment} source={require('../../assets/images/comentario.png')}/>
+                            <Text style={styles.textComment}>Comentários</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            //onPress={() => handleDeletePost(item.id)}
+                        >
+                            <Image style={styles.delete} source={require('../../assets/images/deleteIcon.png')}/>
+                        </TouchableOpacity>
+                    </View>
                 </View>        
             </View>
         )
@@ -40,15 +55,16 @@ export default function TimeLineScreen({ navigation }){
 
     return(
         <SafeAreaView style={styles.conteiner}>
-        {posts ? (
-        <FlatList
-            data={posts}
-            keyExtractor={(item) => item.id}
-            renderItem={renderItem}
-        />
-        ) : (
-        <Text style={{ color: '#fff' }}>Sem Posts ainda</Text>
-        )}
+        {
+        posts ? 
+            <FlatList
+                data={posts}
+                keyExtractor={(item) => item.id}
+                renderItem={renderItem}
+            />
+        : 
+            <Text style={{ color: '#fff' }}>Sem Posts ainda</Text>
+        }
         </SafeAreaView>
     )
 }
@@ -64,7 +80,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         marginVertical: 10,
         borderWidth: 0.5,
-        borderBottomColor: '#fff',
+        borderBottomColor: '#000',
         borderTopWidth: 0
     },
 
@@ -113,6 +129,12 @@ const styles = StyleSheet.create({
         height: 20,
         marginLeft: 5,
         marginVertical: 5
+    },
+
+    delete: {
+        width: 30,
+        height: 30,
+        marginHorizontal: 5
     },
 
     textComment: {

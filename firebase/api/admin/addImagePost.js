@@ -45,3 +45,7 @@ export async function addImagemPost(setIsLoading) {
 
     return imageUrl;
 };
+
+export function resetImageUrl() {
+    return null;
+}

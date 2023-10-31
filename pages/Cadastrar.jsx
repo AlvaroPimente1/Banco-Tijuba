@@ -27,7 +27,11 @@ export default function Cadastrar({ navigation }){
                 .set({
                     nome: nome,
                     email: email,
-                    telefone: numero
+                    telefone: numero,
+                    Ambiental: 1,
+                    Social: 1,
+                    Saude: 1,
+                    Educacional: 1
                 });
         
             console.log('Sessão de usuário criada');

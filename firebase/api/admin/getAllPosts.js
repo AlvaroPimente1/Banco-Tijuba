@@ -22,7 +22,7 @@ export default function getAllPosts(){
         return ()=>{
             unsub();
         }
-    }, [])
+    }, [[projetos.id]])
 
     return posts
 }

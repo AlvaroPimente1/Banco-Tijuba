@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SafeAreaView, View,Text, StyleSheet, TextInput, TouchableOpacity, Image, ActivityIndicator, ActivityIndicatorBase } from "react-native";
 import createNewPost from "../../firebase/api/admin/createNewPost";
+import { resetImageUrl } from "../../firebase/api/admin/addImagePost";
 
 export default function NewPostScreen(){
     const { 
@@ -9,10 +10,10 @@ export default function NewPostScreen(){
         imagemUrl,
         createPost,
         carregaImagem,
+        resetImagem,
         isLoading,
         setIsLoading
     } = createNewPost();
-
 
     return(
         <SafeAreaView style={styles.conteiner}>
@@ -23,16 +24,23 @@ export default function NewPostScreen(){
                 </View>
             ) : (
                 <>
-                    {imagemUrl && (
-                        <Image
-                            source={{ uri: imagemUrl }}
-                            style={styles.image}
-                        />
-                    )}
-
-                    <TouchableOpacity onPress={carregaImagem}>
-                        <Text style={{ color: '#fff' }}>Adicionar Imagem</Text>
-                    </TouchableOpacity>
+                    {imagemUrl ?
+                        <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                            <Image
+                                source={{ uri: imagemUrl }}
+                                style={styles.image}
+                            />
+                            <TouchableOpacity
+                                onPress={resetImagem}
+                            >
+                                <Image style={{ width:30, height: 30 }} source={require('../../assets/images/deleteIcon.png')}/>
+                            </TouchableOpacity>
+                        </View>
+                    :
+                        <TouchableOpacity onPress={carregaImagem}>
+                            <Image source={require('../../assets/images/adicionar__imagem.png')}/>
+                        </TouchableOpacity>
+                    }
 
                     <View style={styles.conteinerInput}>
                         <TextInput
@@ -69,7 +77,7 @@ const styles = StyleSheet.create({
     conteiner: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         backgroundColor: '#1C1C1C',
     },
 
@@ -99,7 +107,7 @@ const styles = StyleSheet.create({
     image: {
         width: 200,
         height: 200,
-        marginBottom: 20,
+        marginBottom: 5,
         borderRadius: 5,
         borderWidth: 2,
         borderColor: "#333333",

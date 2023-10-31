@@ -30,6 +30,10 @@ export default function createNewPost(){
         setImagemUrl(url);
     }
 
+    const resetImagem = async() => {
+        setImagemUrl(null)
+    }
+
     const createPost = async() => {
         const projRef = firestore().collection('projetos').doc(projetos.id).collection('projeto_posts');
         if(titulo != '' && mensagem != ''){
@@ -65,6 +69,7 @@ export default function createNewPost(){
         imagemUrl,
         setImagemUrl,
         isLoading,
-        setIsLoading
+        setIsLoading,
+        resetImagem
     }
 }

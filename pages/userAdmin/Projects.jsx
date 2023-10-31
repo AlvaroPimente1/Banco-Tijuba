@@ -21,7 +21,10 @@ export default function ListAdmin({ navigation }){
                 >
                     <View style={{flexDirection: 'row'}}>
                         <Image style={styles.fotoDemo} source={require('../../assets/images/imagemTeste.png')}/>
-                        <Text style={styles.textoLista}>{item.nome_projeto}</Text>
+                        <View style={{ flexDirection: 'column' }}>
+                            <Text style={styles.textoLista}>{item.nome_projeto}</Text>
+                            <Text style={styles.textoMenorLista}>{item.categoria}</Text>
+                        </View>
                     </View>
                     <Text style={styles.descricao}>{item.descricao}</Text>
                 </TouchableOpacity>

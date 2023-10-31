@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../../style/commonsStyles';
-import { Button, TextInput, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import createProject from '../../firebase/api/admin/createProject';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -14,7 +13,6 @@ export default function AddProjectScreen() {
         { label: 'Educação', value: 'Educacao' },
         { label: 'Agricultura Familiar', value: 'Agricultura' },
         { label: 'Turismo', value: 'Turismo' },
-        { label: 'BioJoias', value: 'Biojoias' }
     ]);
     
     const {
@@ -30,7 +28,7 @@ export default function AddProjectScreen() {
     } = createProject();
 
     return (
-        <SafeAreaView style={styles.conteiner}>
+        <SafeAreaView style={styles.container}>        
             <TextInput
                 style={styles.inputText}
                 value={nomeProjeto}
@@ -45,10 +43,17 @@ export default function AddProjectScreen() {
                 placeholder={'Descrição do projeto'}
                 placeholderTextColor={'#F5F5F5'}
             />
+
             <DropDownPicker
-                style={styles.inputText}
+                containerStyle={styles.dropDownContainer}
+                style={styles.dropDown}
+                labelStyle={styles.label}
+                itemStyle={styles.item}
+                selectedLabelStyle={styles.selectedLabel}
+                arrowStyle={styles.arrow}
                 placeholderTextColor={'#F5F5F5'}
-                placeholder='Selecione um parâmetro'
+                placeholder='Categoria do projeto'
+                placeholderStyle={{ color: '#fff' }}
                 open={open}
                 value={value}
                 items={items}
@@ -58,10 +63,51 @@ export default function AddProjectScreen() {
                     setCategoria(val);}
                     }
                 setItems={setItems}
-            />
+            />                
             <TouchableOpacity onPress={addProject}>
                 <Text style={{color: '#fff'}}>Criar Projeto!</Text>
             </TouchableOpacity>
         </SafeAreaView>
     );
 }
+
+
+const styles = StyleSheet.create({
+    container:{
+        flex: 1,
+        backgroundColor: '#1C1C1C',
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
+    },
+
+    inputText: {
+        width: '90%',
+        borderBottomWidth: 1,
+        borderColor: '#663399',
+        color: '#fff',
+        marginVertical: 20
+    },
+    dropDownContainer: {
+        height: 40,
+        width: '90%',
+        marginBottom: 20,
+    },
+    dropDown: {
+        backgroundColor: '#663399',
+        borderWidth: 1,
+        borderColor: '#663399',
+        borderRadius: 8,
+    },
+    label: {
+        color: '#fff',
+    },
+    item: {
+        justifyContent: 'flex-start', 
+    },
+    selectedLabel: {
+        color: '#fff',
+    },
+    arrow: {
+        backgroundColor: '#663399',
+    },
+})

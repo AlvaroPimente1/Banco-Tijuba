@@ -25,9 +25,15 @@ const styles =  StyleSheet.create({
 
     textoLista: {
         color: '#F5F5F5',
-        alignSelf: 'center',
         marginLeft: 5
     },
+
+    textoMenorLista: {
+        color: '#F5F5F5',
+        marginLeft: 5,
+        marginTop: 3,
+        fontSize: 10
+    },  
 
     conteinerLista: {
         backgroundColor: '#333333',
