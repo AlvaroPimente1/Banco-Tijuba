@@ -19,7 +19,6 @@ export default function DrawerAdmin() {
                 drawerActiveTintColor: '#8a63d2',
                 drawerInactiveTintColor: '#663399'
             }}
-
         >
             <Drawer.Screen name="Meu Perfil" component={PerfilAdminScreen}/>
             <Drawer.Screen name="Sobre" component={OverViewScreen}/>

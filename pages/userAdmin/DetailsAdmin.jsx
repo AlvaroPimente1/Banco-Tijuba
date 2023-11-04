@@ -36,6 +36,9 @@ export default function DetailAdmin({ route, navigation }){
         <SafeAreaView style={styles.conteiner}>
                 <View style={styles.imagemConteiner}>
                     <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')}/>
+                    <TouchableOpacity onPress={() => navigation.navigate('Editar')}>
+                        <Image style={styles.editIcon} source={require('../../assets/images/edit.png')}/>
+                    </TouchableOpacity>
                 </View>
                         <Text style={styles.name}>{projetos.nome_projeto}</Text>
                     <View style={styles.descriptionConteiner}>

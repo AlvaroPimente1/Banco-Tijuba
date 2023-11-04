@@ -45,6 +45,8 @@ const styles =  StyleSheet.create({
     },
 
     imagemConteiner: {
+        flexDirection: 'column',
+        alignItems: 'center',
         paddingVertical: 20,
         backgroundColor: "#663399",
         paddingHorizontal: 100,
@@ -53,6 +55,11 @@ const styles =  StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: '#333333'
     }, 
+
+    editIcon: {
+        width: 25,
+        height: 25
+    },
 
     descriptionConteiner: {
         paddingHorizontal: 5,

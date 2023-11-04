@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 export default async function getPermission() {
@@ -10,7 +11,7 @@ export default async function getPermission() {
             return false;
         }
     } catch (error) {
-        console.error('Erro ao solicitar permissão:', error);
+        Alert.alert('Erro ao solicitar permissão:', error);
         return false;
     }
 }
