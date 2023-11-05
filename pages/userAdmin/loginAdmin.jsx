@@ -42,16 +42,27 @@ export default function LoginAdmin({ navigation }) {
         }
     }
 
-    function esqueciSenha() {
-        auth()
-            .sendPasswordResetEmail(email)
-            .then(() => Alert.alert('Redefinir Senha', 'Enviamos um e-mail para você'))
-            .catch(error => {
+    async function esqueciSenha(){
+        if(email === ''){
+            Alert.alert('Erro', 'Insira o e-mail vinculado a conta.')
+        } 
+        else{
+            try{
+                await auth().
+                sendPasswordResetEmail(email)
+                Alert.alert('Concluído', `Um e-mail foi enviado para ${email}.`)
+            } catch (error) {
                 if (error.code === 'auth/user-not-found') {
                     Alert.alert('Usuário não encontrado!');
+                } else if (error.code === 'auth/invalid-email') {
+                    Alert.alert('Endereço de email inválido!');
+                } 
+                else {
+                    Alert.alert('Erro', 'Ocorreu um erro ao enviar o email de redefinição de senha. Tente novamente mais tarde.');
+                    console.error(error);
                 }
-                console.log(error);
-            });
+            }
+        }
     }
 
     return (
