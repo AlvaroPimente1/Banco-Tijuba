@@ -9,9 +9,9 @@ export default function getNewProject() {
     const [projetos, setProjetos] = useState([]);
 
     useEffect(() => {
-        const userRef = firestore().collection('usuarios').doc(getUserID()).collection('projetos_usuario');
-        
-        const unsubProjetosUer = userRef.onSnapshot(async usuarioProjetosSnapshot => {
+        const userProjetosRef = firestore().collection('usuarios').doc(getUserID()).collection('projetos_usuario');
+
+        const unsubProjetosUer = userProjetosRef.onSnapshot(async usuarioProjetosSnapshot => {
             const referencedProjectIds = usuarioProjetosSnapshot.docs.map(doc => doc.data().projetoRef.id);
             
             const unsubFiltroProjetos = firestore().collection('projetos').onSnapshot(querySnapshot => {
