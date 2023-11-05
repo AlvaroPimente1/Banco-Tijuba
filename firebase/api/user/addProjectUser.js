@@ -12,7 +12,7 @@ export async function adicionarProjetoAoUsuario(projetos) {
         await userRef.add({
             projetoRef: firestore().collection('projetos').doc(projetos.id),
             nome_projeto: projetos.nome_projeto,
-            dt_entrada: firestore.FieldValue.serverTimestamp(),
+            dt_solicitacao: firestore.FieldValue.serverTimestamp(),
         });
 
         const projetoRef = firestore().collection('projetos').doc(projetos.id);
