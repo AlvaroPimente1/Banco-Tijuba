@@ -64,7 +64,7 @@ export default function LoginUser({ navigation }){
                 }
             }
         }
-        }
+    }
 
 
     return(

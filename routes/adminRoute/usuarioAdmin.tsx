@@ -5,6 +5,7 @@ import TabAdmin from "./tabAdmin";
 import TopAdmin from "./topAdmin";
 import SolicitacoesScreen from "../../pages/userAdmin/Solicitacoes";
 import EditProjectScreen from "../../pages/userAdmin/EditProject";
+import SolicitacaoDetalheScreen from "../../pages/userAdmin/SolicitantePerfil";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ export default function AdminRoute(){
             <Stack.Screen name="TopAdmin" component={TopAdmin} />
             <Stack.Screen name="Solicitacoes" component={SolicitacoesScreen}/>
             <Stack.Screen name="Editar" component={EditProjectScreen}/>
+            <Stack.Screen name="DetalheSolicitacao" component={SolicitacaoDetalheScreen}/>
         </Stack.Navigator>
     )
 }

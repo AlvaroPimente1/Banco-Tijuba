@@ -2,9 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import { SafeAreaView, View, Text, FlatList, StyleSheet, Image, TouchableOpacity, Alert } from "react-native";
 import ParamContext from "../../context/projetoContext";
 import { buscarArraySolicitacao, buscarDetalhesUsuario } from "../../firebase/api/admin/getAllRequest";
-import firestore from '@react-native-firebase/firestore';
 
-export default function SolicitacoesScreen(){
+export default function SolicitacoesScreen({ navigation }){
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
     const [ listaUsuarios, setListaUsuarios ] = useState([]);
@@ -27,24 +26,11 @@ export default function SolicitacoesScreen(){
 
 
     function renderItem({ item }) {
-        
-        async function aceitaUsuario(){
-            const projetoRef = firestore().collection('projetos').doc(projetos.id); // Corrigindo a referência ao documento.
-        
-            projetoRef.update({
-                solicitacoesProjeto: firestore.FieldValue.arrayRemove(item.id),
-                participantesProjeto: firestore.FieldValue.arrayUnion(item.id)
-            })
-            .then(() => {
-                Alert.alert('Usuário aceito no projeto com sucesso.');
-            })
-            .catch((error) => {
-                Alert.alert('Erro ao aceitar usuário no projeto:', error);
-            });
-        }
 
         return (
-            <View style={styles.viewConteiner}>
+            <TouchableOpacity style={styles.viewConteiner}
+                onPress={() => navigation.navigate('DetalheSolicitacao', { perfil: item })}
+            >
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         {item && item.fotoPerfil
@@ -58,7 +44,6 @@ export default function SolicitacoesScreen(){
                     </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <TouchableOpacity
-                            onPress={aceitaUsuario}
                         >
                             <Image style={styles.icon} source={require('../../assets/images/check.png')} />
                         </TouchableOpacity>
@@ -69,7 +54,7 @@ export default function SolicitacoesScreen(){
                         </TouchableOpacity>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 
