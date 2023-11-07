@@ -31,7 +31,9 @@ export default function Cadastrar({ navigation }){
                     Ambiental: 1,
                     Social: 1,
                     Saude: 1,
-                    Educacional: 1
+                    Educacional: 1,
+                    Pmaior: '',
+                    Smaior: ''
                 });
         
             console.log('Sessão de usuário criada');

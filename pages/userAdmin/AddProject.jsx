@@ -11,8 +11,7 @@ export default function AddProjectScreen() {
         { label: 'Meio Ambiente', value: 'Ambiente' },
         { label: 'Social', value: 'Social' },
         { label: 'Educação', value: 'Educacao' },
-        { label: 'Agricultura Familiar', value: 'Agricultura' },
-        { label: 'Turismo', value: 'Turismo' },
+        { label: 'Saude', value: 'Saude' },
     ]);
     
     const {
