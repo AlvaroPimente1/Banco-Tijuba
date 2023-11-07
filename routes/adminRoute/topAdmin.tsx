@@ -14,9 +14,10 @@ export default function TopAdmin(){
                     tabBarStyle: { backgroundColor: "#663399" },
                     tabBarLabelStyle: { fontWeight: "bold", color: '#fff' },
                     tabBarIndicatorStyle: { backgroundColor: "#1C1C1C" },
+                    
                 }}  
             >
-                <Top.Screen name="DetailAdmin" component={DetailAdmin} />
+                <Top.Screen name="DetailAdmin" component={DetailAdmin} options={{ title: "Detalhes" }}/>
                 <Top.Screen name="TimeLine" component={TimeLineScreen} />
                 <Top.Screen name="Novo Post" component={NewPostScreen} />
             </Top.Navigator>

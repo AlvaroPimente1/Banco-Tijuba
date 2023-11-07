@@ -7,7 +7,7 @@ import { adicionarProjetoAoUsuario } from "../../firebase/api/user/addProjectUse
 import firestore from '@react-native-firebase/firestore';
 import getUserID from "../../firebase/api/user/getUserID";
 
-export default function DetailNew({ route }){
+export default function DetailNew({ route, navigation }){
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
 
@@ -30,6 +30,27 @@ export default function DetailNew({ route }){
 
         verificarProjetoDisponivel();
     }, [projetos.id]);
+
+    useEffect(() => {
+        return () => {
+                const userRef = firestore()
+                    .collection('usuarios')
+                    .doc(getUserID())
+                    .collection('interacao_projetos')
+                    .doc(projetos.id);
+    
+                try {
+                    userRef.set(
+                        {
+                            dt_saida: firestore.FieldValue.serverTimestamp()
+                        },
+                        { merge: true } 
+                    );
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+    }, []);
     
     return(
         <SafeAreaView style={styles.conteiner}>

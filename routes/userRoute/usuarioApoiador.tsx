@@ -19,8 +19,8 @@ export default function UserRoute(){
                 }}
         >
             <Stack.Screen name="Tab" component={TabNavigator} options={{headerShown: false}}/> 
-            <Stack.Screen name="TopUser" component={TopUser} />
-            <Stack.Screen name="DetailsNew" component={DetailNew}/>
+            <Stack.Screen name="TopUser" component={TopUser} options={{ presentation: 'modal' , headerTitle: ''}} />
+            <Stack.Screen name="DetailsNew" component={DetailNew} />
             <Stack.Screen name="Perfil" component={PerfilUsuario}/>
         </Stack.Navigator>
     )

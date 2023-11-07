@@ -15,7 +15,7 @@ export default function TopUser(){
                     tabBarIndicatorStyle: { backgroundColor: "#1C1C1C" },
                 }}  
             >
-                <Top.Screen name="Detail" component={Detail} />
+                <Top.Screen name="Detail" component={Detail} options={{ title: 'Detalhes' }} />
                 <Top.Screen name="TimeLine" component={TimeLineScreen} />
             </Top.Navigator>
     )

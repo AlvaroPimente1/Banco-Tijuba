@@ -19,7 +19,7 @@ export default function AdminRoute(){
                 }}        
         >
             <Stack.Screen name="Tab" component={TabAdmin} options={{headerShown: false}}/>
-            <Stack.Screen name="TopAdmin" component={TopAdmin} />
+            <Stack.Screen name="TopAdmin" component={TopAdmin} options={{ presentation: 'modal' , headerTitle: ''}} />
             <Stack.Screen name="Solicitacoes" component={SolicitacoesScreen}/>
             <Stack.Screen name="Editar" component={EditProjectScreen}/>
             <Stack.Screen name="DetalheSolicitacao" component={SolicitacaoDetalheScreen}/>
