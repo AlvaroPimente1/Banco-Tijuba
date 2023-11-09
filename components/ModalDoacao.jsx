@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Modal, TextInput, Button, TouchableOpacity } from 'react-native';
 
-export default function ModalAgenda({ isModalVisible, setModalVisible, addEvent }){
-    const [ tituloCompromisso, setTituloCompromisso ] = useState('');
-    const [ descricaoCompromisso, setDescricaoCompromisso ] = useState('');
+export default function ModalDoacao({ isModalVisible, setModalVisible, addDoacao, navigation }){
+    const [ doacao, setDoacao ] = useState('');
 
     return(
         <>
@@ -17,20 +16,12 @@ export default function ModalAgenda({ isModalVisible, setModalVisible, addEvent 
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                    <Text style={{ marginBottom: 10, color: '#fff' }}>Novo Compromisso</Text>
+                    <Text style={{ marginBottom: 10, color: '#fff' }}>Do que o projeto precisa?</Text>
                     <TextInput
                         style={styles.input}
-                        value={tituloCompromisso}
-                        onChangeText={setTituloCompromisso}
-                        placeholder="Digite o titulo"
-                        placeholderTextColor={'#fff'}
-                    />
-                    
-                    <TextInput
-                        style={styles.input}
-                        value={descricaoCompromisso}
-                        onChangeText={setDescricaoCompromisso}
-                        placeholder="Digite a descrição"
+                        onChangeText={setDoacao}
+                        value={doacao}
+                        placeholder="Insira aqui"
                         placeholderTextColor={'#fff'}
                     />
         
@@ -38,9 +29,8 @@ export default function ModalAgenda({ isModalVisible, setModalVisible, addEvent 
                         <TouchableOpacity
                             style={styles.button}
                             onPress={() => {
-                                addEvent(tituloCompromisso, descricaoCompromisso);
-                                setTituloCompromisso('');
-                                setDescricaoCompromisso('');
+                                addDoacao(doacao);
+                                setDoacao('');
                                 setModalVisible(false);
                             }}
                         >
@@ -50,12 +40,24 @@ export default function ModalAgenda({ isModalVisible, setModalVisible, addEvent 
                         <TouchableOpacity
                             style={styles.button}
                             onPress={() => {
+                                setDoacao('')
                                 setModalVisible(false);
                             }}
                         >
                             <Text style={styles.buttonText}>Cancelar</Text>
                         </TouchableOpacity> 
                     </View>
+{/*                     <View style={{ marginTop: 15}}>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => {
+                                setModalVisible(false);
+                                navigation.navigate('Doacao');
+                            }}
+                        >
+                            <Text style={styles.buttonText}>Visualizar Doações</Text>
+                        </TouchableOpacity> 
+                    </View> */}
                 </View>
             </View>
         </Modal>

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity } from "react-native";
 
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-import NewProject from "../../pages/userRegular/New";
+import TopUserProject from "./TopProjects";
 import ListProject from "../../pages/userRegular/List";
-import ChatBot from "../../pages/userRegular/ChatBot";
 import { Image } from "react-native";
 
 
@@ -52,24 +50,7 @@ export default function TabNavigator(){
                 })}
             />
 
-                <Tab.Screen name="Bot" component={ChatBot}
-                    options={{
-                        tabBarIcon: () => {
-                            return <Image source={require('../../assets/images/roboGrande.png')} style={{width: 30, height: 30}}/>
-                        },
-                    tabBarLabelStyle: {
-                        fontSize: 12,
-                        fontWeight: 'bold',
-                        color: '#1C1C1C',
-                        marginBottom: 2
-                    },
-                        tabBarLabel: 'ChatBot',
-                        headerTitle: 'Bot',
-                        
-                    }}
-                />
-
-                <Tab.Screen name="New" component={NewProject} 
+                <Tab.Screen name="New" component={TopUserProject} 
                         options={{
                             tabBarIcon: () => {
                                 return <Image source={require('../../assets/images/mais.png')} style={{width: 20, height: 20}}/>

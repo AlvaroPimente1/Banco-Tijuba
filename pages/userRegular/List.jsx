@@ -30,10 +30,13 @@ export default function ListProject({ navigation }){
                             navigation.navigate('TopUser', { screen: 'Detail' });
                     }}                    
                 >
-                    <View style={{flexDirection: 'row'}}>
-                        <Image style={styles.fotoDemo} source={require('../../assets/images/imagemTeste.png')}/>
+                <View style={{flexDirection: 'row'}}>
+                    <Image style={styles.fotoDemo} source={require('../../assets/images/imagemTeste.png')}/>
+                    <View style={{ flexDirection: 'column' }}>
                         <Text style={styles.textoLista}>{item.nome_projeto}</Text>
+                        <Text style={styles.textoMenorLista}>{item.categoria}</Text>
                     </View>
+                </View>
                     <Text style={styles.descricao}>{item.descricao}</Text>
                 </TouchableOpacity>
             </View>

@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
 import ParamContext from "../../context/projetoContext";
 import styles from "../../style/commonsStyles";
-import { SafeAreaView, View, Text, TextInput, Alert, FlatList, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, FlatList, TouchableOpacity, Image } from 'react-native';
 import getNewProject from "../../firebase/api/user/getnewProject";
 import firestore from '@react-native-firebase/firestore';
 import getUserID from "../../firebase/api/user/getUserID";
-import { formatDate } from "../../utils/formatDate";
 
 export default function NewProject({ navigation }){
     const { setParams } = useContext(ParamContext);
@@ -37,6 +36,7 @@ export default function NewProject({ navigation }){
             try {
                 await userRef.set(
                     {
+                        nome_projeto: item.nome_projeto,
                         dt_entrada: firestore.FieldValue.serverTimestamp()
                     },
                     { merge: true } 
@@ -47,7 +47,7 @@ export default function NewProject({ navigation }){
         }
 
         return(
-            <View>
+            <SafeAreaView>
                 <TouchableOpacity style={styles.conteinerLista}
                         onPress={() => {
                             setParams({ projeto: item }); 
@@ -55,13 +55,16 @@ export default function NewProject({ navigation }){
                             horaEntrada();
                         }}  
                 >
-                    <View style={{flexDirection: 'row'}}>
-                        <Image style={styles.fotoDemo} source={require('../../assets/images/imagemTeste.png')}/>
+                <View style={{flexDirection: 'row'}}>
+                    <Image style={styles.fotoDemo} source={require('../../assets/images/imagemTeste.png')}/>
+                    <View style={{ flexDirection: 'column' }}>
                         <Text style={styles.textoLista}>{item.nome_projeto}</Text>
+                        <Text style={styles.textoMenorLista}>{item.categoria}</Text>
                     </View>
+                </View>
                     <Text style={styles.descricao}>{item.descricao}</Text>
                 </TouchableOpacity>
-            </View>
+            </SafeAreaView>
         )
     }
 

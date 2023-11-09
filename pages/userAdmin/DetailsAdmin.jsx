@@ -2,10 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import styles from "../../style/detailStyles";
 import firestore from '@react-native-firebase/firestore';
 import ParamContext from "../../context/projetoContext";
-import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Alert, TextInput } from "react-native";
+import { View, SafeAreaView, Text, StyleSheet, Image, TouchableOpacity, Alert, ScrollView } from "react-native";
 import ListApoiadores from "../../components/ListaParticipantes";
+import ModalDoacao from "../../components/ModalDoacao";
+import getUserID from "../../firebase/api/user/getUserID";
 
 export default function DetailAdmin({ route, navigation }){
+    const [ isModalVisible, setModalVisible ] = useState(false);
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
 
@@ -19,21 +22,29 @@ export default function DetailAdmin({ route, navigation }){
         }
     }
 
-    function deleteProjeto(){
-        const projetoRef = firestore().collection('projetos').doc(projetos.id)
+    const addDoacao = (doacao) => {
+        if (doacao) {
+            try{
+                firestore()
+                .collection('projetos')
+                .doc(projetos.id)
+                .collection('doacoes_projeto')
+                .add({ 
+                    nome_doacao: doacao,
+                    dt_solicitacao: firestore.FieldValue.serverTimestamp()
+                });
 
-        try{
-            projetoRef.delete();
-            Alert.alert('Sucesso', 'Projeto excluido')
-            navigation.navigate('Tab');
+                Alert.alert('Sucesso', 'Solicitação de doação executada com êxito')
+            } catch(error){
+                console.error(error)
+            }
+        } else {
+            Alert.alert('Erro', 'Não foi possível executar a ação no momento.')
         }
-        catch{
-            Alert.alert('Erro', 'Ocorreu um erro ao excluir o projeto')
-        }
-    }
+    };
 
     return(
-        <SafeAreaView style={styles.conteiner}>
+        <ScrollView style={styles.conteiner}>
                 <View style={styles.imagemConteiner}>
                     <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')}/>
                     <TouchableOpacity onPress={() => navigation.navigate('Editar')}>
@@ -50,28 +61,46 @@ export default function DetailAdmin({ route, navigation }){
                     <View style={styles.buttonConteiner}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={() => navigation.navigate('Solicitacoes')}
+                            onPress={()=> setModalVisible(true)}
                         >
-                            <Text style={styles.buttonText}>Visualizar solicitações</Text>  
+                            <Text style={styles.buttonText}>Solicitar Doação</Text>  
                         </TouchableOpacity>
-                    </View>
-            <TouchableOpacity style={styles.botaoLista}
-                onPress={mostrarListaUsuarios}
-            >
-                <Text style={styles.participantesText}>Participantes</Text>
-                
-                {
-                    showList
-                    ? <Image style={styles.iconLista} source={require('../../assets/images/setaBaixo.png')}/>
-                    : <Image style={styles.iconLista} source={require('../../assets/images/setaDireita.png')}/>
-                }
 
-            </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={()=> navigation.navigate('DoacaoAdmin')}
+                        >
+                            <Text style={styles.buttonText}>Visualizar Doações</Text>  
+                        </TouchableOpacity>
+                        
+                    </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <TouchableOpacity style={styles.botaoLista}
+                    onPress={mostrarListaUsuarios}
+                >
+                    <Text style={styles.participantesText}>Participantes</Text>
+                    
+                    {
+                        showList
+                        ? <Image style={styles.iconLista} source={require('../../assets/images/setaBaixo.png')}/>
+                        : <Image style={styles.iconLista} source={require('../../assets/images/setaDireita.png')}/>
+                    }
+
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Solicitacoes')}
+                >
+                    <Text style={styles.participantesText}>Solicitações</Text>
+                </TouchableOpacity>
+            </View>
 
             {showList
                 ? <ListApoiadores/>
                 : null
             }
-        </SafeAreaView>
+
+            <ModalDoacao isModalVisible={isModalVisible} setModalVisible={setModalVisible} addDoacao={addDoacao}/>
+        </ScrollView>
     )
 }

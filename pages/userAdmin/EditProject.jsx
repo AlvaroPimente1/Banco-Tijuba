@@ -4,7 +4,7 @@ import ParamContext from "../../context/projetoContext";
 import firestore from '@react-native-firebase/firestore';
 import { Alert } from "react-native";
 
-export default function EditProjectScreen(){
+export default function EditProjectScreen({ navigation }){
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
 
@@ -13,7 +13,6 @@ export default function EditProjectScreen(){
 
     async function editarProjeto(){
         const projetoRef = firestore().collection('projetos').doc(projetos.id);
-
         try{
             await projetoRef.update({
                 nome_projeto: nomeProjeto,
@@ -23,6 +22,34 @@ export default function EditProjectScreen(){
         } catch(error){
             Alert.alert('Erro', 'Não foi possível atualizar o projeto: ', error)
         }
+    }
+
+    function deleteProjeto() {
+        const projetoRef = firestore().collection('projetos').doc(projetos.id);
+
+        Alert.alert(
+            'Confirmação',
+            'Tem certeza de que deseja excluir este projeto?',
+        [
+            {
+                text: 'Cancelar',
+                style: 'cancel',
+            },
+            {
+                text: 'Confirmar',
+                onPress: async () => {
+                    try {
+                        await projetoRef.delete();
+                        Alert.alert('Sucesso', 'Projeto excluído');
+                        navigation.navigate('Tab');
+                    } catch (error) {
+                        Alert.alert('Erro', 'Ocorreu um erro ao excluir o projeto');
+                    }
+                },
+            },
+        ],
+        { cancelable: false }
+        );
     }
 
 
@@ -50,6 +77,13 @@ export default function EditProjectScreen(){
                 onPress={editarProjeto}
             >
                 <Text style={styles.buttonText}>Salvar Modificações</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.button}
+                onPress={deleteProjeto}
+            >
+                <Text style={styles.buttonText}>Deletar Projeto</Text>
             </TouchableOpacity>
         </SafeAreaView>
     )

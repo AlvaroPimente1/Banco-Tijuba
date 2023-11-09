@@ -36,7 +36,7 @@ const styles =  StyleSheet.create({
     },  
 
     conteinerLista: {
-        backgroundColor: '#333333',
+        backgroundColor: '#444444',
         paddingVertical: 8,
         paddingHorizontal: 5,
         marginBottom: 15,

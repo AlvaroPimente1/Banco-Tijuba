@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import Detail from "../../pages/userRegular/Detail";
-import TimeLineUserScreen from "../../pages/userRegular/TimeLineUser";
+import NewProject from "../../pages/userRegular/New";
+import RecommendedScreen from "../../pages/userRegular/Recommended";
 
 const Top = createMaterialTopTabNavigator();
 
-export default function TopUser(){
+export default function TopUserProject(){
     return(
             <Top.Navigator    
                 screenOptions={{
@@ -15,8 +15,8 @@ export default function TopUser(){
                     tabBarIndicatorStyle: { backgroundColor: "#1C1C1C" },
                 }}  
             >
-                <Top.Screen name="Detail" component={Detail} options={{ title: 'Detalhes' }} />
-                <Top.Screen name="TimeLineUser" component={TimeLineUserScreen} options={{ title: 'TimeLine' }}/>
+                <Top.Screen name="NewProject" component={NewProject} options={{ title: 'Todos os projetos' }} />
+                <Top.Screen name="Recommended" component={RecommendedScreen} options={{ title: 'Recomendações' }}/> 
             </Top.Navigator>
     )
 }

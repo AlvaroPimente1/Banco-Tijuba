@@ -48,6 +48,7 @@ export default function ListApoiadores(){
                 data={listaUsuarios}
                 keyExtractor={item => item.userId || item.email} 
                 renderItem={renderItem}
+                horizontal 
             />
         </>
     )
@@ -59,9 +60,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 10,
         borderRadius: 10,
-        marginHorizontal: 15,
+        marginHorizontal: 8,
         marginVertical: 4,
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        maxWidth: 350
     },
 
     textTelefone: {

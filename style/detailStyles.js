@@ -74,7 +74,9 @@ const styles =  StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 10,
         borderRadius: 10,
-        borderWidth: 1
+        borderWidth: 1,
+        minWidth: 180,
+        alignItems: 'center'
     },
 
     buttonText: {
@@ -84,14 +86,14 @@ const styles =  StyleSheet.create({
     },
 
     buttonConteiner: {
-        justifyContent: 'center',
-        marginVertical: 10,
+        justifyContent: 'space-around',
+        marginVertical: 15,
         flexDirection: 'row'
     },
 
     participantesText: {
         fontSize: 18,
-        marginHorizontal: 8,
+        marginHorizontal: 15,
         color: '#fff'
     },
 

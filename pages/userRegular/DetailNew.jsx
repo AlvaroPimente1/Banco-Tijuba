@@ -38,7 +38,7 @@ export default function DetailNew({ route, navigation }){
                     .doc(getUserID())
                     .collection('interacao_projetos')
                     .doc(projetos.id);
-    
+
                 try {
                     userRef.set(
                         {
@@ -66,7 +66,11 @@ export default function DetailNew({ route, navigation }){
                     <View style={styles.buttonConteiner}>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={() => adicionarProjetoAoUsuario(projetos)}
+                            onPress={() => {
+                                adicionarProjetoAoUsuario(projetos);
+                                navigation.goBack();
+                            }
+                        }
                         >
                             <Text style={styles.buttonText}>Quero apoiar esse projeto!</Text>  
                         </TouchableOpacity>

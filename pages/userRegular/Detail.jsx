@@ -20,7 +20,7 @@ export default function Detail(){
     }
 
     return(
-<SafeAreaView style={styles.conteiner}>
+    <ScrollView style={styles.conteiner}>
                 <View style={styles.imagemConteiner}>
                     <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')}/>
                 </View>
@@ -49,6 +49,6 @@ export default function Detail(){
                 ? <ListApoiadores/>
                 : null
             }
-        </SafeAreaView>
+        </ScrollView>
     )
 }
