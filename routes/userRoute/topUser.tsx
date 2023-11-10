@@ -3,6 +3,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 import Detail from "../../pages/userRegular/Detail";
 import TimeLineUserScreen from "../../pages/userRegular/TimeLineUser";
+import DoacaoUserScreen from "../../pages/userRegular/DoacaoUser";
 
 const Top = createMaterialTopTabNavigator();
 
@@ -17,6 +18,7 @@ export default function TopUser(){
             >
                 <Top.Screen name="Detail" component={Detail} options={{ title: 'Detalhes' }} />
                 <Top.Screen name="TimeLineUser" component={TimeLineUserScreen} options={{ title: 'TimeLine' }}/>
+                <Top.Screen name="DoacaoUser" component={DoacaoUserScreen} options={{ title: 'Mural Doação' }}/>
             </Top.Navigator>
     )
 }

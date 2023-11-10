@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import ParamContext from "../context/projetoContext";
-import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, FlatList } from "react-native";
+import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, FlatList, TouchableOpacity } from "react-native";
 import { buscarArrayUsuarios, buscarDetalhesUsuario, buscarQtdParticipantes } from "../firebase/api/shared/getAllSupporter";
 
 export default function ListApoiadores(){

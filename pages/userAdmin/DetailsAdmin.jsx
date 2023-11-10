@@ -31,6 +31,7 @@ export default function DetailAdmin({ route, navigation }){
                 .collection('doacoes_projeto')
                 .add({ 
                     nome_doacao: doacao,
+                    check: false,
                     dt_solicitacao: firestore.FieldValue.serverTimestamp()
                 });
 
