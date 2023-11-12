@@ -1,15 +1,26 @@
 import React, { useContext, useState, useEffect } from "react";
 import styles from "../../style/detailStyles";
 import ParamContext from "../../context/projetoContext";
-import { View, SafeAreaView, Text, TouchableOpacity, ScrollView, Image } from "react-native";
+import { View, Alert, Text, TouchableOpacity, ScrollView, Image } from "react-native";
 import { formatDate } from "../../utils/formatDate";
 import ListApoiadores from "../../components/ListaParticipantes";
+import getUserINFO from "../../firebase/api/user/getUserInfo";
+import firestore from '@react-native-firebase/firestore';
 
-export default function Detail(){
+export default function Detail({ navigation }){
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
 
+    const [ usuarioInfo, setUsuarioInfo ] = useState('');
     const [ showList, setShowList ] = useState(false);
+
+    useEffect(() => {
+        async function fetchData() {
+            const info = await getUserINFO();
+            setUsuarioInfo(info);
+        }
+        fetchData();
+    }, []);
 
     function mostrarListaUsuarios(){
         if(!showList){
@@ -18,6 +29,46 @@ export default function Detail(){
             setShowList(false)
         }
     }
+
+    async function sairProjeto() {
+        try {
+            const userProjetosRef = firestore().collection('usuarios').doc(usuarioInfo.id).collection('projetos_usuario').doc(projetos.id);
+            const projetoRef = firestore().collection('projetos').doc(projetos.id);
+    
+            if (projetos.participantesProjeto.includes(usuarioInfo.id)) {
+                Alert.alert(
+                    'Confirmar',
+                    'Tem certeza de que deseja sair deste projeto?',
+                    [
+                        {
+                            text: 'Cancelar',
+                            style: 'cancel',
+                        },
+                        {
+                            text: 'Confirmar',
+                            onPress: async () => {
+                                await projetoRef.update({
+                                    participantesProjeto: firestore.FieldValue.arrayRemove(usuarioInfo.id)
+                                });
+    
+                                await userProjetosRef.delete();
+    
+                                Alert.alert('Concluído', 'Você não faz mais parte deste projeto!');
+                                navigation.navigate('Tab');
+                            },
+                        },
+                    ],
+                    { cancelable: false }
+                );
+            } else {
+                Alert.alert('Erro', 'Você não faz parte deste projeto.');
+            }
+        } catch (error) {
+            Alert.alert('Erro', 'Não foi possível efetuar a operação no momento');
+            console.error(error);
+        }
+    }
+    
 
     return(
     <ScrollView style={styles.conteiner}>
@@ -49,6 +100,15 @@ export default function Detail(){
                 ? <ListApoiadores/>
                 : null
             }
+
+            <View style={styles.buttonConteiner}>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={sairProjeto}
+                >
+                    <Text style={styles.buttonText}>Sair do projeto</Text>
+                </TouchableOpacity>
+            </View>
         </ScrollView>
     )
 }
