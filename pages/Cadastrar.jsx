@@ -14,39 +14,40 @@ export default function Cadastrar({ navigation }){
     const [nome, setNome] = useState('');
     const [numero, setNumero] = useState('');
 
-
     async function criaConta() {
-        try {
-            await auth().createUserWithEmailAndPassword(email, senha);
-            Alert.alert('Usuário criado com sucesso!');
-            navigation.navigate('LoginUser');
-        
-            await firestore()
-                .collection('usuarios')
-                .doc(getUserID())
-                .set({
-                    nome: nome,
-                    email: email,
-                    telefone: numero,
-                    Ambiental: 1,
-                    Social: 1,
-                    Saude: 1,
-                    Educacional: 1,
-                    Pmaior: '',
-                    Smaior: ''
-                });
-        
-            console.log('Sessão de usuário criada');
-            } catch (error) {
-                if (error.code === 'auth/email-already-in-use') {
-                    Alert.alert('Esse email já está em uso!');
-                } else if (error.code === 'auth/invalid-email') {
-                    Alert.alert('Email inválido!');
-                } else {
-                    Alert.alert('Erro', 'Ocorreu um erro durante a criação de conta. Tente novamente mais tarde.');
-                    console.error(error);
+        if(email != '' || senha != '' || nome != '' || numero != ''){
+            try {
+                await auth().createUserWithEmailAndPassword(email, senha);
+                Alert.alert('Usuário criado com sucesso!');
+                navigation.navigate('LoginUser');
+            
+                await firestore()
+                    .collection('usuarios')
+                    .doc(getUserID())
+                    .set({
+                        nome: nome,
+                        email: email,
+                        telefone: numero,
+                        Ambiental: 1,
+                        Social: 1,
+                        Saude: 1,
+                        Educacional: 1,
+                    });
+            
+                console.log('Sessão de usuário criada');
+                } catch (error) {
+                    if (error.code === 'auth/email-already-in-use') {
+                        Alert.alert('Esse email já está em uso!');
+                    } else if (error.code === 'auth/invalid-email') {
+                        Alert.alert('Email inválido!');
+                    } else {
+                        Alert.alert('Erro', 'Ocorreu um erro durante a criação de conta. Tente novamente mais tarde.');
+                        console.error(error);
+                    }
                 }
-            }
+        } else {
+            Alert.alert('Erro', 'É necessário preencher todos os campos para criar conta.')
+        }
     }
 
     return(
@@ -83,6 +84,7 @@ export default function Cadastrar({ navigation }){
                             keyboardType="numeric"
                             value={numero}
                             onChangeText={setNumero}
+                            maxLength={13}
                         />
 
                         

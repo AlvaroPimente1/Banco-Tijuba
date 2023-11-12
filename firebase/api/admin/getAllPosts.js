@@ -9,7 +9,12 @@ export default function getAllPosts(){
     const projetos = params.projeto;
 
     useEffect(()=>{
-        const projetoRef = firestore().collection('projetos').doc(projetos.id).collection('projeto_posts');
+        const projetoRef = firestore()
+            .collection('projetos')
+            .doc(projetos.id)
+            .collection('projeto_posts')
+            .orderBy('dt_post', 'desc');
+        
         const unsub = projetoRef.onSnapshot((snapshot) =>{
             const postsArray = snapshot.docs.map(doc => {
                 return{ ...doc.data(), id: doc.id };

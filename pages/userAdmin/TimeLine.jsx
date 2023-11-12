@@ -1,18 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import getAllPosts from "../../firebase/api/admin/getAllPosts";
 import { formatDate } from "../../utils/formatDate";
-import deletePost from "../../firebase/api/admin/deletePost";
-import { SafeAreaView, Text, Image, TouchableOpacity, View, FlatList, StyleSheet, ScrollView } from "react-native";
+import firestore from '@react-native-firebase/firestore';
+import { SafeAreaView, Text, Image, TouchableOpacity, View, FlatList, StyleSheet, Alert } from "react-native";
+import ParamContext from "../../context/projetoContext";
 
 export default function TimeLineScreen({ navigation }){
+    const { params } = useContext(ParamContext);
+    const projetos = params.projeto;
     const posts = getAllPosts();
 
-/*     const handleDeletePost = async (postId) => {
-        await deletePost(postId);
-
-    }; */
-
     function renderItem({ item }){
+
+        async function deleteItem(){
+            try{
+                const postRef = firestore()
+                            .collection('projetos')
+                            .doc(projetos.id)
+                            .collection('projeto_posts')
+                            .doc(item.id);
+
+                await postRef.delete()
+                Alert.alert('Concluído', 'Projeto excluído com sucesso')
+            } catch(error){
+                Alert.alert('Erro', 'Não foi possível deletar o projeto no momento')
+                console.error(error);
+            }
+        }
+
         return(
             <View style={styles.conteinerPost}>
                 <View style={styles.viewData}>
@@ -43,7 +58,7 @@ export default function TimeLineScreen({ navigation }){
                             <Text style={styles.textComment}>Comentários</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            //onPress={() => handleDeletePost(item.id)}
+                            onPress={deleteItem}
                         >
                             <Image style={styles.delete} source={require('../../assets/images/deleteIcon.png')}/>
                         </TouchableOpacity>

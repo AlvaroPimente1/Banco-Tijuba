@@ -8,13 +8,16 @@ export default function DoacaoAdminScreen(){
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
     const [ doacoes, setDoacoes ] = useState([]);
-    const [ isCheck, setIsCheck ] = useState('');
+    const [isCheckArray, setIsCheckArray] = useState([]);
+
 
     useEffect(()=>{
             const doacaoRef = firestore()
                     .collection('projetos')
                     .doc(projetos.id)
-                    .collection('doacoes_projeto');
+                    .collection('doacoes_projeto')
+                    .orderBy('dt_solicitacao', 'desc');
+
             const unsub = doacaoRef.onSnapshot((snapshot) =>{
                 const doacoesArray = snapshot.docs.map(doc => {
                     return{ ...doc.data(), id: doc.id };
@@ -27,17 +30,25 @@ export default function DoacaoAdminScreen(){
             return ()=>{
                 unsub();
             }
-        }, [])
+        }, [ doacoes.id ])
 
-    function renderItem({ item }){
-        async function checkDoacao() {
+        useEffect(() => {
+            const initialIsCheckArray = doacoes.map(item => item.check);
+            setIsCheckArray(initialIsCheckArray);
+        }, [doacoes]);
+
+    function renderItem({ item, index }){
+        const isCheck = isCheckArray[index];
+
+        const doacaoRef = firestore()
+        .collection('projetos')
+        .doc(projetos.id)
+        .collection('doacoes_projeto')
+        .doc(item.id);
+
+
+        async function checkDoacao(index) {
             try {
-                const doacaoRef = firestore()
-                .collection('projetos')
-                .doc(projetos.id)
-                .collection('doacoes_projeto')
-                .doc(item.id);
-
                 const doacaoDoc = await doacaoRef.get();
                 if (doacaoDoc.exists) {
                 const doacaoData = doacaoDoc.data();
@@ -61,14 +72,18 @@ export default function DoacaoAdminScreen(){
                                     check: true,
                                     dt_check: firestore.FieldValue.serverTimestamp(),
                             });
-                                setIsCheck(true);
+                            const updatedIsCheckArray = [...isCheckArray];
+                            updatedIsCheckArray[index] = true;
+                            setIsCheckArray(updatedIsCheckArray);
 
                             } else {
                                 await doacaoRef.update({
                                     check: false,
                                     dt_check: firestore.FieldValue.serverTimestamp(),
                                 });
-                                setIsCheck(false);
+                                const updatedIsCheckArray = [...isCheckArray];
+                                updatedIsCheckArray[index] = false;
+                                setIsCheckArray(updatedIsCheckArray);
                             }
                         },
                     },
@@ -85,12 +100,6 @@ export default function DoacaoAdminScreen(){
 
         async function deleteDoacao(){
             try{
-                const doacaoRef = firestore()
-                .collection('projetos')
-                .doc(projetos.id)
-                .collection('doacoes_projeto')
-                .doc(item.id);
-
                 Alert.alert(
                     'Confirmação', 'Deseja exluir a solicitação de doação?',
                     [
@@ -137,7 +146,6 @@ export default function DoacaoAdminScreen(){
                                 <Image style={styles.icons} source={require('../../assets/images/check.png')} />
                             </TouchableOpacity>
                         }
-
                         <TouchableOpacity
                             onPress={deleteDoacao}
                         >

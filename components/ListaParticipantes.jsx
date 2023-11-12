@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import ParamContext from "../context/projetoContext";
-import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, FlatList, TouchableOpacity } from "react-native";
+import { View, SafeAreaView, Text, StyleSheet, ScrollView, Image, FlatList, TouchableOpacity, Alert } from "react-native";
 import { buscarArrayUsuarios, buscarDetalhesUsuario, buscarQtdParticipantes } from "../firebase/api/shared/getAllSupporter";
 
-export default function ListApoiadores(){
+export default function ListApoiadores({ navigation }){
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
     const [ listaUsuarios, setListaUsuarios ] = useState([]);
@@ -17,6 +17,7 @@ export default function ListApoiadores(){
                 
                 setListaUsuarios(usersDetails);
             } catch (error) {
+                Alert.alert("Erro", "Ocorreu um erro ao buscar usuários participantes")
                 console.error("Erro ao buscar os usuários:", error);
             }
         }
@@ -26,7 +27,9 @@ export default function ListApoiadores(){
 
     function renderItem({ item }){
         return(
-            <View style={styles.viewConteiner}>
+            <TouchableOpacity style={styles.viewConteiner}
+                onPress={() => navigation.navigate('Perfil')}
+            >
                 <View style={{flexDirection: 'row'}}>
                     {item && item.fotoPerfil 
                         ? <Image style={styles.fotoPerfil} source={{uri: item.fotoPerfil}} />
@@ -37,7 +40,7 @@ export default function ListApoiadores(){
                         <Text style={styles.textTelefone}>{item.telefone}</Text>
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 
