@@ -27,21 +27,20 @@ export default function SolicitacoesScreen({ navigation }){
 
 
     function renderItem({ item }) {
-
-        async function aceitarUsuario() {
-            const projetoRef = firestore().collection('projetos').doc(projetos.id);
-            const userSolicitacaoRef = firestore().collection('usuarios').doc(item.id).collection('solicitacao_usuario').doc(projetos.id);
-            const userProjetosRef = firestore().collection('usuarios').doc(item.id).collection('projetos_usuario').doc(projetos.id);
+        const projetoRef = firestore().collection('projetos').doc(projetos.id);
+        const userSolicitacaoRef = firestore().collection('usuarios').doc(item.id).collection('solicitacao_usuario').doc(projetos.id);
+        const userProjetosRef = firestore().collection('usuarios').doc(item.id).collection('projetos_usuario').doc(projetos.id);
         
+        async function aceitarUsuario() {        
             try {
                 await projetoRef.update({
                     solicitacoesProjeto: firestore.FieldValue.arrayRemove(item.id),
                     participantesProjeto: firestore.FieldValue.arrayUnion(item.id),
                 });
         
-                userSolicitacaoRef.delete();
+                await userSolicitacaoRef.delete();
         
-                userProjetosRef.set({
+                await userProjetosRef.set({
                     projetoRef: projetoRef,
                     nome_projeto: projetos.nome_projeto,
                     dt_entrada: firestore.FieldValue.serverTimestamp(),
@@ -52,6 +51,10 @@ export default function SolicitacoesScreen({ navigation }){
                 Alert.alert('Erro', 'Não foi possível efetuar a operação no momento');
                 console.error(error);
             }
+        }
+
+        async function recusarUsuario(){
+            await userSolicitacaoRef.delete();
         }
 
         return (
@@ -76,7 +79,7 @@ export default function SolicitacoesScreen({ navigation }){
                             <Image style={styles.icon} source={require('../../assets/images/check.png')} />
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => Alert.alert('Num Aceitou')}
+                            onPress={recusarUsuario}
                         >
                             <Image style={styles.icon} source={require('../../assets/images/cancel.png')} />
                         </TouchableOpacity>

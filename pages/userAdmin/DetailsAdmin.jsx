@@ -9,6 +9,7 @@ import getUserID from "../../firebase/api/user/getUserID";
 
 export default function DetailAdmin({ route, navigation }){
     const [ isModalVisible, setModalVisible ] = useState(false);
+    const [ quantidadeSolicitacoes, setQuantidadeSolicitacoes ] = useState(0);
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
 
