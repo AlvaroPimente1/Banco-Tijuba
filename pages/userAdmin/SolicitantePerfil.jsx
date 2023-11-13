@@ -22,7 +22,7 @@ export default function SolicitacaoDetalheScreen({ route }){
 
             userSolicitacaoRef.delete();
 
-            userProjetosRef.add({
+            userProjetosRef.set({
                 projetoRef: projetoRef,
                 nome_projeto: projetos.nome_projeto,
                 dt_entrada: firestore.FieldValue.serverTimestamp(),

@@ -10,7 +10,7 @@ export default function DoacaoUserScreen(){
     const [ doacoes, setDoacoes ] = useState([]);
 
     useEffect(()=>{
-            const doacaoRef = firestore().collection('projetos').doc(projetos.id).collection('doacoes_projeto');
+            const doacaoRef = firestore().collection('projetos').doc(projetos.id).collection('doacoes_projeto').orderBy('dt_solicitacao', 'desc');
             const unsub = doacaoRef.onSnapshot((snapshot) =>{
                 const doacoesArray = snapshot.docs.map(doc => {
                     return{ ...doc.data(), id: doc.id };
@@ -26,6 +26,8 @@ export default function DoacaoUserScreen(){
         }, [])
 
     function renderItem({ item }){
+        const isCheck = item.check;
+
         return(
             <View style={styles.containerLista}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -34,10 +36,20 @@ export default function DoacaoUserScreen(){
                         <Text style={{ color: '#fff', fontSize: 13, marginTop: 3 }}>Data da solicitação: {formatDate(item.dt_solicitacao)}</Text>
                     </View>
                     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                        <TouchableOpacity>
-                            <Text>User</Text>
-                            {/* <Image style={{ width: 25, height: 25 }} source={require('../../assets/images/deleteIcon.png')}/> */}
-                        </TouchableOpacity>
+                    {
+                            isCheck ?
+                            <View
+                                style={{ backgroundColor: 'red', paddingHorizontal: 5, paddingVertical: 5, borderRadius: 10 }}
+                            >
+                                <Text style={{ color: '#fff' }}>Indisponível pra doar!</Text>
+                            </View>
+                            :
+                            <View
+                            style={{ backgroundColor: 'green', paddingHorizontal: 5, paddingVertical: 5, borderRadius: 10 }}
+                            >
+                                <Text style={{ color: '#fff' }}>Disponível para doar</Text>
+                            </View>
+                        }
                     </View>
                 </View>
             </View>

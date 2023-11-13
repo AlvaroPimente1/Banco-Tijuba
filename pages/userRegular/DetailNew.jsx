@@ -54,7 +54,13 @@ export default function DetailNew({ route, navigation }){
     
     return(
         <SafeAreaView style={styles.conteiner}>
-            <ImageConteiner source={require('../../assets/images/imagemTeste.png')} />
+            <View style={styles.imagemConteiner}>
+                        {projetos.foto_projeto ? (
+                            <Image style={styles.image} source={{ uri: projetos.foto_projeto }} />
+                        ) : (
+                            <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')} />
+                        )}
+            </View>
             <ScrollView>
                     <Text style={styles.name}>{projetos.nome_projeto}</Text>
                 <View style={styles.descriptionConteiner}>

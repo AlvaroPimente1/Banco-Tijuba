@@ -28,33 +28,31 @@ export default function SolicitacoesScreen({ navigation }){
 
     function renderItem({ item }) {
 
-        async function aceitarUsuario(){
+        async function aceitarUsuario() {
             const projetoRef = firestore().collection('projetos').doc(projetos.id);
             const userSolicitacaoRef = firestore().collection('usuarios').doc(item.id).collection('solicitacao_usuario').doc(projetos.id);
-            const userProjetosRef = firestore().collection('usuarios').doc(item.id).collection('projetos_usuario');
-    
-            try{
+            const userProjetosRef = firestore().collection('usuarios').doc(item.id).collection('projetos_usuario').doc(projetos.id);
+        
+            try {
                 await projetoRef.update({
                     solicitacoesProjeto: firestore.FieldValue.arrayRemove(item.id),
-                    participantesProjeto: firestore.FieldValue.arrayUnion(item.id)
+                    participantesProjeto: firestore.FieldValue.arrayUnion(item.id),
                 });
-    
+        
                 userSolicitacaoRef.delete();
-    
-                userProjetosRef.add({
+        
+                userProjetosRef.set({
                     projetoRef: projetoRef,
                     nome_projeto: projetos.nome_projeto,
                     dt_entrada: firestore.FieldValue.serverTimestamp(),
-                })
-    
+                });
+        
                 Alert.alert('Concluído', 'Solicitação aceita!');
-    
-            }
-            catch(error){
+            } catch (error) {
                 Alert.alert('Erro', 'Não foi possível efetuar a operação no momento');
                 console.error(error);
             }
-        } 
+        }
 
         return (
             <TouchableOpacity style={styles.viewConteiner}

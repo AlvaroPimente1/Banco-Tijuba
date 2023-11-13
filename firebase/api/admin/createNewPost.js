@@ -10,7 +10,7 @@ export default function createNewPost(){
     const [ titulo, setTitulo ] = useState('');
     const [ mensagem, setMensagem ] = useState('');
     const [ imagemUrl, setImagemUrl ] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(false);
 
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;

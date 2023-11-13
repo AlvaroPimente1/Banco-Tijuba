@@ -46,12 +46,16 @@ export default function DetailAdmin({ route, navigation }){
 
     return(
         <ScrollView style={styles.conteiner}>
-                <View style={styles.imagemConteiner}>
-                    <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')}/>
-                    <TouchableOpacity onPress={() => navigation.navigate('Editar')}>
-                        <Image style={styles.editIcon} source={require('../../assets/images/edit.png')}/>
-                    </TouchableOpacity>
-                </View>
+                    <View style={styles.imagemConteiner}>
+                        {projetos.foto_projeto ? (
+                            <Image style={styles.image} source={{ uri: projetos.foto_projeto }} />
+                        ) : (
+                            <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')} />
+                        )}
+                        <TouchableOpacity onPress={() => navigation.navigate('Editar')}>
+                            <Image style={styles.editIcon} source={require('../../assets/images/edit.png')} />
+                        </TouchableOpacity>
+                    </View>
                         <Text style={styles.name}>{projetos.nome_projeto}</Text>
                     <View style={styles.descriptionConteiner}>
                         <Text style={styles.description}>{projetos.descricao}</Text>
