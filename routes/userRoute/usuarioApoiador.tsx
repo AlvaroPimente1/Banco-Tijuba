@@ -2,7 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import TabNavigator from "./tab";
-import Detail from "../../pages/userRegular/Detail";
+import CommentsUserScreen from "../../pages/userRegular/CommentsUser";
 import DetailNew from "../../pages/userRegular/DetailNew";
 import PerfilUsuario from "../../pages/userRegular/Perfil";
 import TopUser from "./topUser";
@@ -22,6 +22,7 @@ export default function UserRoute(){
             <Stack.Screen name="TopUser" component={TopUser} options={{ presentation: 'modal' , headerTitle: ''}} />
             <Stack.Screen name="DetailsNew" component={DetailNew} />
             <Stack.Screen name="Perfil" component={PerfilUsuario}/>
+            <Stack.Screen name="Comments" component={CommentsUserScreen} options={{ title: 'Comentários' }}/>
         </Stack.Navigator>
     )
 }

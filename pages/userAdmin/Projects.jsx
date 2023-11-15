@@ -38,11 +38,13 @@ export default function ListAdmin({ navigation }){
                 placeholder={'Pesquise o projeto que quiser'}
                 placeholderTextColor={'#F5F5F5'}
             />
+            
             <FlatList
                 data={projetos}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
             />
+            
         </SafeAreaView>
     )
 }

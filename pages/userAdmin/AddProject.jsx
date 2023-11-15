@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import createProject from '../../firebase/api/admin/createProject';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -63,7 +63,14 @@ export default function AddProjectScreen() {
                     }
                 setItems={setItems}
             />                
-            <TouchableOpacity onPress={addProject}>
+            <TouchableOpacity onPress={() => {
+                    if(nomeProjeto.length < 40){
+                        addProject();
+                    } else{
+                        Alert.alert('Erro', 'Nome do projeto grande demais')
+                    }
+                } 
+            }>
                 <Text style={{color: '#fff'}}>Criar Projeto!</Text>
             </TouchableOpacity>
         </SafeAreaView>

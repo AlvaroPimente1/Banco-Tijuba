@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import ListAdmin from "../../pages/userAdmin/Projects";
 import DrawerAdmin from "./drawerAdmin";
+import MenuGestaoScreen from "../../pages/userAdmin/MenuGestao";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +37,7 @@ export default function TabAdmin(){
                 })}
             />
 
-            <Tab.Screen name="Drawer" component={DrawerAdmin} 
+            <Tab.Screen name="MenuGestao" component={MenuGestaoScreen} 
                     options={{
                         tabBarIcon: () => {
                             return <Image source={require('../../assets/images/org.png')} style={{width: 40, height: 40}}/>
@@ -48,7 +49,7 @@ export default function TabAdmin(){
                         marginBottom: 2
                     },
                     tabBarLabel: 'Gestão',
-                    headerShown: false
+                    title: 'Menu Gestão'
                 }}
             />    
         </Tab.Navigator>

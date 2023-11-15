@@ -112,7 +112,14 @@ export default function EditProjectScreen({ navigation }){
 
             <TouchableOpacity
                 style={styles.button}
-                onPress={editarProjeto}
+                onPress={() => {
+                    if(nomeProjeto.length < 40){
+                        editarProjeto();
+                    } else{
+                        Alert.alert('Erro', 'Nome do projeto grande demais')
+                    }
+                } 
+                }
             >
                 <Text style={styles.buttonText}>Salvar Modificações</Text>
             </TouchableOpacity>

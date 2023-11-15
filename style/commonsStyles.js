@@ -25,7 +25,7 @@ const styles =  StyleSheet.create({
 
     textoLista: {
         color: '#F5F5F5',
-        marginLeft: 5
+        marginHorizontal: 5
     },
 
     textoMenorLista: {
@@ -43,7 +43,8 @@ const styles =  StyleSheet.create({
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#663399',
-        marginHorizontal: 30
+        marginHorizontal: 30,
+        flex: 2
     },
 
     fotoDemo: {

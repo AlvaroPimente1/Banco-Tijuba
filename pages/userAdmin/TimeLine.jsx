@@ -52,7 +52,7 @@ export default function TimeLineScreen({ navigation }){
                     <View  style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <TouchableOpacity
                             style={{ flexDirection: 'row' }}
-                            //onPress={()=> navigation.navigate('Comments')}
+                            onPress={()=> navigation.navigate('CommentsAdmin', { post: item })}
                         >
                             <Image style={styles.comment} source={require('../../assets/images/comentario.png')}/>
                             <Text style={styles.textComment}>Comentários</Text>
