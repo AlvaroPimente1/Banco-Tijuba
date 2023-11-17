@@ -10,7 +10,12 @@ export default function DoacaoUserScreen(){
     const [ doacoes, setDoacoes ] = useState([]);
 
     useEffect(()=>{
-            const doacaoRef = firestore().collection('projetos').doc(projetos.id).collection('doacoes_projeto').orderBy('dt_solicitacao', 'desc');
+        const doacaoRef = firestore()
+            .collection('projetos')
+            .doc(projetos.id)
+            .collection('doacoes_projeto')
+            .where('check', '==', false) 
+            .orderBy('dt_solicitacao', 'desc');
             const unsub = doacaoRef.onSnapshot((snapshot) =>{
                 const doacoesArray = snapshot.docs.map(doc => {
                     return{ ...doc.data(), id: doc.id };
@@ -19,14 +24,13 @@ export default function DoacaoUserScreen(){
             }, error => {
                 Alert.alert('Erro', 'Ocorreu um erro ao consultar as solicitações de doação')
             })
-            
+
             return ()=>{
                 unsub();
             }
         }, [])
 
     function renderItem({ item }){
-        const isCheck = item.check;
         
         const openZap = () => {
             const mensagemPadrao = encodeURIComponent(`Olá, estou interessado na doação de ${item.nome_doacao} no projeto ${projetos.nome_projeto}!`);
@@ -42,22 +46,12 @@ export default function DoacaoUserScreen(){
                     <View style={{ flexDirection: 'column', justifyContent: 'flex-start' }}>
                         <Text style={{ color: '#fff', fontSize: 15 }}>{item.nome_doacao}</Text>
                         <Text style={{ color: '#fff', fontSize: 13, marginTop: 3 }}>Data da solicitação: {formatDate(item.dt_solicitacao)}</Text>
+                        <Text style={{ color: '#fff', fontSize: 13, marginTop: 3 }}>Responsável: {item.cadastrado_por}</Text>
                     </View>
                     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    {
-                            isCheck ?
-                            <View
-                                style={{ backgroundColor: 'red', paddingHorizontal: 5, paddingVertical: 5, borderRadius: 10 }}
-                            >
-                                <Text style={{ color: '#fff' }}>Indisponível pra doar!</Text>
-                            </View>
-                            :
-                            <View
-                            style={{ backgroundColor: 'green', paddingHorizontal: 5, paddingVertical: 5, borderRadius: 10 }}
-                            >
+                        <View style={{ backgroundColor: 'green', paddingHorizontal: 5, paddingVertical: 5, borderRadius: 10 }}>
                                 <Text style={{ color: '#fff' }}>Disponível para doar</Text>
-                            </View>
-                        }
+                        </View>
                     </View>
                 </View>
             </TouchableOpacity>

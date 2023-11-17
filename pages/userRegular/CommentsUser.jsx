@@ -5,25 +5,24 @@ import firestore from '@react-native-firebase/firestore';
 import getUserID from "../../firebase/api/user/getUserID";
 import { formatDate } from "../../utils/formatDate";
 
-export default function CommentsUserScreen({ route }){
+export default function CommentsUserScreen({ route, navigation }){
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
     const post = route.params.post;
 
     const [ comentario, setComentario ] = useState('')
     const [ comentariosComInfoUsuario, setComentariosComInfoUsuario ] = useState([]);
+    const comentarioRef = firestore()
+        .collection('projetos')
+        .doc(projetos.id)
+        .collection('projeto_posts')
+        .doc(post.id)
+        .collection('comentarios_post');
 
     async function fetchComentarios() {
         try {
-            const comentarioRef = firestore()
-                .collection('projetos')
-                .doc(projetos.id)
-                .collection('projeto_posts')
-                .doc(post.id)
-                .collection('comentarios_post')
-                .orderBy('dt_comentario', 'desc');
-    
-            const querySnapshot = await comentarioRef.get();
+
+            const querySnapshot = await comentarioRef.orderBy('dt_comentario', 'desc').get();
     
             const comentariosData = [];
     
@@ -34,10 +33,12 @@ export default function CommentsUserScreen({ route }){
     
                 if (userDoc.exists) {
                     const userInfo = userDoc.data();
+                    const isUserComment = userDoc.id === getUserID();
                     comentariosData.push({
                         id: doc.id,
                         ...comentarioData,
                         usuario: userInfo, 
+                        canDelete: isUserComment
                     });
                 } else {
                     console.log('Documento de usuário não encontrado para o comentário:', doc.id);
@@ -57,12 +58,6 @@ export default function CommentsUserScreen({ route }){
 
     async function addComentario(){
         try{
-            const comentarioRef = firestore()
-                .collection('projetos')
-                .doc(projetos.id)
-                .collection('projeto_posts')
-                .doc(post.id)
-                .collection('comentarios_post');
 
             const userRef = firestore()
                 .collection('usuarios').doc(getUserID());
@@ -81,6 +76,19 @@ export default function CommentsUserScreen({ route }){
     }
 
     function renderItem({ item }) {
+
+        async function deleteComment(){
+            try{
+                const comentarioItem = comentarioRef.doc(item.id);
+
+                await comentarioItem.delete();
+                fetchComentarios();
+            } catch(error){
+                Alert.alert('Erro', 'Não foi possível efetuar operação no momento');
+                console.error(error);
+            }
+        }
+
         return (
             <View style={styles.comentarioItem}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -93,7 +101,17 @@ export default function CommentsUserScreen({ route }){
                 <View style={{ marginHorizontal: 5, marginVertical: 5, flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={{ color: '#fff', fontSize: 16 }}>{item.comentario}</Text>
                 </View>
-                <Text style={{ color: '#fff', fontSize: 13 }}>{formatDate(item.dt_comentario)}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Text style={{ color: '#fff', fontSize: 13 }}>{formatDate(item.dt_comentario)}</Text>
+                    {
+                    item.canDelete ?
+                            <TouchableOpacity onPress={deleteComment}>
+                                <Image style={{ width: 30, height: 30 }} source={require('../../assets/images/deleteIcon.png')}/>
+                            </TouchableOpacity>
+                    :
+                        null
+                    }                    
+                </View>
             </View>
         );
     }
