@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { SafeAreaView, View, Text, StyleSheet, Alert, TouchableOpacity, FlatList, Image } from "react-native";
+import { SafeAreaView, View, Text, StyleSheet, Alert, TouchableOpacity, FlatList, Linking } from "react-native";
 import { formatDate } from "../../utils/formatDate";
 import ParamContext from "../../context/projetoContext";
 import firestore from '@react-native-firebase/firestore';
@@ -27,9 +27,17 @@ export default function DoacaoUserScreen(){
 
     function renderItem({ item }){
         const isCheck = item.check;
+        
+        const openZap = () => {
+            const mensagemPadrao = encodeURIComponent(`Olá, estou interessado na doação de ${item.nome_doacao} no projeto ${projetos.nome_projeto}!`);
+            const url = `https://wa.me/55${item.telefone}?text=${mensagemPadrao}`;
+            Linking.openURL(url);
+        };
 
         return(
-            <View style={styles.containerLista}>
+            <TouchableOpacity style={styles.containerLista}
+                onPress={openZap}
+            >
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View style={{ flexDirection: 'column', justifyContent: 'flex-start' }}>
                         <Text style={{ color: '#fff', fontSize: 15 }}>{item.nome_doacao}</Text>
@@ -52,7 +60,7 @@ export default function DoacaoUserScreen(){
                         }
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 

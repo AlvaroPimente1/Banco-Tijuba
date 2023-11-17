@@ -23,27 +23,42 @@ export default function DetailAdmin({ route, navigation }){
         }
     }
 
-    const addDoacao = (doacao) => {
+    const addDoacao = async (doacao) => {
         if (doacao) {
-            try{
-                firestore()
-                .collection('projetos')
-                .doc(projetos.id)
-                .collection('doacoes_projeto')
-                .add({ 
-                    nome_doacao: doacao,
-                    check: false,
-                    dt_solicitacao: firestore.FieldValue.serverTimestamp()
-                });
+            try {
+                const userRef = await firestore()
+                    .collection('usuarios_admin')
+                    .doc(getUserID())
+                    .get();
 
-                Alert.alert('Sucesso', 'Solicitação de doação executada com êxito')
-            } catch(error){
-                console.error(error)
+                if (userRef.exists) {
+                    const userData = userRef.data();
+    
+                    await firestore()
+                        .collection('projetos')
+                        .doc(projetos.id) 
+                        .collection('doacoes_projeto')
+                        .add({ 
+                            nome_doacao: doacao,
+                            check: false,
+                            dt_solicitacao: firestore.FieldValue.serverTimestamp(),
+                            cadastrado_por: userData.nome,
+                            telefone: userData.telefone
+                        });
+    
+                    Alert.alert('Sucesso', 'Solicitação de doação executada com êxito');
+                } else {
+                    Alert.alert('Erro', 'Usuário não encontrado.');
+                }
+            } catch (error) {
+                console.error(error);
+                Alert.alert('Erro', 'Não foi possível executar a ação no momento.');
             }
         } else {
-            Alert.alert('Erro', 'Não foi possível executar a ação no momento.')
+            Alert.alert('Erro', 'Doação não especificada.');
         }
     };
+    
 
     return(
         <ScrollView style={styles.conteiner}>

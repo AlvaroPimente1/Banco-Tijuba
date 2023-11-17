@@ -47,9 +47,11 @@ export default function Detail({ navigation }){
                         {
                             text: 'Confirmar',
                             onPress: async () => {
-                                await projetoRef.update({
-                                    participantesProjeto: firestore.FieldValue.arrayRemove(usuarioInfo.id)
-                                });
+                                if(projetoRef.exists){
+                                    await projetoRef.update({
+                                        participantesProjeto: firestore.FieldValue.arrayRemove(usuarioInfo.id)
+                                    });
+                                }
     
                                 await userProjetosRef.delete();
     

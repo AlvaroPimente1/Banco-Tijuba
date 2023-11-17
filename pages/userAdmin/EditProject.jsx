@@ -89,9 +89,19 @@ export default function EditProjectScreen({ navigation }){
                             </TouchableOpacity>
                         </View>
                     :
-                        <TouchableOpacity onPress={carregaImagem} style={{ alignItems: 'center' }}>
-                            <Image style={{ width: 200, height: 200, borderRadius: 10 }} source={require('../../assets/images/imagemTeste.png')}/>
-                            <Text style={{ color: '#fff', marginTop: 5 }}>Adicionar Imagem</Text>
+                        <TouchableOpacity onPress={carregaImagem}>
+                        {projetos.foto_projeto ? 
+                            <View style={{ alignItems: 'center' }}>
+                                <Image style={styles.image} source={{ uri: projetos.foto_projeto }} />
+                                <Text style={{ color: '#fff', marginTop: 5 }}>Mudar Imagem</Text>
+                            </View>
+                        : 
+                            <View style={{ alignItems: 'center' }}>
+                                <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')} />
+                                <Text style={{ color: '#fff', marginTop: 5 }}>Adicionar Imagem</Text>
+                            </View>
+                            }
+                            
                             <Text>{imagemUrl}</Text>
                         </TouchableOpacity>
                     }
