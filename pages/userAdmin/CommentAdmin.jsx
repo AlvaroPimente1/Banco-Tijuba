@@ -4,14 +4,17 @@ import ParamContext from "../../context/projetoContext";
 import firestore from '@react-native-firebase/firestore';
 import getUserID from "../../firebase/api/user/getUserID";
 import { formatDate } from "../../utils/formatDate";
+import Loading from "../../components/Loading";
 
 export default function CommentsUserAdmin({ route }){
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
     const post = route.params.post;
 
-    const [ comentario, setComentario ] = useState('')
+    const [ isLoading, setIsLoading ] = useState(true);
+    const [ comentario, setComentario ] = useState('');
     const [ comentariosComInfoUsuario, setComentariosComInfoUsuario ] = useState([]);
+    
     const comentarioRef = firestore()
             .collection('projetos')
             .doc(projetos.id)
@@ -39,12 +42,15 @@ export default function CommentsUserAdmin({ route }){
                         usuario: userInfo, 
                     });
                 } else {
+                    setIsLoading(false);
                     console.log('Documento de usuário não encontrado para o comentário:', doc.id);
                 }
             }
-    
+            
+            setIsLoading(false);
             setComentariosComInfoUsuario(comentariosData);
         } catch (error) {
+            setIsLoading(false);
             console.error(error);
         }
     }
@@ -110,25 +116,33 @@ export default function CommentsUserAdmin({ route }){
 
     return(
         <SafeAreaView style={styles.conteiner}>
-            <FlatList
-                data={comentariosComInfoUsuario}
-                keyExtractor={(item) => item.id}
-                renderItem={renderItem}
-            />
-            <View style={styles.barraInteracao}>
-                <TextInput
-                    value={comentario}
-                    onChangeText={setComentario}
-                    placeholder="Digite sua mensagem..."
-                    placeholderTextColor={'#fff'}
-                    style={styles.textInput}
-                />
-                <TouchableOpacity
-                    onPress={addComentario}
-                >
-                    <Text style={styles.sendButton}>Enviar</Text>
-                </TouchableOpacity>
-            </View>
+            {
+                isLoading ?
+                    <Loading/>
+                :
+                <>
+                    <FlatList
+                        data={comentariosComInfoUsuario}
+                        keyExtractor={(item) => item.id}
+                        renderItem={renderItem}
+                    />
+                    <View style={styles.barraInteracao}>
+                        <TextInput
+                            value={comentario}
+                            onChangeText={setComentario}
+                            placeholder="Digite sua mensagem..."
+                            placeholderTextColor={'#fff'}
+                            style={styles.textInput}
+                        />
+
+                        <TouchableOpacity
+                            onPress={addComentario}
+                        >
+                            <Text style={styles.sendButton}>Enviar</Text>
+                        </TouchableOpacity>
+                    </View>                   
+                </>
+            }
         </SafeAreaView>
     )
 }

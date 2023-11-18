@@ -50,7 +50,7 @@ export default function DoacaoUserScreen(){
                     </View>
                     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                         <View style={{ backgroundColor: 'green', paddingHorizontal: 5, paddingVertical: 5, borderRadius: 10 }}>
-                                <Text style={{ color: '#fff' }}>Disponível para doar</Text>
+                                <Text style={{ color: '#fff' }}>Entre em contato</Text>
                         </View>
                     </View>
                 </View>

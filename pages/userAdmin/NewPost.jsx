@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SafeAreaView, View,Text, StyleSheet, TextInput, TouchableOpacity, Image, ActivityIndicator, ActivityIndicatorBase } from "react-native";
 import createNewPost from "../../firebase/api/admin/createNewPost";
-import { resetImageUrl } from "../../firebase/api/admin/addImagePost";
+import Loading from "../../components/Loading";
 
 export default function NewPostScreen(){
     const { 
@@ -18,10 +18,7 @@ export default function NewPostScreen(){
     return(
         <SafeAreaView style={styles.conteiner}>
             {isLoading ? (
-                <View style={styles.aviso}>
-                    <ActivityIndicator size="large" color="#fff" />
-                    <Text style={{ color: '#fff', marginTop: 5 }}>Carregando imagem</Text>
-                </View>
+                <Loading/>
             ) : (
                 <>
                     {imagemUrl ?
@@ -79,17 +76,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-evenly',
         backgroundColor: '#1C1C1C',
-    },
-
-    aviso: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#333333',
-        paddingHorizontal: 20,
-        paddingVertical: 20,
-        borderRadius: 15,
-        borderWidth: 1,
-        borderColor: '#663399',
     },
 
     conteinerInput: {
