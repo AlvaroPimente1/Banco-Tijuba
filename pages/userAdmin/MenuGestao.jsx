@@ -34,7 +34,7 @@ export default function MenuGestaoScreen({ navigation }){
                 onPress={() => navigation.navigate('Criar Usuario')}
             >
                 <Image style={styles.icons} source={require('../../assets/images/MenuPersonAdd.png')}/>
-                <Text style={styles.textLista}>Criar Usuário Administrador MMIB</Text>
+                <Text style={styles.textLista}>Cadastrar Usuário MMIB</Text>
             </TouchableOpacity>
         </SafeAreaView>
     )

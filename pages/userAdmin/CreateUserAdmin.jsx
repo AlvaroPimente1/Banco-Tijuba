@@ -1,9 +1,8 @@
 import { ReactNativeFirebase } from "@react-native-firebase/app";
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View, Image, TextInput, Alert } from "react-native";
-import { KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import { StatusBar } from "react-native";
-import styles from "../../style/cadastroStyles";
 import firestore from '@react-native-firebase/firestore';
 import getUserID from "../../firebase/api/user/getUserID";
 import auth from '@react-native-firebase/auth';
@@ -47,18 +46,13 @@ export default function CreaterUserAdmin({ navigation }){
                 behavior='padding'
                 style={styles.container}
             >
-                <StatusBar
-                barStyle="light-content"
-                backgroundColor="transparent"
-                translucent
-                />
-                <TouchableWithoutFeedback>
-                    <View style={styles.conteudo}>
-                        <Text style={{ color: '#fff' }}>Criar usuário administrador Mmib</Text>
+                        <View>
+                            <Text style={styles.titulo}>Cadastrar usuário MMIB</Text>
+                        </View>
                         <TextInput
                             style={styles.input}
-                            placeholder={'Insira seu nome'}
-                            placeholderTextColor={"grey"}
+                            placeholder={'Nome'}
+                            placeholderTextColor={"#fff"}
                             KeyboardAvoidingView="enable"
                             value={nome}
                             onChangeText={setNome}
@@ -67,7 +61,7 @@ export default function CreaterUserAdmin({ navigation }){
                         <TextInput
                             style={styles.input}
                             placeholder={'Número de telefone'}
-                            placeholderTextColor={"grey"}
+                            placeholderTextColor={"#fff"}
                             KeyboardAvoidingView="enable"
                             keyboardType="numeric"
                             value={numero}
@@ -77,16 +71,16 @@ export default function CreaterUserAdmin({ navigation }){
                         
                         <TextInput
                             style={styles.input}
-                            placeholder={'Insira seu e-mail'}
-                            placeholderTextColor={"grey"}
+                            placeholder={'E-mail'}
+                            placeholderTextColor={"#fff"}
                             KeyboardAvoidingView="enable"
                             value={email}
                             onChangeText={setEmail}
                         />
                         <TextInput
                             style={styles.input}
-                            placeholder={'Insira sua senha'}
-                            placeholderTextColor={"grey"}
+                            placeholder={'Senha'}
+                            placeholderTextColor={"#fff"}
                             KeyboardAvoidingView="enable"
                             secureTextEntry={true}
                             value={senha}
@@ -99,8 +93,42 @@ export default function CreaterUserAdmin({ navigation }){
                         >
                             <Text style={styles.textoBotao}>Cadastrar usuario</Text>
                         </TouchableOpacity>
-                    </View>
-                </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#1C1C1C',
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
+    },
+
+    conteudo: {
+        
+    },
+
+    input: {
+        borderBottomWidth: 1,
+        borderColor: '#663399',
+        width: 300,
+        color: '#fff'
+    },
+
+    botao: {
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        backgroundColor: '#663399',
+        borderRadius: 20
+    },
+
+    textoBotao: {
+        color: '#fff',        
+    },
+
+    titulo: {
+        color: '#fff',
+        fontSize: 20
+    }
+})

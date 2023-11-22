@@ -12,7 +12,7 @@ export default function EditProjectScreen({ navigation }){
     const [ nomeProjeto, setNomeProjeto ] = useState(projetos.nome_projeto);
     const [ descricaoProjeto, setDescricaoProjeto ] = useState(projetos.descricao);
     const [ isLoading, setIsLoading ] = useState(false)
-    const [ imagemUrl, setImagemUrl ] = useState(null);
+    const [ imagemUrl, setImagemUrl ] = useState(projetos.foto_projeto ? projetos.foto_projeto : null);
 
     const carregaImagem = async() => {
         const url = await addImagemProjeto(setIsLoading, params.projeto);

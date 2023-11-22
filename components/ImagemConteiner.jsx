@@ -26,6 +26,6 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 30,
         borderBottomLeftRadius: 30,
         borderBottomWidth: 1,
-        borderColor: '#333333'
+        borderColor: '#333333',
     }, 
 })

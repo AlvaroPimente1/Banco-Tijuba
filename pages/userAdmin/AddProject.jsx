@@ -8,9 +8,9 @@ export default function AddProjectScreen() {
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
-        { label: 'Meio Ambiente', value: 'Ambiente' },
+        { label: 'Meio Ambiente', value: 'Ambiental' },
         { label: 'Social', value: 'Social' },
-        { label: 'Educação', value: 'Educacao' },
+        { label: 'Educação', value: 'Educação' },
         { label: 'Saude', value: 'Saude' },
     ]);
     
@@ -63,7 +63,9 @@ export default function AddProjectScreen() {
                     }
                 setItems={setItems}
             />                
-            <TouchableOpacity onPress={() => {
+            <TouchableOpacity
+                style={styles.botao}
+                onPress={() => {
                     if(nomeProjeto.length < 40){
                         addProject();
                     } else{
@@ -115,5 +117,12 @@ const styles = StyleSheet.create({
     },
     arrow: {
         backgroundColor: '#663399',
+    },
+    
+    botao: {
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        backgroundColor: '#663399',
+        borderRadius: 20,
     },
 })

@@ -4,9 +4,10 @@ import { Calendar } from 'react-native-calendars';
 import firestore from '@react-native-firebase/firestore';
 import ModalAgenda from '../../components/ModalAgenda';
 import getUserINFOAdmin from "../../firebase/api/admin/getUserInfoAdmin";
+import { NavigationContainer } from '@react-navigation/native';
 
 
-export default function AgendaScreen() {
+export default function AgendaScreen({ navigation }) {
     const [selectedDate, setSelectedDate] = useState(null);
     const [ events, setEvents ] = useState([]);
     const [ isModalVisible, setModalVisible ] = useState(false);
@@ -87,7 +88,9 @@ export default function AgendaScreen() {
 
     function renderItem({ item }){
         return(
-            <View style={styles.conteinerLista}>
+            <TouchableOpacity style={styles.conteinerLista}
+                onPress={() => navigation.navigate('RelatorioCompromisso', { compromisso : item })}
+            >
                 <Text style={styles.textTitulo}>{item.titulo_compromisso}</Text>
                 <Text style={styles.textDescricao}>{item.descricao_compromisso}</Text>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
@@ -98,7 +101,7 @@ export default function AgendaScreen() {
                         <Image style={styles.icon} source={require('../../assets/images/deleteIcon.png')}/>
                     </TouchableOpacity>   
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 

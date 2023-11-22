@@ -12,6 +12,7 @@ import AddProjectScreen from "../../pages/userAdmin/AddProject";
 import AgendaScreen from "../../pages/userAdmin/Shedule";
 import CreaterUserAdmin from "../../pages/userAdmin/CreateUserAdmin";
 import CommentsUserAdmin from "../../pages/userAdmin/CommentAdmin";
+import RelatorioCompromissoScreen from "../../pages/userAdmin/RelatorioCompromisso";
 
 
 const Stack = createNativeStackNavigator();
@@ -36,6 +37,7 @@ export default function AdminRoute(){
             <Stack.Screen name="Agenda Mmib" component={AgendaScreen} />
             <Stack.Screen name="Criar Usuario" component={CreaterUserAdmin} />
             <Stack.Screen name="CommentsAdmin" component={CommentsUserAdmin} options={{ title: 'Comentários' }} />
+            <Stack.Screen name="RelatorioCompromisso" component={RelatorioCompromissoScreen} options={{ title: 'Relatorio' }} />
         </Stack.Navigator>
     )
 }

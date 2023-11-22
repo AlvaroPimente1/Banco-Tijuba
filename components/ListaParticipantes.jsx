@@ -27,9 +27,7 @@ export default function ListApoiadores({ navigation }){
 
     function renderItem({ item }){
         return(
-            <TouchableOpacity style={styles.viewConteiner}
-                onPress={() => navigation.navigate('Perfil')}
-            >
+            <TouchableOpacity style={styles.viewConteiner}>
                 <View style={{flexDirection: 'row'}}>
                     {item && item.fotoPerfil 
                         ? <Image style={styles.fotoPerfil} source={{uri: item.fotoPerfil}} />

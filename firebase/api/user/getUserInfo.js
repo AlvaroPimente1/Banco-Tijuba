@@ -9,7 +9,7 @@ export default async function getUserINFO() {
     const userData = querySnapshot.data();
 
     if (userData) {
-        userData.id = querySnapshot.id; // Adiciona o ID do documento aos dados do usuário
+        userData.id = querySnapshot.id; 
     }
 
     return userData;
