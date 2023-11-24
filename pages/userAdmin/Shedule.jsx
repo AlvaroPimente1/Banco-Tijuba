@@ -8,7 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 
 export default function AgendaScreen({ navigation }) {
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [ selectedDate, setSelectedDate ] = useState(null);
     const [ events, setEvents ] = useState([]);
     const [ isModalVisible, setModalVisible ] = useState(false);
     const [ usuario, setUsuario ] = useState('');
@@ -64,7 +64,8 @@ export default function AgendaScreen({ navigation }) {
                     titulo_compromisso: titulo,
                     descricao_compromisso: descricao,
                     data_compromisso: selectedDate,
-                    criado_por: usuario.nome
+                    criado_por: usuario.nome,
+                    relatorio: false
                 });
         }
     };
@@ -89,7 +90,7 @@ export default function AgendaScreen({ navigation }) {
     function renderItem({ item }){
         return(
             <TouchableOpacity style={styles.conteinerLista}
-                onPress={() => navigation.navigate('RelatorioCompromisso', { compromisso : item })}
+            onPress={() => navigation.navigate('RelatorioCompromisso', { compromisso: item, dataSelecionada: selectedDate })}
             >
                 <Text style={styles.textTitulo}>{item.titulo_compromisso}</Text>
                 <Text style={styles.textDescricao}>{item.descricao_compromisso}</Text>

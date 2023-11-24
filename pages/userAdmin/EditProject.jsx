@@ -101,8 +101,6 @@ export default function EditProjectScreen({ navigation }){
                                 <Text style={{ color: '#fff', marginTop: 5 }}>Adicionar Imagem</Text>
                             </View>
                             }
-                            
-                            <Text>{imagemUrl}</Text>
                         </TouchableOpacity>
                     }
 
