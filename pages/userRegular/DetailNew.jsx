@@ -6,6 +6,7 @@ import ImageConteiner from "../../components/ImagemConteiner";
 import { adicionarProjetoAoUsuario } from "../../firebase/api/user/addProjectUser";
 import firestore from '@react-native-firebase/firestore';
 import getUserID from "../../firebase/api/user/getUserID";
+import recomendarProjeto from "../../firebase/api/recomendacao/recomendacao";
 
 export default function DetailNew({ route, navigation }){
     const { params } = useContext(ParamContext);
@@ -33,6 +34,8 @@ export default function DetailNew({ route, navigation }){
 
     useEffect(() => {
         return () => {
+                const userId = getUserID();
+
                 const userRef = firestore()
                     .collection('usuarios')
                     .doc(getUserID())
@@ -46,6 +49,8 @@ export default function DetailNew({ route, navigation }){
                         },
                         { merge: true } 
                     );
+
+                    recomendarProjeto(userId, projetos.id)
                 } catch (error) {
                     console.error(error);
                 }
