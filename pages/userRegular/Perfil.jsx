@@ -46,7 +46,7 @@ return(
             </TouchableOpacity>
         </View>
         <View style={styles.usuarioConteiner}>
-            {usuario && <Text style={styles.texto}>Nome: {usuario.nome}</Text>}
+            {usuario ? <Text style={styles.texto}>Nome: {usuario.nome}</Text> : null}
             {usuario && <Text style={styles.texto}>E-mail: {usuario.email}</Text>}
             {usuario && <Text style={styles.texto}>Telefone: {usuario.telefone}</Text>}
             <Text style={styles.texto}>Você está em {qtdProjetos} projetos.</Text>

@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { SafeAreaView, View, Text, FlatList, TouchableOpacity, Image, TextInput } from "react-native";
 import styles from "../../style/commonsStyles";
 import useFetchRecommendedProjects from "../../firebase/api/user/projetosRecomendados";
+import ParamContext from "../../context/projetoContext";
 
 export default function RecommendedScreen({ navigation }){
+    const { setParams } = useContext(ParamContext);
     const projects = useFetchRecommendedProjects();
 
     function renderItem({ item }){
         return(
             <TouchableOpacity style={styles.conteinerLista}
-            onPress={() => {
-                setParams({ projeto: item }); 
-                navigation.navigate('DetailsNew');
-            }}  
+                onPress={() => {
+                    setParams({ projeto: item }); 
+                    navigation.navigate('DetailsRecommend');
+                }}  
             >
                 <View style={{flexDirection: 'row'}}>
                     {item.foto_projeto ? 
