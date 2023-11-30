@@ -7,6 +7,7 @@ import { adicionarProjetoAoUsuario } from "../../firebase/api/user/addProjectUse
 import firestore from '@react-native-firebase/firestore';
 import getUserID from "../../firebase/api/user/getUserID";
 import recomendarProjeto from "../../firebase/api/recomendacao/recomendacao";
+import recommendProjects from "../../firebase/api/recomendacao/recomedacao_projeto";
 
 export default function DetailNew({ route, navigation }){
     const { params } = useContext(ParamContext);
@@ -34,27 +35,27 @@ export default function DetailNew({ route, navigation }){
 
     useEffect(() => {
         return () => {
-                const userId = getUserID();
-
-                const userRef = firestore()
-                    .collection('usuarios')
-                    .doc(getUserID())
-                    .collection('interacao_projetos')
-                    .doc(projetos.id);
-
-                try {
-                    userRef.set(
-                        {
-                            dt_saida: firestore.FieldValue.serverTimestamp()
-                        },
-                        { merge: true } 
-                    );
-
-                    recomendarProjeto(userId, projetos.id)
-                } catch (error) {
-                    console.error(error);
-                }
+            const userId = getUserID();
+    
+            const userRef = firestore()
+                .collection('usuarios')
+                .doc(getUserID())
+                .collection('interacao_projetos')
+                .doc(projetos.id);
+    
+            try {
+                userRef.set(
+                    {
+                        dt_saida: firestore.FieldValue.serverTimestamp()
+                    },
+                    { merge: true } 
+                ).then(() => {
+                    recomendarProjeto(userId, projetos.id);
+                });
+            } catch (error) {
+                console.error(error);
             }
+        }
     }, []);
     
     return(

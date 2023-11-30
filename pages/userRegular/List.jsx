@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../../style/commonsStyles";
 import { SafeAreaView, View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Image } from 'react-native';
 import { useState, useContext } from "react";
 import ParamContext from "../../context/projetoContext";
 import getListProjects from "../../firebase/api/user/getlistProject";
+import recommendProjects from "../../firebase/api/recomendacao/recomedacao_projeto";
 
 export default function ListProject({ navigation }){
     const [text, setText] = useState('');
@@ -20,6 +21,11 @@ export default function ListProject({ navigation }){
         setList(filterList);
         setText(text); 
     }
+
+    useEffect(() => {
+        recommendProjects().catch(console.error);
+    
+    }, []); 
 
     function renderItem({ item }){
         return(
