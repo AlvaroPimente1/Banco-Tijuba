@@ -36,5 +36,5 @@ export default function getListProjects() {
         return () => unsubscribe();
     }, []);
 
-    return { items, list };
+    return { text, setText, list, setList, items, setItems,  };
 }

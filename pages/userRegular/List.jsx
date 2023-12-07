@@ -8,12 +8,12 @@ import recommendProjects from "../../firebase/api/recomendacao/recomedacao_proje
 
 export default function ListProject({ navigation }){
     const [text, setText] = useState('');
-    const { projetos, items, list } = getListProjects();
+    const { projetos, items, list, setList } = getListProjects();
     const { setParams } = useContext(ParamContext);
 
     function FiltroBusca(text) {
         const filterList = items.filter((item) => {  
-            const itemFilter = item.nome ? item.nome.toUpperCase() : ''.toUpperCase();
+            const itemFilter = item.nome_projeto ? item.nome_projeto.toUpperCase() : ''.toUpperCase();
             const newText = text.toUpperCase();
             return itemFilter.indexOf(newText) > -1;
         });
@@ -24,7 +24,6 @@ export default function ListProject({ navigation }){
 
     useEffect(() => {
         recommendProjects().catch(console.error);
-    
     }, []); 
 
     function renderItem({ item }){

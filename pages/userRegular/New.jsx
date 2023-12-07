@@ -12,17 +12,18 @@ export default function NewProject({ navigation }){
     const {
         text, setText,
         list, setList,
+        items, setItems
     } = getNewProject();
 
     function FiltroBusca(text) {
-        const filterList = items.filter((item) => {
-            const itemFilter = item.nome ? item.nome.toUpperCase() : ''.toUpperCase();
+        const filterList = items.filter((item) => {  
+            const itemFilter = item.nome_projeto ? item.nome_projeto.toUpperCase() : ''.toUpperCase();
             const newText = text.toUpperCase();
             return itemFilter.indexOf(newText) > -1;
         });
-
+    
         setList(filterList);
-        setText(text);
+        setText(text); 
     }
 
     function renderItem({ item }){

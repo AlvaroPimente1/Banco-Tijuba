@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../style/commonsStyles";
 import getAllProject from "../../firebase/api/admin/getAllProject";
 import { useContext } from "react";
@@ -6,8 +6,23 @@ import ParamContext from "../../context/projetoContext";
 import { SafeAreaView, Text, TextInput, FlatList, View, TouchableOpacity, Image } from "react-native";
 
 export default function ListAdmin({ navigation }){
-    const projetos = getAllProject();
+    const [searchText, setSearchText] = useState('');
+    const [filteredProjects, setFilteredProjects] = useState([]);
+    const allProjects = getAllProject(); 
     const { setParams } = useContext(ParamContext);
+
+    useEffect(() => {
+        if (searchText === '') {
+            setFilteredProjects(allProjects);
+        } else {
+            const filtered = allProjects.filter(item => {
+                const itemData = item.nome_projeto.toUpperCase();
+                const textData = searchText.toUpperCase();
+                return itemData.includes(textData);
+            });
+            setFilteredProjects(filtered);
+        }
+    }, [searchText, allProjects]);
 
     function renderItem({ item }){
         return(
@@ -41,10 +56,11 @@ export default function ListAdmin({ navigation }){
                 style={styles.inputText}
                 placeholder={'Pesquise o projeto que quiser'}
                 placeholderTextColor={'#F5F5F5'}
+                onChangeText={text => setSearchText(text)}
             />
             
             <FlatList
-                data={projetos}
+                data={filteredProjects}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
             />

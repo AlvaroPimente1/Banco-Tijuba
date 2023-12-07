@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { SafeAreaView, View, Text, FlatList, TouchableOpacity, Image, TextInput } from "react-native";
 import styles from "../../style/commonsStyles";
 import useFetchRecommendedProjects from "../../firebase/api/user/projetosRecomendados";
@@ -6,7 +6,24 @@ import ParamContext from "../../context/projetoContext";
 
 export default function RecommendedScreen({ navigation }){
     const { setParams } = useContext(ParamContext);
-    const projects = useFetchRecommendedProjects();
+    const allProjects = useFetchRecommendedProjects();
+    const [searchText, setSearchText] = useState('');
+    const [filteredProjects, setFilteredProjects] = useState([]);
+
+    useEffect(() => {
+        if (searchText === '') {
+            setFilteredProjects(allProjects);
+        } else {
+            const filtered = allProjects.filter(item => {
+                const itemData = item.nome_projeto
+                    ? item.nome_projeto.toUpperCase()
+                    : ''.toUpperCase();
+                const textData = searchText.toUpperCase();
+                return itemData.indexOf(textData) > -1;
+            });
+            setFilteredProjects(filtered);
+        }
+    }, [searchText, allProjects]);
 
     function renderItem({ item }){
         return(
@@ -38,9 +55,10 @@ export default function RecommendedScreen({ navigation }){
                 style={styles.inputText}
                 placeholder={'Pesquise o projeto que quiser'}
                 placeholderTextColor={'#F5F5F5'}
+                onChangeText={(text) => setSearchText(text)}
             />
             <FlatList
-                data={projects}
+                data={filteredProjects}
                 renderItem={renderItem}
                 keyExtractor={item => item.id.toString()}
             />
