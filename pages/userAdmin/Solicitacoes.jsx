@@ -25,7 +25,6 @@ export default function SolicitacoesScreen({ navigation }){
         fetchUsuarios();
     }, [projetos.id]);
 
-
     function renderItem({ item }) {
         const projetoRef = firestore().collection('projetos').doc(projetos.id);
         const userSolicitacaoRef = firestore().collection('usuarios').doc(item.id).collection('solicitacao_usuario').doc(projetos.id);
@@ -55,6 +54,13 @@ export default function SolicitacoesScreen({ navigation }){
 
         async function recusarUsuario(){
             await userSolicitacaoRef.delete();
+
+            await projetoRef.update({
+                solicitacoesProjeto: firestore.FieldValue.arrayRemove(item.id)
+            })
+
+            Alert.alert('Usuário recusado!');
+            navigation.goBack();
         }
 
         return (

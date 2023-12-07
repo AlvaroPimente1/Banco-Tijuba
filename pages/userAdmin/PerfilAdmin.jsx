@@ -42,7 +42,7 @@ export default function PerfilAdminScreen({ navigation }) {
                 telefone: newTelefone
             }, { merge: true })
 
-            Alert.alert('Concluído', 'Informações Atualizadas com Êxito')
+            Alert.alert('Concluído', 'Informações Atualizadas com Êxito.')
             navigation.goBack();
         } catch(error){
             console.error(error);
@@ -107,12 +107,12 @@ export default function PerfilAdminScreen({ navigation }) {
                     </View>
                     :
                     <View style={styles.usuarioConteiner}>
-                        <TouchableOpacity onPress={() => setIsEdit(true)}>
-                            <Image style={{ width: 20, height: 20 }} source={require('../../assets/images/edit.png')} />
-                        </TouchableOpacity>
                         {usuario && <Text style={styles.texto}>Nome: {usuario.nome}</Text>}
                         {usuario && <Text style={styles.texto}>E-mail: {usuario.email}</Text>}
                         {usuario && <Text style={styles.texto}>Telefone: {usuario.telefone}</Text>}
+                        <TouchableOpacity onPress={() => setIsEdit(true)}>
+                            <Image style={{ width: 20, height: 20 }} source={require('../../assets/images/edit.png')} />
+                        </TouchableOpacity>
                     </View>
             }
         </SafeAreaView>

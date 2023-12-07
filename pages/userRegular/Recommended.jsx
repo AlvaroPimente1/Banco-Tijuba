@@ -20,7 +20,7 @@ export default function RecommendedScreen({ navigation }){
                     {item.foto_projeto ? 
                             <Image style={styles.fotoDemo} source={{ uri: item.foto_projeto }} />
                         : 
-                            <Image style={styles.fotoDemo} source={require('../../assets/images/imagemTeste.png')} />
+                            <Image style={styles.fotoDemo} source={require('../../assets/images/logoMMib.png')} />
                     }
                     <View style={{ flexDirection: 'column' }}>
                         <Text style={styles.textoLista}>{item.nome_projeto}</Text>

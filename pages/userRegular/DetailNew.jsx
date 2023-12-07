@@ -64,7 +64,7 @@ export default function DetailNew({ route, navigation }){
                         {projetos.foto_projeto ? (
                             <Image style={styles.image} source={{ uri: projetos.foto_projeto }} />
                         ) : (
-                            <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')} />
+                            <Image style={styles.image} source={require('../../assets/images/logoMMib.png')} />
                         )}
             </View>
             <ScrollView>

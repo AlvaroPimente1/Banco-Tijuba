@@ -66,7 +66,7 @@ export default function DetailAdmin({ route, navigation }){
                         {projetos.foto_projeto ? (
                             <Image style={styles.image} source={{ uri: projetos.foto_projeto }} />
                         ) : (
-                            <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')} />
+                            <Image style={styles.image} source={require('../../assets/images/logoMMib.png')} />
                         )}
                         <TouchableOpacity onPress={() => navigation.navigate('Editar')}>
                             <Image style={styles.editIcon} source={require('../../assets/images/edit.png')} />

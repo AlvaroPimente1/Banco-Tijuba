@@ -10,7 +10,7 @@ export default function AddProjectScreen() {
     const [items, setItems] = useState([
         { label: 'Meio Ambiente', value: 'Ambiental' },
         { label: 'Social', value: 'Social' },
-        { label: 'Educação', value: 'Educação' },
+        { label: 'Educação', value: 'Educacional' },
         { label: 'Saude', value: 'Saude' },
     ]);
     

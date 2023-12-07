@@ -78,7 +78,7 @@ export default function Detail({ navigation }){
                         {projetos.foto_projeto ? (
                             <Image style={styles.image} source={{ uri: projetos.foto_projeto }} />
                         ) : (
-                            <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')} />
+                            <Image style={styles.image} source={require('../../assets/images/logoMMib.png')} />
                         )}
             </View>
                         <Text style={styles.name}>{projetos.nome_projeto}</Text>

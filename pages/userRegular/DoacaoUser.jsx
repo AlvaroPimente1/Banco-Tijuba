@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { SafeAreaView, View, Text, StyleSheet, Alert, TouchableOpacity, FlatList, Linking } from "react-native";
+import { SafeAreaView, View, Text, StyleSheet, Alert, TouchableOpacity, FlatList, Linking, Image } from "react-native";
 import { formatDate } from "../../utils/formatDate";
 import ParamContext from "../../context/projetoContext";
 import firestore from '@react-native-firebase/firestore';
@@ -7,7 +7,9 @@ import firestore from '@react-native-firebase/firestore';
 export default function DoacaoUserScreen(){
     const { params } = useContext(ParamContext);
     const projetos = params.projeto;
+
     const [ doacoes, setDoacoes ] = useState([]);
+    const [ showPix, setShowPix ] = useState(false);
 
     useEffect(()=>{
         const doacaoRef = firestore()
@@ -22,7 +24,7 @@ export default function DoacaoUserScreen(){
                 })
                 setDoacoes(doacoesArray);
             }, error => {
-                Alert.alert('Erro', 'Ocorreu um erro ao consultar as solicitações de doação')
+                
             })
 
             return ()=>{
@@ -30,12 +32,21 @@ export default function DoacaoUserScreen(){
             }
         }, [])
 
+    const openPix = () => {
+        const urlPix = 'pix://mmibcotijuba17@gmail.com';
+        Linking.openURL(urlPix)
+    }
+
+    const handleShowPix = () => {
+        showPix ? setShowPix(false) : setShowPix(true)
+    }
+
     function renderItem({ item }){
         
         const openZap = () => {
             const mensagemPadrao = encodeURIComponent(`Olá, estou interessado na doação de ${item.nome_doacao} no projeto ${projetos.nome_projeto}!`);
-            const url = `https://wa.me/55${item.telefone}?text=${mensagemPadrao}`;
-            Linking.openURL(url);
+            const urlZap = `https://wa.me/55${item.telefone}?text=${mensagemPadrao}`;
+            Linking.openURL(urlZap);
         };
 
         return(
@@ -62,7 +73,23 @@ export default function DoacaoUserScreen(){
         <SafeAreaView style={styles.container}>
             <View style={styles.containerTitulo}>
                 <Text style={styles.titulo}>Mural do que precisamos</Text>
+                <TouchableOpacity style={{ alignItems: 'center', marginTop: 5 }}
+                    onPress={handleShowPix}
+                >
+                    <Text style={styles.subTitulo}>Deseja contribuir com quantia?</Text>
+                    {/* <Text style={styles.subTitulo}>Clique aqui!</Text>                 */}
+                </TouchableOpacity>
             </View>
+            {
+                showPix ? 
+                    <TouchableOpacity style={{ alignItems: 'center', marginBottom: 10 }}
+                        onPress={openPix}
+                    >
+                        <Image style={{ width: 70, height: 70 }} source={require('../../assets/images/pix.png')}/>
+                    </TouchableOpacity>
+                :
+                    null
+            }
             <FlatList   
                 data={doacoes}
                 keyExtractor={item => item.id}
@@ -89,12 +116,16 @@ const styles = StyleSheet.create({
     },
 
     containerTitulo: {
-        marginVertical: 30,
-        alignItems: 'center'
+        marginVertical: 20,
+        alignItems: 'center',
     },
 
     titulo: {
         fontSize: 25,
+        color: '#fff'
+    },
+
+    subTitulo: {
         color: '#fff'
     }
 })

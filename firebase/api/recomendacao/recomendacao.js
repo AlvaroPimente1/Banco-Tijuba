@@ -51,15 +51,14 @@ const removerCaracteresNaoAlfanumericos = (texto) => {
                 
                 const tempoGastoTotal = Math.floor((contagemPalavrasNomeProjeto + contagemPalavrasDescricao + contagemPalavrasCadastro + contagemPalavrasCategoria + contagemPalavrasDtCriacao) / 238);
 
-                const dtEntrada = docTime['dt_entrada'].toDate(); // Supondo que seja um Timestamp do Firebase
-                const entrada = formatDate(dtEntrada); // Usando sua função personalizada
+                const dtEntrada = docTime['dt_entrada'].toDate(); 
+                const entrada = formatDate(dtEntrada); 
 
-                const dtSaida = docTime['dt_saida'].toDate(); // Supondo que seja um Timestamp do Firebase
-                const saida = formatDate(dtSaida); // Usando sua função personalizada
+                const dtSaida = docTime['dt_saida'].toDate();
+                const saida = formatDate(dtSaida); 
 
-                const diferencaSegundos = (dtSaida.getTime() - dtEntrada.getTime()) / 1000; // Convertendo milissegundos em segundos
+                const diferencaSegundos = (dtSaida.getTime() - dtEntrada.getTime()) / 1000; 
 
-                // Agora você pode usar diferencaSegundos para calcular a janela de tempo
                 const janelaSuperior = tempoGastoTotal + 2;
                 const janelaInferior = tempoGastoTotal - 2;
 
@@ -80,8 +79,7 @@ const removerCaracteresNaoAlfanumericos = (texto) => {
                     const valorCategoria = dadosUsuario[categoria] ?? 0;
 
                     const totalIndiv = 21;
-                    const totalGlobal = ambiental + educacional + saude + social;
-                    // Log do total global para depuração, se necessário
+
                     const docRefUsuario = firestore().doc(caminhoUsuario);
 
                     const atualizarCategoria = async (categoriaIncremento, outrasCategoriasDecrementos) => {
