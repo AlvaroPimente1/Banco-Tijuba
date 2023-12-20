@@ -97,7 +97,7 @@ export default function EditProjectScreen({ navigation }){
                             </View>
                         : 
                             <View style={{ alignItems: 'center' }}>
-                                <Image style={styles.image} source={require('../../assets/images/imagemTeste.png')} />
+                                <Image style={styles.image} source={require('../../assets/images/logoMMib.png')} />
                                 <Text style={{ color: '#fff', marginTop: 5 }}>Adicionar Imagem</Text>
                             </View>
                             }
