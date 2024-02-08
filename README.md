@@ -1,9 +1,23 @@
 <h1>BanCotijuba (Versao TCC)</h1>
 
 <h2>Objetivo</h2>
-Este é um app para o Projeto Integrado III do ano 2023.
-O intuito desse app é armazenar informações referentes as atividades e projetos do MMIB, englobando os membros - buscando incentivar outros habitantes da ilha a participarem, os financiadores, e os objetivos de cada atividade. Uma vez que tudo isto esteja categorizado, teremos uma IA para otimizar a execução de planejamento de projetos, escolhendo quais são os melhores parceiros para um dado segmento de caso, sendo também um ChatBot, que pode direcionar possíveis projetos a serem investidos -  considerando um dado orçamento.
-
+Este app tem como objetivo otimizar a gestão do movimento e dos projetos sociais do MMIB.
+<h2>Funcionalidades</h2>
+<h3>Usuário MMIB</h3>
+<ul>
+ <li>Calendário colaborativo para marcar compromissos e gerar relatórios</li>
+ <li>Criar Projetos Sociais baseados em categorias</li>
+ <li>Fazer postagens que vão para a timeline do projeto</li>
+ <li>Solicitar doações que vão para o mural de doações</li>
+ <li>Criar outros usuários MMIB</li>
+</ul>
+<h3>Usuário Comum</h3>
+<ul>
+ <li>Visualizar projetos e fazer solicitaçao para fazer parte e apoiar projeto</li>
+ <li>Ter seu gosto pessoal de projetos computado pelo aplicativo por meio de um algoritmo de recomendação</li>
+ <li>Fazer comentários nas publicaçoes para interagir</li>
+ <li>Escolher produto para doar e entrar em contato com usuário MMIB que solicitou doação</li>
+</ul>
 <!--Comentar este formato, para talvez utilizar futuramente-->
 <!--
 <div align="center">
@@ -28,10 +42,7 @@ O intuito desse app é armazenar informações referentes as atividades e projet
 <h2>Integrantes</h2>
  <ul>
   <li>Álvaro Pimentel <br> Contato: alvaroaugusto@alvaropimentel.eti.br</li>
-  <li>Bernardo Brandão <br> Contato: bernardogbrandao@gmail.com</li>
   <li>Enzo Eluan <br> Contato: enzoeluan@gmail.com</li>
-  <li>Marcos França <br> Contato: marcosfranca1233@gmail.com</li>
   <li>Vitor Flores <br> Contato: vitordf25@gmail.com</li>
  </ul>
-
 
