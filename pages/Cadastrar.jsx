@@ -28,6 +28,7 @@ export default function Cadastrar({ navigation }){
                         nome: nome,
                         email: email,
                         telefone: numero,
+                        primeiro_login: true,
                         Ambiental: 1,
                         Social: 1,
                         Saude: 1,

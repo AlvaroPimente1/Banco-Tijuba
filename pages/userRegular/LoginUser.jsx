@@ -19,11 +19,16 @@ export default function LoginUser({ navigation }){
             if (user) {
                 const usuariosRef = firestore().collection('usuarios');
                 const userDoc = await usuariosRef.doc(user.uid).get();
+                const userDocData = await userDoc.data()
 
                 if (userDoc.exists) {
-                    navigation.navigate('UserRoute');
-                    setEmail('');
-                    setSenha('');
+                    if(userDocData.primeiro_login){
+                        navigation.navigate('TermosUso', { admin: false });
+                    } else {
+                        navigation.navigate('UserRoute');
+                        setEmail('');
+                        setSenha('');
+                    }
                 } else {
                     Alert.alert('Acesso Negado', 'Sua conta é de Administrador!');
                     auth().signOut();
