@@ -25,7 +25,8 @@ export default function CreaterUserAdmin({ navigation }){
                 .set({
                     nome: nome,
                     email: email,
-                    telefone: numero
+                    telefone: numero,
+                    primeiro_login: true
                 });
         
             console.log('Sessão de usuário criada');

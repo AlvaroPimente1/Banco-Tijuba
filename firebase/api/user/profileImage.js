@@ -3,10 +3,8 @@ import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import getUserID from './getUserID';
 import { Alert } from "react-native";
-import getPermission from '../shared/getPermissions';
 
 export async function mudaImagemPerfil() {
-    if(await getPermission()){
         try {
             const image = await ImagePicker.openPicker({
                 width: 300,
@@ -56,7 +54,6 @@ export async function mudaImagemPerfil() {
             console.error(error);
             Alert.alert('Erro', error.message);
         }
-    }
     
 };
 

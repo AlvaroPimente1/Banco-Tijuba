@@ -2,14 +2,12 @@ import ImagePicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import { Alert, useContext } from "react-native";
-import getPermission from '../shared/getPermissions';
 
 export async function addImagemRelatorio(setIsLoading) {
     let imageUrl = null;
 
     setIsLoading(true);
 
-    if(await getPermission()){
         try {
             const image = await ImagePicker.openPicker({
                 width: 300,
@@ -36,9 +34,6 @@ export async function addImagemRelatorio(setIsLoading) {
         } finally {  
             setIsLoading(false);
         }
-    } else{
-        setIsLoading(false);
-    }
 
     return imageUrl;
 };

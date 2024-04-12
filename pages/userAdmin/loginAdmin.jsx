@@ -18,10 +18,15 @@ export default function LoginAdmin({ navigation }) {
             if (user) {
                 const usuariosAdminRef = firestore().collection('usuarios_admin');
                 const adminDoc = await usuariosAdminRef.doc(user.uid).get();
+                const adminDocData = await adminDoc.data()
 
                 if (adminDoc.exists) {
-                    Alert.alert('Bem vindo MMIB!', 'Login efetuado com sucesso.');
-                    navigation.navigate('AdminRoute');
+                    if(adminDocData.primeiro_login){
+                        navigation.navigate('TermosUso', { admin: true });
+                    } else {
+                        Alert.alert('Bem vindo MMIB!', 'Login efetuado com sucesso.');
+                        navigation.navigate('AdminRoute');
+                    }
                     setEmail('');
                     setSenha('');
                 } else {

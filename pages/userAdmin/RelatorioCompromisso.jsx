@@ -64,7 +64,7 @@ export default function RelatorioCompromissoScreen({ route }) {
                 dt_relatorio: firestore.FieldValue.serverTimestamp()
             }, { merge: true });
 
-            Alert.alert('Concluído', 'Relatório Criado com Êxito' + compromisso.id);
+            Alert.alert('Concluído', 'Relatório Criado com Êxito');
             setRelatorio('');
         } catch (error) {
             Alert.alert('Erro', 'Erro ao enviar relatório: ' + error.message);

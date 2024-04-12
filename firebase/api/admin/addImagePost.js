@@ -3,14 +3,12 @@ import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import getUserID from '../user/getUserID';
 import { Alert } from "react-native";
-import getPermission from '../shared/getPermissions';
 
 export async function addImagemPost(setIsLoading) {
     let imageUrl = null;
 
     setIsLoading(true); 
 
-    if(await getPermission()){
         try {
             const image = await ImagePicker.openPicker({
                 width: 300,
@@ -39,10 +37,6 @@ export async function addImagemPost(setIsLoading) {
         } finally {
             setIsLoading(false);  
         }
-    } else {
-        setIsLoading(false);  
-    }
-
     return imageUrl;
 };
 

@@ -9,6 +9,7 @@ import AdminRoute from "./adminRoute/usuarioAdmin";
 import Cadastro from "../pages/Cadastrar";
 import LoginUser from "../pages/userRegular/LoginUser";
 import LoginAdmin from "../pages/userAdmin/loginAdmin";
+import TermosUso from "../pages/userAdmin/TermosUso";
 
 
 const Stack = createNativeStackNavigator();
@@ -25,6 +26,7 @@ export default function Routes(){
                     <Stack.Screen name="UserRoute" component={UserRoute} options={{ presentation: 'modal' , headerTitle: 'Entrar', headerShown: false}}/>
                     <Stack.Screen name="LoginAdmin" component={LoginAdmin} options={{headerShown: false}}/>
                     <Stack.Screen name="AdminRoute" component={AdminRoute} options={{ presentation: 'modal', headerShown: false}}/>
+                    <Stack.Screen name="TermosUso" component={TermosUso} options={{ presentation: 'modal', headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </ParamContext.Provider>
