@@ -44,5 +44,6 @@ Este app tem como objetivo otimizar a gestão do movimento e dos projetos sociai
   <li>Álvaro Pimentel <br> Contato: alvaroaugusto@alvaropimentel.eti.br</li>
   <li>Enzo Eluan <br> Contato: enzoeluan@gmail.com</li>
   <li>Vitor Flores <br> Contato: vitordf25@gmail.com</li>
+   <li>Marcos França <br> Contato: marcosfranca1233@gmail.com</li>
  </ul>
 
